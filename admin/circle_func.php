@@ -20,19 +20,30 @@ function circles_js($id)
 					data = {
 						action:'g_map_options',
 						map_id:id,
-						task:"getxml",
+						task:"ajax",
 					}
 					
-					jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>",data,function(response){
-						if(response.success)
-						{
-							var xml = jQuery.parseXML(response.success);
-							var maps = xml.documentElement.getElementsByTagName("map");
+					jQuery.ajax({
+                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                        dataType: 'json',
+                        method: 'post',
+                        data: data,
+                        beforeSend: function () {
+                        }
+                    }).done(function (response) {
+                        HGinitializeCircleMap(response);
+                    }).fail(function () {
+                        console.log('Failed to load response from database');
+                    });
+					function HGinitializeCircleMap(response) {
+                        if (response.success) {
+                            var mapInfo = response.success;
+                            var maps = mapInfo.maps;
 							for(var i = 0; i < maps.length; i++)
 							{
 								var mapcenter = new google.maps.LatLng(
-									parseFloat(maps[i].getAttribute("center_lat")),
-									parseFloat(maps[i].getAttribute("center_lng")));
+									parseFloat(maps[i].center_lat),
+									parseFloat(maps[i].center_lng));
 
 								var mapOptions = {
 									zoom: parseInt(zoom),
@@ -96,22 +107,22 @@ function circles_js($id)
 									google.maps.event.trigger(map_circle_edit, 'resize');
 									map_circle_edit.setCenter(mapcenter);
 									jQuery("#circle_get_id").val(circleid);
-									var circles = xml.documentElement.getElementsByTagName("circle");
+									var circles = mapInfo.circles;
 									for(var j = 0; j < circles.length; j++)
 									{
-										var id = circles[j].getAttribute("id");
+										var id = circles[j].id;
 										if(circleid == id)
 										{
-											var name = circles[j].getAttribute("name");
-											var center_lat = circles[j].getAttribute("center_lat");
-											var center_lng = circles[j].getAttribute("center_lng");
-											var radius = circles[j].getAttribute("radius");
-											var line_width = circles[j].getAttribute("line_width");
-											var line_color = circles[j].getAttribute("line_color");
-											var line_opacity = circles[j].getAttribute("line_opacity");
-											var fill_color = circles[j].getAttribute("fill_color");
-											var fill_opacity = circles[j].getAttribute("fill_opacity");
-											var show_marker = circles[j].getAttribute("show_marker");
+											var name = circles[j].name;
+											var center_lat = circles[j].center_lat;
+											var center_lng = circles[j].center_lng;
+											var radius = circles[j].radius;
+											var line_width = circles[j].line_width;
+											var line_color = circles[j].line_color;
+											var line_opacity = circles[j].line_opacity;
+											var fill_color = circles[j].fill_color;
+											var fill_opacity = circles[j].fill_opacity;
+											var show_marker = circles[j].show_marker;
 											jQuery("#circle_edit_name").val(name);
 											jQuery("#circle_edit_center_lat").val(center_lat);
 											jQuery("#circle_edit_center_lng").val(center_lng);
@@ -131,8 +142,8 @@ function circles_js($id)
 											jQuery("#circle_edit_fill_color").val(fill_color);
 											jQuery("#circle_edit_fill_opacity").simpleSlider("setValue", fill_opacity);
 											
-											editcircleposition = new google.maps.LatLng(parseFloat(circles[j].getAttribute("center_lat")),
-												parseFloat(circles[j].getAttribute("center_lng")));
+											editcircleposition = new google.maps.LatLng(parseFloat(circles[j].center_lat),
+												parseFloat(circles[j].center_lng));
 											var geocoder= new google.maps.Geocoder();
 											geocoder.geocode({'latLng':editcircleposition},function(results, status){
 												if (status == google.maps.GeocoderStatus.OK) {
@@ -221,7 +232,7 @@ function circles_js($id)
 								})
 							}
 						}
-					},"json")
+					}
 				}
 				function placeCircle(location)
 				{
