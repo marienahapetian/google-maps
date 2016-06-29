@@ -24,18 +24,29 @@
 						data = {
 							action:'g_map_options',
 							map_id:id,
-							task:"getxml",
+							task:"ajax",
 						}
-						jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response){
-							if(response.success)
-							{
-								var xml = jQuery.parseXML(response.success);						
-								var maps = xml.documentElement.getElementsByTagName("map");
+						jQuery.ajax({
+                            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                            dataType: 'json',
+                            method: 'post',
+                            data: data,
+                            beforeSend: function () {
+                            }
+                        }).done(function (response) {
+                            HGinitializeMarkerMap(response);
+                        }).fail(function () {
+                            console.log('Failed to load response from database');
+                        });
+                        function HGinitializeMarkerMap(response) {
+                            if (response.success) {
+                                var mapInfo = response.success;
+                                var maps = mapInfo.maps;
 								for(var i = 0; i < maps.length; i++)
 								{
 									var mapcenter = new google.maps.LatLng(
-										parseFloat(maps[i].getAttribute("center_lat")),
-										parseFloat(maps[i].getAttribute("center_lng")));
+										parseFloat(maps[i].center_lat),
+										parseFloat(maps[i].center_lng));
 									var mapOptions = {
 										zoom:parseInt(zoom),
 										center: mapcenter,
@@ -111,7 +122,7 @@
 											placeMarker(position);
 										
 									})
-									var markers = xml.documentElement.getElementsByTagName("marker");
+									var markers = mapInfo.markers;
 
 									jQuery(".edit_marker_list_delete a").on("click",function(){
 										
@@ -124,22 +135,22 @@
 										jQuery(this).parentsUntil(".editing_section").find(".update_list_item").show(200).addClass("tab_options_active_section");
 										jQuery("#marker_add_button").hide(200).addClass("tab_options_hidden_section");
 										jQuery("#marker_get_id").val(markerid);
-										var markers= xml.documentElement.getElementsByTagName("marker");
+										var markers= mapInfo.markers;
 										for(var y = 0; y < markers.length; y++)
 										{
-											var id = markers[y].getAttribute("id");
+											var id = markers[y].id;
 											if(markerid == id)
 											{
-												var name = markers[y].getAttribute("name");
-												var address = markers[y].getAttribute("address");
-												var anim = markers[y].getAttribute("animation");
-												var description = markers[y].getAttribute("description");												
+												var name = markers[y].name;
+												var address = markers[y].address;
+												var anim = markers[y].animation;
+												var description = markers[y].description;												
 												
-												var lat = markers[y].getAttribute("lat");
-												var lng  = markers[y].getAttribute("lng");
+												var lat = markers[y].lat;
+												var lng  = markers[y].lng;
 												var point = new google.maps.LatLng(
-													parseFloat(markers[y].getAttribute("lat")),
-													parseFloat(markers[y].getAttribute("lng")));
+													parseFloat(markers[y].lat),
+													parseFloat(markers[y].lng));
 												
 												map_marker_edit.setCenter(point);
 												
@@ -239,7 +250,7 @@
 								}
 								
 							}
-						},"json")
+						}
 					}
 				function placeMarker(location)
 				{ 
