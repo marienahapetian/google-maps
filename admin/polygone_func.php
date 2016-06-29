@@ -27,18 +27,29 @@ function polygones_js($id)
 					data = {
 						action:'g_map_options',
 						map_id:id,
-						task:"getxml",
+						task:"ajax",
 					}
-					jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response){
-						if(response.success)
-						{
-							var xml = jQuery.parseXML(response.success);
-							var maps = xml.documentElement.getElementsByTagName("map");
+					jQuery.ajax({
+                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                        dataType: 'json',
+                        method: 'post',
+                        data: data,
+                        beforeSend: function () {
+                        }
+                    }).done(function (response) {
+                        HGinitializePolygonMap(response);
+                    }).fail(function () {
+                        console.log('Failed to load response from database');
+                    });
+                    function HGinitializePolygonMap(response) {
+                        if (response.success) {
+                            var mapInfo = response.success;
+                            var maps = mapInfo.maps;
 							for(var i = 0; i < maps.length; i++)
 							{
 								var mapcenter = new google.maps.LatLng(
-									parseFloat(maps[i].getAttribute("center_lat")),
-									parseFloat(maps[i].getAttribute("center_lng")));
+									parseFloat(maps[i].center_lat),
+									parseFloat(maps[i].center_lng));
 
 								var mapOptions = {
 									zoom: parseInt(zoom),
@@ -109,19 +120,19 @@ function polygones_js($id)
 									google.maps.event.trigger(map_polygone_edit, 'resize');
 									
 									jQuery("#polygone_get_id").val(polygoneid);
-									var polygones = xml.documentElement.getElementsByTagName("polygone");
+									var polygones = mapInfo.polygons;
 									for(var e = 0; e < polygones.length; e++)
 									{
-										var id = polygones[e].getAttribute("id");
+										var id = polygones[e].id;
 										if(polygoneid == id)
 										{
-											var name=polygones[e].getAttribute("name");
-											var line_opacity=polygones[e].getAttribute("line_opacity");
-											var line_color=polygones[e].getAttribute("line_color");
-											var fill_opacity=polygones[e].getAttribute("fill_opacity");
-											var fill_color=polygones[e].getAttribute("fill_color");
-											var line_width = polygones[e].getAttribute("line_width");									
-											var latlngs = polygones[e].getElementsByTagName("latlng");
+											var name=polygones[e].name;
+											var line_opacity=polygones[e].line_opacity;
+											var line_color=polygones[e].line_color;
+											var fill_opacity=polygones[e].fill_opacity;
+											var fill_color=polygones[e].fill_color;
+											var line_width = polygones[e].line_width;									
+											var latlngs = polygones[e].latlng;
 																						
 											jQuery("#polygone_edit_name").val(name);
 											
@@ -137,10 +148,10 @@ function polygones_js($id)
 											
 											for(var j = 0; j < latlngs.length; j++)
 											{
-												var lat =latlngs[j].getAttribute("lat");
-												var lng =latlngs[j].getAttribute("lng");
-												var polygoneditpoint = new google.maps.LatLng(parseFloat(latlngs[j].getAttribute("lat")),
-													parseFloat(latlngs[j].getAttribute("lng")));
+												var lat =latlngs[j].lat;
+												var lng =latlngs[j].lng;
+												var polygoneditpoint = new google.maps.LatLng(parseFloat(latlngs[j].lat),
+													parseFloat(latlngs[j].lng));
 												if(j==0){
 													map_polygone_edit.setCenter(polygoneditpoint);
 												}
@@ -242,7 +253,7 @@ function polygones_js($id)
 								})
 							}
 						}
-					},"json")
+					}
 				}
 				function updatePolygoneInputs(location)
 				{
