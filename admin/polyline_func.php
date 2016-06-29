@@ -26,18 +26,29 @@ function polylines_js($id)
 				data = {
 					action:'g_map_options',
 					map_id:id,
-					task:"getxml",
+					task:"ajax",
 				}
-				jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response){
-					if(response.success)
-					{
-						var xml = jQuery.parseXML(response.success);
-						var maps = xml.documentElement.getElementsByTagName("map");
+				jQuery.ajax({
+                    url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                    dataType: 'json',
+                    method: 'post',
+                    data: data,
+                    beforeSend: function () {
+                    }
+                }).done(function (response) {
+                    HGinitializePolylineMap(response);
+                }).fail(function () {
+                    console.log('Failed to load response from database');
+                });
+                function HGinitializePolylineMap(response) {
+                    if (response.success) {
+                        var mapInfo = response.success;
+                        var maps = mapInfo.maps;
 						for(var i = 0; i < maps.length; i++)
 						{
 							var mapcenter = new google.maps.LatLng(
-								parseFloat(maps[i].getAttribute("center_lat")),
-								parseFloat(maps[i].getAttribute("center_lng")));
+								parseFloat(maps[i].center_lat),
+								parseFloat(maps[i].center_lng));
 							var mapOptions = {
 								zoom:parseInt(zoom),
 								center: mapcenter,
@@ -101,27 +112,27 @@ function polylines_js($id)
 								google.maps.event.trigger(map_polyline_edit, 'resize');
 								
 								jQuery("#polyline_get_id").val(polylineid);
-								var polylines = xml.documentElement.getElementsByTagName("polyline");
+								var polylines = mapInfo.polylines;
 								for(var e = 0; e < polylines.length; e++)
 								{
-									var id = polylines[e].getAttribute("id");
+									var id = polylines[e].id;
 									if(polylineid == id)
 									{
-										var name=polylines[e].getAttribute("name");
-										var line_opacity=polylines[e].getAttribute("line_opacity");
-										var line_color=polylines[e].getAttribute("line_color");
-										var line_width = polylines[e].getAttribute("line_width");
-										var latlngs = polylines[e].getElementsByTagName("latlng");
+										var name=polylines[e].name;
+										var line_opacity=polylines[e].line_opacity;
+										var line_color=polylines[e].line_color;
+										var line_width = polylines[e].line_width;
+										var latlngs = polylines[e].latlng;
 										jQuery("#polyline_edit_name").val(name);
 										jQuery("#polyline_edit_line_opacity").simpleSlider("setValue", line_opacity);
 										jQuery("#polyline_edit_line_color").val(line_color);
 										jQuery("#polyline_edit_line_width").simpleSlider("setValue", line_width);
 										for(var j = 0; j < latlngs.length; j++)
 										{
-											var lat =latlngs[j].getAttribute("lat");
-											var lng =latlngs[j].getAttribute("lng");
-											var polylineeditpoint = new google.maps.LatLng(parseFloat(latlngs[j].getAttribute("lat")),
-												parseFloat(latlngs[j].getAttribute("lng")));
+											var lat =latlngs[j].lat;
+											var lng =latlngs[j].lng;
+											var polylineeditpoint = new google.maps.LatLng(parseFloat(latlngs[j].lat),
+												parseFloat(latlngs[j].lng));
 												if(j==0){
 													map_polyline_edit.setCenter(polylineeditpoint);
 												}
@@ -216,7 +227,7 @@ function polylines_js($id)
 							})
 						}
 					}
-				},"json")
+				}
 			}
 			function updatePolylineInputs(location)
 			{
