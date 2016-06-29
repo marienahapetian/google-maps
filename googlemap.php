@@ -749,7 +749,7 @@ function g_maps_options_callback()
 		if($_POST['task']=="submit_marker_edit"){
 			global $wpdb;
 			$sql=$wpdb->prepare("UPDATE ".$wpdb->prefix ."g_markers SET title=%s,description=%s,size=%s, lat=%s, lng=%s, animation=%s, img=%s WHERE id=%s",
-				$_POST['marker_edit_title'],$_POST['marker_edit_description'],$_POST['marker_edit_image_size'],$_POST['marker_edit_location_lat'],$_POST['marker_edit_location_lng'],$_POST['marker_edit_animation'],$_POST['marker_edit_image'],$_POST['id']);
+				wp_unslash($_POST['marker_edit_title']),wp_unslash($_POST['marker_edit_description']),wp_unslash($_POST['marker_edit_image_size']),wp_unslash($_POST['marker_edit_location_lat']),wp_unslash($_POST['marker_edit_location_lng']),wp_unslash($_POST['marker_edit_animation']),wp_unslash($_POST['marker_edit_image']),wp_unslash($_POST['id']));
 			if($wpdb->query($sql)){
 				$map_params=$wpdb->get_results($wpdb->prepare("SELECT * FROM ".$wpdb->prefix ."g_maps WHERE id=%s",$_POST['map_id']));
 				foreach($map_params as $param){
