@@ -357,31 +357,40 @@ function huge_it_google_mapss_shortcode($atts)
 add_action("wp_ajax_nopriv_g_map_options","g_maps_nopriv_options_callback");
 
 function g_maps_nopriv_options_callback(){
-	function parseToXML($htmlStr)
-	{
-		$xmlStr=str_replace('<','&lt;',$htmlStr);
-		$xmlStr=str_replace('>','&gt;',$xmlStr);
-		$xmlStr=str_replace('"','&quot;',$xmlStr);
-		$xmlStr=str_replace("'",'&#39;',$xmlStr);
-		$xmlStr=str_replace("&",'&amp;',$xmlStr);
-		return $xmlStr;
-	}
+	
 	if(isset($_POST['task'])){
-		if($_POST['task']=="getxml"){
+		if($_POST['task']=="ajax"){
 			$id=$_POST['map_id'];
-			$response ="<?xml version='1.0' encoding='UTF-8'?>
-					<maps>";
 			global $wpdb;
 			
 			
 			$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_maps WHERE id=%s", $id);
 			$getMap = $wpdb->get_results($sql);
-			
+			$response = array(
+                'maps'=>array(),
+                'markers'=>array(),
+                'polygons'=>array(),
+                'polylines'=>array(),
+                'circles'=>array(),
+            );
 			if(isset($getMap))
 			{
 				foreach($getMap as $mapinfo)
 				{
-					$response = $response."<map name='". parseToXML($mapinfo->name) ."' info_type='".$mapinfo->info_type ."' pan_controller='".$mapinfo->pan_controller ."' zoom_controller='".$mapinfo->zoom_controller ."' type_controller='".$mapinfo->type_controller ."' scale_controller='".$mapinfo->scale_controller ."' street_view_controller='".$mapinfo->street_view_controller ."' overview_map_controller='".$mapinfo->overview_map_controller ."' type='". $mapinfo->type ."' zoom='". $mapinfo->zoom ."' center_lat='". $mapinfo->center_lat."' center_lng='". $mapinfo->center_lng."'  />";
+					$response['maps'][] = array(
+                        'name'=>$mapinfo->name,
+                        'info_type'=>$mapinfo->info_type,
+                        'pan_controller'=>$mapinfo->pan_controller,
+                        'zoom_controller'=>$mapinfo->zoom_controller,
+                        'type_controller'=>$mapinfo->type_controller,
+                        'scale_controller'=>$mapinfo->scale_controller,
+                        'street_view_controller'=>$mapinfo->street_view_controller,
+                        'overview_map_controller'=>$mapinfo->overview_map_controller,
+                        'type'=>$mapinfo->type,
+                        'zoom'=>$mapinfo->zoom,
+                        'center_lat'=>$mapinfo->center_lat,
+                        'center_lng'=>$mapinfo->center_lng
+                    );
 				}
 				$sql =$wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_markers WHERE map=%d", $id);
 				$getMarkers = $wpdb->get_results($sql);
@@ -391,35 +400,72 @@ function g_maps_nopriv_options_callback(){
 
 						foreach($getMarkers as $marker)
 						{
-							$response = $response."<marker id='". $marker->id ."' size='".$marker->size."' name='".parseToXML($marker->title)."' animation='".$marker->animation."' lat='".$marker->lat."' lng='".$marker->lng."' description='".parseToXML($marker->description) ."' img='".parseToXML($marker->img) ."' />";
+							$response['markers'][] = array(
+                                'id'=>$marker->id,
+                                'size'=>$marker->size,
+                                'name'=>$marker->title,
+                                'animation'=>$marker->animation,
+                                'lat'=>$marker->lat,
+                                'lng'=>$marker->lng,
+                                'description'=>$marker->description,
+                                'img'=>$marker->img,
+                            );
 						}	
 					}
 				$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_polygones WHERE map=%d",$id);
 				$getPolygone = $wpdb->get_results($sql);
 				if(isset($getPolygone))
 				{
+                    $i=0;
 					foreach($getPolygone as $polygone)
 					{
-						$response = $response."<polygone id='". $polygone->id ."' name='".parseToXML($polygone->name) ."'  url='".parseToXML($polygone->url) ."' line_width='" . $polygone->line_width ."'  line_opacity='".$polygone->line_opacity ."' line_color='".$polygone->line_color ."' fill_opacity='".$polygone->fill_opacity ."' fill_color='".$polygone->fill_color ."' hover_line_color='".$polygone->hover_line_color ."' hover_line_opacity='".$polygone->hover_line_opacity ."' hover_fill_color='".$polygone->hover_fill_color ."' hover_fill_opacity='".$polygone->hover_fill_opacity ."' >";
+						$response['polygons'][$i] = array(
+                            'id'=>$polygone->id,
+                            'name'=>$polygone->name,
+                            'url'=>$polygone->url,
+                            'line_width'=>$polygone->line_width,
+                            'line_opacity'=>$polygone->line_opacity,
+                            'line_color'=>$polygone->line_color,
+                            'fill_opacity'=>$polygone->fill_opacity,
+                            'fill_color'=>$polygone->fill_color,
+                            'hover_line_color'=>$polygone->hover_line_color,
+                            'hover_line_opacity'=>$polygone->hover_line_opacity,
+                            'hover_fill_color'=>$polygone->hover_fill_color,
+                            'hover_fill_opacity'=>$polygone->hover_fill_opacity,
+                            'latlng'=>array(),
+                        );
 						preg_match_all('/\(([^\)]*)\)/', $polygone->data, $matches);
 						foreach($matches[1] as $latlng)
 						{
 								preg_match_all("/[^,]+[\d+][.?][\d+]*/",$latlng,$results);
 								foreach($results as $latlng)
 								{
-									$response = $response."<latlng lat='".$latlng[0]."' lng='".$latlng[1]."' />";
+									$response['polygons'][$i]['latlng'][] = array(
+                                        'lat'=>$latlng[0],
+                                        'lng'=>$latlng[1]
+                                    );
 								}
 						}
-						$response = $response."</polygone>";
+						$i++;
 					}
 				}
 				$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_polylines WHERE map=%s",$id);
 				$getPolyline = $wpdb->get_results($sql);
 				if(isset($getPolyline))
 				{
+                    $i=0;
 					foreach($getPolyline as $polyline)
 					{
-						$response = $response."<polyline id='".$polyline->id ."' name='".parseToXML($polyline->name) ."' hover_line_color='".$polyline->hover_line_color ."' hover_line_opacity='".$polyline->hover_line_opacity ."' line_opacity='".$polyline->line_opacity."' line_color='".$polyline->line_color."' line_width='".$polyline->line_width."' >";
+						$response['polylines'][$i] = array(
+                            'id'=>$polyline->id,
+                            'name'=>$polyline->name,
+                            'line_width'=>$polyline->line_width,
+                            'line_opacity'=>$polyline->line_opacity,
+                            'line_color'=>$polyline->line_color,
+                            'hover_line_color'=>$polyline->hover_line_color,
+                            'hover_line_opacity'=>$polyline->hover_line_opacity,
+                            'latlng'=>array(),
+                        );
 						preg_match_all('/\(([^\)]*)\)/', $polyline->data, $matches);
 						foreach($matches[1] as $latlng)
 						{
@@ -428,7 +474,7 @@ function g_maps_nopriv_options_callback(){
 								$response = $response."<latlng lat='".$latlng[0]."' lng='".$latlng[1]."' />";
 							}
 						}
-						$response = $response."</polyline>";
+						 $i++;
 					}
 				}
 				$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_circles WHERE map=%d", $id);
@@ -437,10 +483,25 @@ function g_maps_nopriv_options_callback(){
 				{
 					foreach($getCircle as $circle)
 					{
-						$response = $response."<circle id='".$circle->id."' name='".parseToXML($circle->name) ."' center_lat='".$circle->center_lat."' center_lng='".$circle->center_lng."' radius='".$circle->radius."' hover_fill_color='".$circle->hover_fill_color ."' hover_fill_opacity='".$circle->hover_fill_opacity ."' hover_line_color='".$circle->hover_line_color ."' hover_line_opacity='".$circle->hover_line_opacity ."' line_width='".$circle->line_width."' line_color='".$circle->line_color."' line_opacity='".$circle->line_opacity."' fill_color='".$circle->fill_color."' fill_opacity='".$circle->fill_opacity."' show_marker='".$circle->show_marker."' />";
+						$response['circles'][] = array(
+                            'id'=>$circle->id,
+                            'name'=>$circle->name,
+                            'center_lat'=>$circle->center_lat,
+                            'center_lng'=>$circle->center_lng,
+                            'radius'=>$circle->radius,
+                            'hover_fill_color'=>$circle->hover_fill_color,
+                            'hover_fill_opacity'=>$circle->hover_fill_opacity,
+                            'hover_line_color'=>$circle->hover_line_color,
+                            'hover_line_opacity'=>$circle->hover_line_opacity,
+                            'line_width'=>$circle->line_width,
+                            'line_color'=>$circle->line_color,
+                            'line_opacity'=>$circle->line_opacity,
+                            'fill_color'=>$circle->fill_color,
+                            'fill_opacity'=>$circle->fill_opacity,
+                            'show_marker'=>$circle->show_marker,
+                        );
 					}
 				}
-				$response = $response."</maps>";
 				echo json_encode(array("success"=>$response));
 				die();
 			}
@@ -453,15 +514,7 @@ add_action("wp_ajax_g_map_options","g_maps_options_callback");
 
 function g_maps_options_callback()
 {
-	function parseToXML($htmlStr)
-	{
-		$xmlStr=str_replace('<','&lt;',$htmlStr);
-		$xmlStr=str_replace('>','&gt;',$xmlStr);
-		$xmlStr=str_replace('"','&quot;',$xmlStr);
-		$xmlStr=str_replace("'",'&#39;',$xmlStr);
-		$xmlStr=str_replace("&",'&amp;',$xmlStr);
-		return $xmlStr;
-	}
+	
 	if(isset($_POST['task'])){
 		if($_POST['task']=='post_shortcode_change_map'){
 			global $wpdb;
@@ -821,22 +874,39 @@ function g_maps_options_callback()
 	}
 		
 	if(isset($_POST['task'])){
-		if($_POST['task'] == "getxml")
+		if($_POST['task'] == "ajax")
 		{
 			$id=$_POST['map_id'];
-			$response ="<?xml version='1.0' encoding='UTF-8'?>
-					<maps>";
 			global $wpdb;
 			
 			
 			$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_maps WHERE id=%s", $id);
 			$getMap = $wpdb->get_results($sql);
-			
+			$response = array(
+                'maps'=>array(),
+                'markers'=>array(),
+                'polygons'=>array(),
+                'polylines'=>array(),
+                'circles'=>array(),
+            );
 			if(isset($getMap))
 			{
 				foreach($getMap as $mapinfo)
 				{
-					$response = $response."<map name='". parseToXML($mapinfo->name) ."' info_type='".$mapinfo->info_type ."' pan_controller='".$mapinfo->pan_controller ."' zoom_controller='".$mapinfo->zoom_controller ."' type_controller='".$mapinfo->type_controller ."' scale_controller='".$mapinfo->scale_controller ."' street_view_controller='".$mapinfo->street_view_controller ."' overview_map_controller='".$mapinfo->overview_map_controller ."' type='". $mapinfo->type ."' zoom='". $mapinfo->zoom ."' center_lat='". $mapinfo->center_lat."' center_lng='". $mapinfo->center_lng."'  />";
+					$response['maps'][] = array(
+                        'name'=>$mapinfo->name,
+                        'info_type'=>$mapinfo->info_type,
+                        'pan_controller'=>$mapinfo->pan_controller,
+                        'zoom_controller'=>$mapinfo->zoom_controller,
+                        'type_controller'=>$mapinfo->type_controller,
+                        'scale_controller'=>$mapinfo->scale_controller,
+                        'street_view_controller'=>$mapinfo->street_view_controller,
+                        'overview_map_controller'=>$mapinfo->overview_map_controller,
+                        'type'=>$mapinfo->type,
+                        'zoom'=>$mapinfo->zoom,
+                        'center_lat'=>$mapinfo->center_lat,
+                        'center_lng'=>$mapinfo->center_lng
+                    );
 				}
 				$sql =$wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_markers WHERE map=%d", $id);
 				$getMarkers = $wpdb->get_results($sql);
@@ -846,44 +916,84 @@ function g_maps_options_callback()
 
 						foreach($getMarkers as $marker)
 						{
-							$response = $response."<marker id='". $marker->id ."' size='".$marker->size."' name='".parseToXML($marker->title)."' animation='".$marker->animation."' lat='".$marker->lat."' lng='".$marker->lng."' description='".parseToXML($marker->description) ."' img='".parseToXML($marker->img) ."' />";
+							$response['markers'][] = array(
+                                'id'=>$marker->id,
+                                'size'=>$marker->size,
+                                'name'=>$marker->title,
+                                'animation'=>$marker->animation,
+                                'lat'=>$marker->lat,
+                                'lng'=>$marker->lng,
+                                'description'=>$marker->description,
+                                'img'=>$marker->img,
+                            );
 						}	
 					}
 				$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_polygones WHERE map=%d",$id);
 				$getPolygone = $wpdb->get_results($sql);
 				if(isset($getPolygone))
 				{
+                    $i=0;
 					foreach($getPolygone as $polygone)
 					{
-						$response = $response."<polygone id='". $polygone->id ."' name='".parseToXML($polygone->name) ."'  url='".parseToXML($polygone->url) ."' line_width='" . $polygone->line_width ."'  line_opacity='".$polygone->line_opacity ."' line_color='".$polygone->line_color ."' fill_opacity='".$polygone->fill_opacity ."' fill_color='".$polygone->fill_color ."' hover_line_color='".$polygone->hover_line_color ."' hover_line_opacity='".$polygone->hover_line_opacity ."' hover_fill_color='".$polygone->hover_fill_color ."' hover_fill_opacity='".$polygone->hover_fill_opacity ."' >";
+						$$response['polygons'][$i] = array(
+                            'id'=>$polygone->id,
+                            'name'=>$polygone->name,
+                            'url'=>$polygone->url,
+                            'line_width'=>$polygone->line_width,
+                            'line_opacity'=>$polygone->line_opacity,
+                            'line_color'=>$polygone->line_color,
+                            'fill_opacity'=>$polygone->fill_opacity,
+                            'fill_color'=>$polygone->fill_color,
+                            'hover_line_color'=>$polygone->hover_line_color,
+                            'hover_line_opacity'=>$polygone->hover_line_opacity,
+                            'hover_fill_color'=>$polygone->hover_fill_color,
+                            'hover_fill_opacity'=>$polygone->hover_fill_opacity,
+                            'latlng'=>array(),
+                        );
 						preg_match_all('/\(([^\)]*)\)/', $polygone->data, $matches);
 						foreach($matches[1] as $latlng)
 						{
 								preg_match_all("/[^,]+[\d+][.?][\d+]*/",$latlng,$results);
 								foreach($results as $latlng)
 								{
-									$response = $response."<latlng lat='".$latlng[0]."' lng='".$latlng[1]."' />";
+									$response['polygons'][$i]['latlng'][] = array(
+                                        'lat'=>$latlng[0],
+                                        'lng'=>$latlng[1]
+                                    );
 								}
 						}
-						$response = $response."</polygone>";
+						$i++;
 					}
 				}
 				$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_polylines WHERE map=%s",$id);
 				$getPolyline = $wpdb->get_results($sql);
 				if(isset($getPolyline))
 				{
+                    $i=0;
 					foreach($getPolyline as $polyline)
 					{
-						$response = $response."<polyline id='".$polyline->id ."' name='".parseToXML($polyline->name) ."' hover_line_color='".$polyline->hover_line_color ."' hover_line_opacity='".$polyline->hover_line_opacity ."' line_opacity='".$polyline->line_opacity."' line_color='".$polyline->line_color."' line_width='".$polyline->line_width."' >";
+						$response['polylines'][$i] = array(
+                            'id'=>$polyline->id,
+                            'name'=>$polyline->name,
+                            'line_width'=>$polyline->line_width,
+                            'line_opacity'=>$polyline->line_opacity,
+                            'line_color'=>$polyline->line_color,
+                            'hover_line_color'=>$polyline->hover_line_color,
+                            'hover_line_opacity'=>$polyline->hover_line_opacity,
+                            'latlng'=>array(),
+                        );
 						preg_match_all('/\(([^\)]*)\)/', $polyline->data, $matches);
 						foreach($matches[1] as $latlng)
 						{
 							preg_match_all("/[^,]+[\d+][.?][\d+]*/",$latlng,$results);
 							foreach($results as $latlng){
-								$response = $response."<latlng lat='".$latlng[0]."' lng='".$latlng[1]."' />";
+								$response['polylines'][$i]['latlng'][] = array(
+                                    'lat'=>$latlng[0],
+                                    'lng'=>$latlng[1]
+                                );
 							}
 						}
-						$response = $response."</polyline>";
+						$i++;
 					}
 				}
 				$sql = $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."g_circles WHERE map=%d", $id);
@@ -892,10 +1002,25 @@ function g_maps_options_callback()
 				{
 					foreach($getCircle as $circle)
 					{
-						$response = $response."<circle id='".$circle->id."' name='".parseToXML($circle->name) ."' center_lat='".$circle->center_lat."' center_lng='".$circle->center_lng."' radius='".$circle->radius."' hover_fill_color='".$circle->hover_fill_color ."' hover_fill_opacity='".$circle->hover_fill_opacity ."' hover_line_color='".$circle->hover_line_color ."' hover_line_opacity='".$circle->hover_line_opacity ."' line_width='".$circle->line_width."' line_color='".$circle->line_color."' line_opacity='".$circle->line_opacity."' fill_color='".$circle->fill_color."' fill_opacity='".$circle->fill_opacity."' show_marker='".$circle->show_marker."' />";
+						$response['circles'][] = array(
+                            'id'=>$circle->id,
+                            'name'=>$circle->name,
+                            'center_lat'=>$circle->center_lat,
+                            'center_lng'=>$circle->center_lng,
+                            'radius'=>$circle->radius,
+                            'hover_fill_color'=>$circle->hover_fill_color,
+                            'hover_fill_opacity'=>$circle->hover_fill_opacity,
+                            'hover_line_color'=>$circle->hover_line_color,
+                            'hover_line_opacity'=>$circle->hover_line_opacity,
+                            'line_width'=>$circle->line_width,
+                            'line_color'=>$circle->line_color,
+                            'line_opacity'=>$circle->line_opacity,
+                            'fill_color'=>$circle->fill_color,
+                            'fill_opacity'=>$circle->fill_opacity,
+                            'show_marker'=>$circle->show_marker,
+                        );
 					}
 				}
-				$response = $response."</maps>";
 				echo json_encode(array("success"=>$response));
 				die();
 			}
