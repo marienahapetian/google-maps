@@ -122,23 +122,34 @@
 							
 							var front_end_data= {
 								action: 'g_map_options',
-								task:"getxml",
-								map_id:<?php echo $map->id; ?>,
+								map_id:<?php echo $id; ?>,
+								task:'ajax'
 							}
-							jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", front_end_data, function(response){
-								if(response.success)
-								{
-									var xml = jQuery.parseXML(response.success);
-									var markers = xml.documentElement.getElementsByTagName("marker");
+                                jQuery.ajax({
+                                    url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                                    dataType: 'json',
+                                    method: 'post',
+                                    data: front_end_data,
+                                    beforeSend: function () {
+                                    }
+                                }).done(function (response) {
+                                    HGinitializeMap(response);
+                                }).fail(function () {
+                                    console.log('Failed to load response from database');
+                                });
+                                function HGinitializeMap(response) {
+                                    if (response.success) {
+                                        var mapInfo = response.success;
+                                        var markers = mapInfo.markers;
 									for(var i = 0; i < markers.length; i++)
 									{
-										var name = markers[i].getAttribute("name");
-										var address = markers[i].getAttribute("address");
-										var anim = markers[i].getAttribute("animation");
-										var description = markers[i].getAttribute("description");
+										var name = markers[i].name;
+										var address = markers[i].address;
+										var anim = markers[i].animation;
+										var description = markers[i].description;
 										var point = new google.maps.LatLng(
-											parseFloat(markers[i].getAttribute("lat")),
-											parseFloat(markers[i].getAttribute("lng")));
+											parseFloat(markers[i].lat),
+											parseFloat(markers[i].lng));
 										var html = "<b>" + name + "</b> <br/>" + address;
 										if(anim == 'DROP'){
 											marker[i] = new google.maps.Marker({
@@ -169,21 +180,21 @@
 										infowindow[i] = new google.maps.InfoWindow;
 										bindInfoWindow(marker[i], front_end_map, infowindow[i], description, "<?php echo $map->info_type; ?>");
 									}
-									var polygones = xml.documentElement.getElementsByTagName("polygone");
+									var polygones = mapInfo.polygons;
 									for(var i = 0; i < polygones.length; i++)
 									{
-										var name = polygones[i].getAttribute("name");
-										var line_opacity = polygones[i].getAttribute("line_opacity");
-										var line_color = "#"+polygones[i].getAttribute("line_color");
-										var fill_opacity = polygones[i].getAttribute("fill_opacity");
-										var line_width = polygones[i].getAttribute("line_width");
-										var fill_color = "#"+polygones[i].getAttribute("fill_color");
-										var latlngs = polygones[i].getElementsByTagName("latlng");
+										var name = polygones[i].name;
+										var line_opacity = polygones[i].line_opacity;
+										var line_color = "#"+polygones[i].line_color;
+										var fill_opacity = polygones[i].fill_opacity;
+										var line_width = polygones[i].line_width;
+										var fill_color = "#"+polygones[i].fill_color;
+										var latlngs = polygones[i].latlng;
 										polygoncoords = [];
 										for(var j = 0; j < latlngs.length; j++)
 										{
-											polygonpoints = new google.maps.LatLng(parseFloat(latlngs[j].getAttribute("lat")),
-												parseFloat(latlngs[j].getAttribute("lng")))
+											polygonpoints = new google.maps.LatLng(parseFloat(latlngs[j].lat),
+												parseFloat(latlngs[j].lng))
 											polygoncoords.push(polygonpoints)
 										}
 										//alert(polygoncoords);
@@ -198,19 +209,19 @@
 											draggable:false,
 										});
 									}
-									var polylines = xml.documentElement.getElementsByTagName("polyline");
+									var polylines = mapInfo.polylines;
 									for(var i = 0; i< polylines.length; i++)
 									{
-										var name = polylines[i].getAttribute("name");
-										var line_opacity = polylines[i].getAttribute("line_opacity");
-										var line_color = polylines[i].getAttribute("line_color");
-										var line_width = polylines[i].getAttribute("line_width");
-										var latlngs = polylines[i].getElementsByTagName("latlng");
+										var name = polylines[i].name;
+										var line_opacity = polylines[i].line_opacity;
+										var line_color = polylines[i].line_color;
+										var line_width = polylines[i].line_width;
+										var latlngs = polylines[i].latlng;
 										newpolylinecoords =[];
 										for(var j = 0; j < latlngs.length; j++)
 										{
-											polylinepoints = new google.maps.LatLng(parseFloat(latlngs[j].getAttribute("lat")),
-												parseFloat(latlngs[j].getAttribute("lng")))
+											polylinepoints = new google.maps.LatLng(parseFloat(latlngs[j].lat),
+												parseFloat(latlngs[j].lng))
 											newpolylinecoords.push(polylinepoints)
 										}
 										polyline[i] = new google.maps.Polyline({
@@ -221,21 +232,21 @@
 											strokeWeight:line_width,
 										})
 									}
-									var circles = xml.documentElement.getElementsByTagName("circle");
+									var circles = mapInfo.circles;
 									for(var i = 0; i< circles.length; i++)
 									{
-										var circle_name =circles[i].getAttribute("name");
-										var circle_center_lat = circles[i].getAttribute("center_lat");
-										var circle_center_lng = circles[i].getAttribute("center_lng");
-										var circle_radius = circles[i].getAttribute("radius");
-										var circle_line_width = circles[i].getAttribute("line_width");
-										var circle_line_color = circles[i].getAttribute("line_color");
-										var circle_line_opacity = circles[i].getAttribute("line_opacity");
-										var circle_fill_color = circles[i].getAttribute("fill_color");
-										var circle_fill_opacity = circles[i].getAttribute("fill_opacity");
-										var circle_show_marker = parseInt(circles[i].getAttribute("show_marker"));
-										circlepoint = new google.maps.LatLng(parseFloat(circles[i].getAttribute("center_lat")),
-										parseFloat(circles[i].getAttribute("center_lng")));
+										var circle_name =circles[i].name;
+										var circle_center_lat = circles[i].center_lat;
+										var circle_center_lng = circles[i].center_lng;
+										var circle_radius = circles[i].radius;
+										var circle_line_width = circles[i].line_width;
+										var circle_line_color = circles[i].line_color;
+										var circle_line_opacity = circles[i].line_opacity;
+										var circle_fill_color = circles[i].fill_color;
+										var circle_fill_opacity = circles[i].fill_opacity;
+										var circle_show_marker = parseInt(circles[i].show_marker);
+										circlepoint = new google.maps.LatLng(parseFloat(circles[i].center_lat),
+										parseFloat(circles[i].center_lng));
 										newcircle[i] = new google.maps.Circle({
 											map:front_end_map,
 											center:circlepoint,
