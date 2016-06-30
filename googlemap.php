@@ -924,7 +924,7 @@ function g_maps_options_callback() {
 				if ( isset( $getPolygone ) ) {
 					$i = 0;
 					foreach ( $getPolygone as $polygone ) {
-						$$response['polygons'][ $i ] = array(
+						$response['polygons'][ $i ] = array(
 							'id'                 => $polygone->id,
 							'name'               => $polygone->name,
 							'url'                => $polygone->url,
