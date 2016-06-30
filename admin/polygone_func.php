@@ -40,7 +40,7 @@ function polygones_js( $id ) {
 				});
 				function HGinitializePolygonMap(response) {
 					if (response.success) {
-						var mapInfo = response.success;
+						var mapInfo = response.success; 
 						var maps = mapInfo.maps;
 						for (var i = 0; i < maps.length; i++) {
 							var mapcenter = new google.maps.LatLng(
