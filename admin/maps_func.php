@@ -354,7 +354,6 @@ function mapss_js( $id ) {
 						}
 						var polygones = mapInfo.polygons;
 						for (var k = 0; k < polygones.length; k++) {
-
 							var name = polygones[k].name;
 							var new_line_opacity = polygones[k].line_opacity;
 							var new_line_color = "#" + polygones[k].line_color;
@@ -408,7 +407,7 @@ function mapss_js( $id ) {
 
 						}
 						var polylines = mapInfo.polylines;
-						for (var q = 0; q < polylines.length; q++) {
+						for (var q = 0; q < polylines.length; q++) { 
 							var name = polylines[q].name;
 							var line_opacity = polylines[q].line_opacity;
 							var line_color = polylines[q].line_color;
