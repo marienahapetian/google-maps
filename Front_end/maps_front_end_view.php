@@ -261,10 +261,6 @@ function showpublishedmap( $id ) {
 
 						}
 					}
-
-					,
-					"json"
-					)
 				})
 			</script>
 			<?php ;
