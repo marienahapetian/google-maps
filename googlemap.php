@@ -359,7 +359,7 @@ function huge_it_google_mapss_shortcode( $atts ) {
 			'id' => ''
 		), $atts );
 	wp_enqueue_script( "jquery" );
-	wp_enqueue_script( "gmap", 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places' );
+	wp_enqueue_script( "gmap", 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDozlXjXoJz29LfOGOOtG-5uY-Qi4XzIPY&v=3.exp&sensor=false&libraries=places' );
 
 	return showpublishedmap( $atts['id'] );
 }
