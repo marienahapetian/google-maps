@@ -1,4 +1,54 @@
 jQuery(document).ready(function(){
+
+	if(jQuery(".hg_gmaps_save_api_key_button").length){
+		jQuery(".hg_gmaps_save_api_key_button").on('click',function(){
+			var _this = jQuery(this);
+			var key = jQuery(this).closest("form").find(".hg_gmaps_api_key_input").val();
+			console.log(key);
+			if(key != undefined && key != ""){
+				var data = {
+					action : 'hg_gmaps_save_api_key',
+					hg_gmaps_nonce: ajax_object.hg_gmaps_nonce,
+					api_key: key
+				};
+
+				jQuery.ajax({
+					url: ajax_object.ajax_url,
+					type: 'post',
+					data: data,
+					dataType: 'json',
+					beforeSend: function (xhr) {
+						_this.parent().find(".spinner").css("visibility","visible");
+					},
+					success: function (result) {
+						if(result.success){
+							setTimeout(function(){
+								var successNotice = "<div id='hg_gmaps_api_key_success' class='notice notice-success is-dismissible'>" +
+									"<p class='hg_mui_heading'>GOOGLE API KEY SAVED SUCCESSFULLY!</p>" +
+									"<button type='button' class='notice-dismiss'><span class='screen-reader-text'>Dismiss this notice.</span></button>" +
+									"</div>";
+								if(jQuery("#hg_gmaps_no_api_key_big_notice").length){
+									jQuery("#hg_gmaps_no_api_key_big_notice").replaceWith(successNotice);
+								}else if(jQuery("#screen-meta").length){
+									jQuery("#screen-meta").after(successNotice)
+								}else {
+									jQuery("#wpbody-content").prepend(successNotice);
+								}
+								jQuery("#hg_gmaps_api_key_success .notice-dismiss").on("click",function(){
+									jQuery(this).parent().remove();
+								});
+							},1500);
+
+						}
+					},
+					error: function () {
+						ecwp.pageLoaded();
+					}
+				})
+			}
+			return false;
+		});
+	}
 		
                 if(jQuery('.g_map').length){
                     var el = jQuery('.g_map');

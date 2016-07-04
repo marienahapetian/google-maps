@@ -11,7 +11,8 @@ function show_maps()
 .free_version_banner {
     position:relative;
     display:block;
-    background-image:url(<?php echo $path_site2; ?>/wp_banner_bg.jpg);
+    margin-top:20px;
+	background-image:url(<?php echo $path_site2; ?>/wp_banner_bg.jpg);
     background-position:top left;
     background-repeat:repeat;
     overflow:hidden;
@@ -211,6 +212,7 @@ function edit_maps()
 		.free_version_banner {
 			position:relative;
 			display:block;
+			margin-top:20px;
 			background-image:url(<?php echo $path_site2; ?>/wp_banner_bg.jpg);
 			background-position:top left;
 			backround-repeat:repeat;
