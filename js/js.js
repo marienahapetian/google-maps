@@ -18,6 +18,7 @@ jQuery(document).ready(function(){
 					data: data,
 					dataType: 'json',
 					beforeSend: function (xhr) {
+						jQuery(this).attr("disabled", true);
 						_this.parent().find(".spinner").css("visibility","visible");
 					},
 					success: function (result) {
@@ -29,14 +30,27 @@ jQuery(document).ready(function(){
 									"</div>";
 								if(jQuery("#hg_gmaps_no_api_key_big_notice").length){
 									jQuery("#hg_gmaps_no_api_key_big_notice").replaceWith(successNotice);
+								}else if(jQuery(".free_version_banner").length){
+									jQuery(".free_version_banner").after(successNotice);
 								}else if(jQuery("#screen-meta").length){
-									jQuery("#screen-meta").after(successNotice)
+									jQuery("#screen-meta").after(successNotice);
 								}else {
 									jQuery("#wpbody-content").prepend(successNotice);
 								}
 								jQuery("#hg_gmaps_api_key_success .notice-dismiss").on("click",function(){
 									jQuery(this).parent().remove();
 								});
+								var form = _this.closest("form");
+								if(form.hasClass("hg_gmaps_main_api_form")){
+									form.find("button").css("visibility","hidden");
+									form.find(".spinner").css("visibility","hidden");
+								}
+
+								if(jQuery(".hg_gmaps_main_api_form").length && jQuery(".hg_gmaps_main_api_form").hasClass("hide")){
+									jQuery(".hg_gmaps_main_api_form").removeClass("hide");
+									jQuery(".hg_gmaps_main_api_form .hg_gmaps_api_key_input").val(key);
+								}
+
 							},1500);
 
 						}
@@ -49,7 +63,12 @@ jQuery(document).ready(function(){
 			return false;
 		});
 	}
-		
+
+	jQuery(".hg_gmaps_main_api_form .hg_gmaps_api_key_input").on("keyup",function(){
+		if(jQuery(this).val() != ""){
+			jQuery(this).closest("form").find("button").css("visibility","visible");
+		}
+	});
                 if(jQuery('.g_map').length){
                     var el = jQuery('.g_map');
                     var elpos_original = el.offset().top;
