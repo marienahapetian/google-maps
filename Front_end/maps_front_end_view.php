@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function showpublishedmap( $id ) {
 	ob_start();
 	global $wpdb;

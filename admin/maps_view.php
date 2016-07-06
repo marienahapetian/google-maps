@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function show_maps() {
 	global $wpdb;
 	$path_site2 = plugins_url( "../images", __FILE__ );
@@ -239,7 +244,7 @@ function edit_maps() {
 			$line_width         = $_POST['polyline_line_width'];
 			$hover_line_color   = $_POST['hover_polyline_line_color'];
 			$hover_line_opacity = $_POST['hover_polyline_line_opacity'];
-			$polyline_name      = $POST['polyline_name'];
+			$polyline_name      = $_POST['polyline_name'];
 			$sql                = $wpdb->prepare( "INSERT INTO " . $wpdb->prefix . "g_polylines (map , name , data ,hover_line_color ,hover_line_opacity , line_opacity , line_color , line_width) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
 				$id, $polyline_name, $coords, $hover_line_color, $hover_line_opacity, $line_opacity, $line_color, $line_width );
 			$insertPolyline     = $wpdb->query( $sql );

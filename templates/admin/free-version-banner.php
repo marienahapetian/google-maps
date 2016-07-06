@@ -3,6 +3,10 @@
  * Free Version Banner
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 ?>
 <style>
     .free_version_banner {
