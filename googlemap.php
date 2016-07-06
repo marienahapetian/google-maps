@@ -10,6 +10,10 @@ Author URI: http://huge-it.com
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 include_once( 'includes/ajax/ajax-api-key.php' );
  
 add_action('init', 'hugemaps_do_output_buffer');
