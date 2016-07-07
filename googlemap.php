@@ -4,13 +4,19 @@
 Plugin Name: Huge IT Google Maps
 Plugin URI: http://huge-it.com/google-map
 Description: This easy to use Google Map plugin gives you opportunity to show anything on the map with fantastic tools of Google Maps.
-Version: 2.0.8
+Version: 2.1.0
 Author: Huge-IT
 Author URI: http://huge-it.com
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-add_action( 'init', 'hugemaps_do_output_buffer' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+include_once( 'includes/ajax/ajax-api-key.php' );
+ 
+add_action('init', 'hugemaps_do_output_buffer');
 function hugemaps_do_output_buffer() {
 	ob_start();
 }
@@ -305,28 +311,60 @@ function hugeitgooglemapss_admin_script() {
 	wp_enqueue_style( "maps_admin_css", plugins_url( "style/style.css", __FILE__ ), false );
 	wp_enqueue_style( "simple_slider_style", plugins_url( "style/simple-slider.css", __FILE__ ), false );
 	wp_enqueue_script( "maps_admin_js", plugins_url( "js/js.js", __FILE__ ), false );
-	wp_enqueue_script( "gmap", 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDozlXjXoJz29LfOGOOtG-5uY-Qi4XzIPY&v=3.exp&sensor=false&libraries=places' );
+	$api_key = get_option("hg_gmaps_api_key","");
+	if($api_key != ""){
+		$key_param = 'key='.$api_key.'&';
+	}else{
+		$key_param = '';
+	}
+	wp_enqueue_script( "gmap", 'https://maps.googleapis.com/maps/api/js?'.$key_param.'v=3.exp&sensor=false&libraries=places' );
 	wp_enqueue_script( "simple_slider", plugins_url( "js/simple-slider.js", __FILE__ ), false );
-	//wp_enqueue_script( 'ajax_script', plugins_url( 'js/maps_ajax.js', __FILE__ ), array('jquery'));
-	wp_enqueue_script( 'param_block2', plugins_url( "jscolor/jscolor.js", __FILE__ ) );
-	//wp_localize_script( 'ajax_script', 'ajax_object',array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => $email_nonce ) );
+	wp_enqueue_script('param_block2', plugins_url("jscolor/jscolor.js", __FILE__));
+	wp_localize_script( 'maps_admin_js', 'ajax_object',array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'hg_gmaps_nonce' => wp_create_nonce('hg_gmaps_nonce') ) );
+}
+
+function hg_gmaps_api_key_notice(){
 	?>
-	<?php ;
+	<div id="hg_gmaps_no_api_key_big_notice" class="error">
+		<p class="hg_mui_heading">Attention!</br>Before you begin using Google Map plugin, please note that All Google Maps users now required to have an API key to function. You can read more about that <a href="https://googlegeodevelopers.blogspot.am/2016/06/building-for-scale-updates-to-google.html" target="_blank">here.</a></p>
+		<div><a class="hg_mui_btn hg_mui_btn_raised_blue" href="https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true" target="_blank">Register for Google Maps API now</a></div>
+		<p class="hg_mui_heading">Once registered, simply paste your API key here and press the save button. It will activate in 5-10 minutes.</p>
+		<div>
+			<form action="" method="post">
+				<label class="hg_mui_text">
+					<span class="hg_mui_label mui_label_mt11">API KEY</span>
+					<div class="hg_mui_input_block">
+						<input name="hg_gmaps_api_key_input" class="hg_gmaps_api_key_input" value="" required="required" type="text"><span class="control_title">Input the api key here</span>
+						<div class="hg_mui_bar"></div>
+					</div>
+				</label>
+				<div class="hg_gmaps_apply_action"><button class="hg_gmaps_save_api_key_button hg_mui_btn hg_mui_btn_raised_green">Save</button><span class="spinner"></span></div>
+			</form>
+		</div>
+		<p class="hg_mui_heading">Need help? <a href="http://huge-it.com/contact-us/" target="_blank">Contact Us</a> and we will help you with installation.</p>
+	</div>
+	<?php
 }
 
-function hugeitgooglemapss_option_admin_script() { ?>
-
-	<?php ;
-}
-
-function hugeitgooglemaps_main() {
+function hugeitgooglemaps_main()
+{
 	if ( is_plugin_active( 'google-map-wp/googlemap.php' ) ) {
 		header( 'Location:admin.php?page=hugeitgooglemap_main' );
 	}
 	require_once( "admin/maps_func.php" );
 	require_once( "admin/maps_view.php" );
 	global $wpdb;
-	if ( ! isset( $_GET['task'] ) ) {
+	$api_key = get_option("hg_gmaps_api_key","");
+
+	$path_site2 = plugins_url("./images", __FILE__);
+	require('templates/admin/free-version-banner.php');
+
+	if( $api_key == "" ){
+		hg_gmaps_api_key_notice();
+	}
+
+	if(!isset($_GET['task']))
+	{
 		show_maps();
 	} else {
 		if ( isset( $_GET['id'] ) ) {
@@ -359,13 +397,19 @@ function huge_it_google_mapss_shortcode( $atts ) {
 			'id' => ''
 		), $atts );
 	wp_enqueue_script( "jquery" );
-	wp_enqueue_script( "gmap", 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDozlXjXoJz29LfOGOOtG-5uY-Qi4XzIPY&v=3.exp&sensor=false&libraries=places' );
+	$api_key = get_option("hg_gmaps_api_key","");
+	if($api_key != ""){
+		$key_param = 'key='.$api_key.'&';
+	}else{
+		$key_param = '';
+	}
+	wp_enqueue_script( "gmap", 'https://maps.googleapis.com/maps/api/js?'.$key_param.'v=3.exp&sensor=false&libraries=places' );
 
 	return showpublishedmap( $atts['id'] );
 }
 
 
-add_action( "wp_ajax_nopriv_g_map_options", "g_maps_nopriv_options_callback" );
+add_action( "wp_ajax_nopriv_g_map_options", "g_maps_options_callback" );
 
 function g_maps_nopriv_options_callback() {
 
