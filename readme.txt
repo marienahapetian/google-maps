@@ -4,7 +4,7 @@ Donate link: http://huge-it.com/google-map/
 Tags: google map, google maps, easy map, gmaps, google map plugin, map, maps, map plugin, map markers, map widget, maps, marker, polygons, polylines, post map, wp maps, wp google maps, wp google map, path, streetview, store locator, routes, longitude, location, latitude, google map widget, address, geocoder, pin, place, geo, cross-browser, gpx, openstreetmap, latitude, google earth, googlemaps, kml, custom google map, custom google maps, map styles, gps, google, google maps plugin, widget map, wp map,
 Requires at least: 3.0.1
 Tested up to: 4.5.3
-Stable tag: 2.0.8
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,17 +110,6 @@ We included a huge repository of different styles for Google Map aimed towards w
 
 Huge-IT Google Maps exports CSV file, which makes it easy to export data, create a CSV file of the objects that you submit.
 
-**[Demo 1 Google Map Layers](http://huge-it.com/wordpress-plugins-google-map-layers/#plugin_demo_wrapper)**
-
-Our Google Map can be used with different layers, among them: Road Traffic - show traffic in real-time on your maps website. Bicycling Roads could be shown on your website in few minutes. Show on the map Transit Roads from any city.
-
-**[Demo 2 Google Map Markers](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/#plugin_demo_wrapper)**
-
-Set unlimited markers on your map choose their style size and animation. Change color of your map choose marker you like and make Huge-IT Google Map to be part of your website's design. In map you can find 18 nice markers or choose all of them.
-
-**[Demo 3 Google Map Shapes](http://huge-it.com/wordpress-google-map-demo-3-google-map-shapes/#plugin_demo_wrapper)**
-
-With Huge-IT Google Map plugin you can easily add 3 kind of shapes with different colors sizes and options. There are: Polylines, Polygons and Circle. These shapes will show a specific area on your Map.
 
 > #### Demos 
 >
@@ -172,13 +161,13 @@ If you think, that you found a bug in our [WordPress Google Maps](http://huge-it
 
 == Screenshots ==
 
-1.  [WordPress Google Maps](http://huge-it.com/wordpress-plugins-google-map-layers/) - Google Maps Layer
-12.  [WordPress Google Maps](http://huge-it.com/wordpress-plugins-google-map-layers/) - Google Maps Layer
-13.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/) - Google Maps Marker
-14.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/) - Google Maps Markers
-15.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/) - Google Maps Markers
-16.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/) - Google Maps Markers
-17.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-3-google-map-shapes/) - Google Maps Shapes
+1.  [WordPress Google Maps](http://huge-it.com/wordpress-plugins-google-map-layers/#plugin_demo_wrapper) - Google Maps Layer
+12.  [WordPress Google Maps](http://huge-it.com/wordpress-plugins-google-map-layers/#plugin_demo_wrapper) - Google Maps Layer
+13.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/#plugin_demo_wrapper) - Google Maps Marker
+14.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/#plugin_demo_wrapper) - Google Maps Markers
+15.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/#plugin_demo_wrapper) - Google Maps Markers
+16.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-2-google-map-markers/#plugin_demo_wrapper) - Google Maps Markers
+17.  [WordPress Google Maps](http://huge-it.com/wordpress-google-map-demo-3-google-map-shapes/#plugin_demo_wrapper) - Google Maps Shapes
 21.  [WordPress Google Maps](http://huge-it.com/google-map/) - Google Maps admin page
 22.  [WordPress Google Maps](http://huge-it.com/google-map/) - Google Maps admin page
 23.  [WordPress Google Maps](http://huge-it.com/google-map/) - Google Maps admin page
@@ -255,6 +244,12 @@ If you think, that you found a bug in our [WordPress Google Maps](http://huge-it
 
 == Changelog ==
 
+= 2.1.0 =
+*  Created API Key registration option with links to user manual.
+
+= 2.0.9 =
+*  Fix with the keyless access to the API and code improvements and optimization.
+
 = 2.0.8 =
 *  Responsive bug fixed.
 
@@ -300,8 +295,8 @@ In order to add created Google Maps plugin in post/page, copy/past the shortcode
 * Enable Street-View-Controller. Select to be able to see streets with “little man”
 * Enable Overview-Map-Controller. Select to see map controller on the bottom right corner
 * Default Zoom. Set the zoom level
-* Center Address. Give address to maps center
-* Center Latitude. Set latitude for the maps center
+* Center Address. Give address to center
+* Center Latitude. Set latitude for the center
 * Center Longitude. Set longitude for maps center
 * Map width. Give size for maps width (in presents)
 * Map height. Give size for maps height (in px)

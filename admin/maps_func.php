@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function add_maps() {
 	global $wpdb;
 	$sql = "INSERT INTO " . $wpdb->prefix . "g_maps (name , type, zoom, center_lat, center_lng) VALUES ('New Map', 'ROADMAP', '2', '0', '0')";
