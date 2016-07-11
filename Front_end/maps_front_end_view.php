@@ -1,9 +1,7 @@
 <?php
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
 function showpublishedmap( $id ) {
 	ob_start();
 	global $wpdb;
@@ -59,14 +57,12 @@ function showpublishedmap( $id ) {
 					var circlepoint;
 					var width = jQuery("#huge_it_google_map<?php echo $i; ?>").width();
 					var height = jQuery("#huge_it_google_map<?php echo $i; ?>").height();
-
 					function bindInfoWindow(marker, map, infowindow, description, info_type) {
 						google.maps.event.addListener(marker, 'click', function () {
 							infowindow.setContent(description);
 							infowindow.open(map, marker);
 						});
 					}
-
 					jQuery(document).on("click tap drag scroll", function (e) {
 						if (window.matchMedia('(max-width:768px)').matches) {
 							var container = jQuery("#huge_it_google_map<?php echo $i; ?>");
@@ -82,7 +78,6 @@ function showpublishedmap( $id ) {
 								});
 							}
 						}
-
 					})
 					var div = parseInt(width) / parseInt(height);
 					jQuery(window).on("resize", function () {
@@ -90,7 +85,6 @@ function showpublishedmap( $id ) {
 						var newheight = parseInt(newwidth) / parseInt(div) + "px";
 						jQuery("#huge_it_google_map<?php echo $i; ?>").height(newheight);
 					})
-
 					var center_lat = <?php echo $map->center_lat; ?>;
 					var center_lng = <?php echo $map->center_lng; ?>;
 					var center_coords = new google.maps.LatLng(center_lat, center_lng);
@@ -109,7 +103,6 @@ function showpublishedmap( $id ) {
 						maxZoom:<?php echo $map->max_zoom; ?>
 					}
 					var front_end_map = new google.maps.Map(document.getElementById('huge_it_google_map<?php echo $i; ?>'), frontEndMapOptions)
-
 					if (window.matchMedia('(max-width:768px)').matches) {
 						front_end_map.setOptions({
 							draggable: false,
@@ -121,8 +114,6 @@ function showpublishedmap( $id ) {
 							scrollwheel: true,
 						});
 					}
-
-
 					var front_end_data = {
 						action: 'g_map_options',
 						map_id:<?php echo $id; ?>,
@@ -263,7 +254,6 @@ function showpublishedmap( $id ) {
 									})
 								}
 							}
-
 						}
 					}
 				})
@@ -271,8 +261,6 @@ function showpublishedmap( $id ) {
 			<?php ;
 		}
 	}
-
 	return ob_get_clean();
 }
-
 ?>
