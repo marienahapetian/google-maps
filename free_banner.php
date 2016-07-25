@@ -394,5 +394,31 @@
 <script>
 	jQuery(".close_free_banner").click(function(){
 		jQuery(".free_version_banner").fadeOut();
-	})
+		hgSliderSetCookie( 'hgSliderFreeBannerShow', 'no', {expires:3600} );
+	});
+	function hgSliderSetCookie(name, value, options) {
+		options = options || {};
+		var expires = options.expires;
+		if (typeof expires == "number" && expires) {
+			var d = new Date();
+			d.setTime(d.getTime() + expires * 1000);
+			expires = options.expires = d;
+		}
+		if (expires && expires.toUTCString) {
+			options.expires = expires.toUTCString();
+		}
+		if(typeof value == "object"){
+			value = JSON.stringify(value);
+		}
+		value = encodeURIComponent(value);
+		var updatedCookie = name + "=" + value;
+		for (var propName in options) {
+			updatedCookie += "; " + propName;
+			var propValue = options[propName];
+			if (propValue !== true) {
+				updatedCookie += "=" + propValue;
+			}
+		}
+		document.cookie = updatedCookie;
+	}
 </script>
