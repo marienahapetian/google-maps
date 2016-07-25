@@ -1,10 +1,5 @@
 <?php
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
-
-function polygones_js( $id ) {
+function polygone_js( $id ) {
 	global $wpdb;
 	$sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $id );
 	$map = $wpdb->get_results( $sql );
@@ -45,16 +40,33 @@ function polygones_js( $id ) {
 				});
 				function HGinitializePolygonMap(response) {
 					if (response.success) {
-						var mapInfo = response.success; 
+						var mapInfo = response.success;
 						var maps = mapInfo.maps;
 						for (var i = 0; i < maps.length; i++) {
+							var trafficLayer = new google.maps.TrafficLayer();
+							var trafficLayer1 = new google.maps.TrafficLayer();
+							var bikeLayer = new google.maps.BicyclingLayer();
+							var bikeLayer1 = new google.maps.BicyclingLayer();
+							var transitLayer = new google.maps.TransitLayer();
+							var transitLayer1 = new google.maps.TransitLayer();
 							var mapcenter = new google.maps.LatLng(
 								parseFloat(maps[i].center_lat),
 								parseFloat(maps[i].center_lng));
+							var styles = [
+								{
+									stylers: [
+										{hue: hue},
+										{saturation: saturation},
+										{lightness: lightness},
+										{gamma: gamma},
+									]
+								}
+							]
 
 							var mapOptions = {
 								zoom: parseInt(zoom),
 								center: mapcenter,
+								styles: styles,
 							}
 							mappolygone = new google.maps.Map(document.getElementById('g_map_polygon'), mapOptions);
 							map_polygone_edit = new google.maps.Map(document.getElementById('g_map_polygone_edit'), mapOptions);
@@ -72,6 +84,36 @@ function polygones_js( $id ) {
 									polygonmarker = [];
 								}
 							})
+
+							if (type == "ROADMAP") {
+								mappolygone.setOptions({mapTypeId: google.maps.MapTypeId.ROADMAP})
+								map_polygone_edit.setOptions({mapTypeId: google.maps.MapTypeId.ROADMAP})
+							}
+							if (type == "SATELLITE") {
+								mappolygone.setOptions({mapTypeId: google.maps.MapTypeId.SATELLITE});
+								map_polygone_edit.setOptions({mapTypeId: google.maps.MapTypeId.SATELLITE});
+							}
+							if (type == "HYBRID") {
+								mappolygone.setOptions({mapTypeId: google.maps.MapTypeId.HYBRID});
+								map_polygone_edit.setOptions({mapTypeId: google.maps.MapTypeId.HYBRID});
+							}
+							if (type == "TERRAIN") {
+								mappolygone.setOptions({mapTypeId: google.maps.MapTypeId.TERRAIN});
+								map_polygone_edit.setOptions({mapTypeId: google.maps.MapTypeId.TERRAIN});
+							}
+
+							if (bike == "true") {
+								bikeLayer.setMap(mappolygone);
+								bikeLayer1.setMap(map_polygone_edit);
+							}
+							if (traffic == "true") {
+								trafficLayer.setMap(mappolygone);
+								trafficLayer1.setMap(map_polygone_edit);
+							}
+							if (transit == "true") {
+								transitLayer.setMap(mappolygone);
+								transitLayer1.setMap(map_polygone_edit);
+							}
 
 							google.maps.event.addListener(mappolygone, 'rightclick', function (event) {
 								placePolygone(event.latLng);
@@ -126,7 +168,15 @@ function polygones_js( $id ) {
 										var fill_opacity = polygones[e].fill_opacity;
 										var fill_color = polygones[e].fill_color;
 										var line_width = polygones[e].line_width;
+										var hover_line_opacity = polygones[e].hover_line_opacity;
+										var hover_line_color = polygones[e].hover_line_color;
+										var hover_fill_opacity = polygones[e].hover_fill_opacity;
+										var hover_fill_color = polygones[e].hover_fill_color;
+										var url = polygones[e].url;
+
 										var latlngs = polygones[e].latlng;
+
+										jQuery("#polygone_edit_url").val(url);
 
 										jQuery("#polygone_edit_name").val(name);
 
@@ -140,6 +190,13 @@ function polygones_js( $id ) {
 
 										jQuery("#polygone_edit_fill_color").val(fill_color);
 
+										jQuery("#hover_polygone_edit_line_opacity").simpleSlider("setValue", hover_line_opacity);
+
+										jQuery("#hover_polygone_edit_line_color").val(hover_line_color);
+
+										jQuery("#hover_polygone_edit_fill_opacity").simpleSlider("setValue", hover_fill_opacity);
+
+										jQuery("#hover_polygone_edit_fill_color").val(hover_fill_color);
 										for (var j = 0; j < latlngs.length; j++) {
 											var lat = latlngs[j].lat;
 											var lng = latlngs[j].lng;
@@ -159,6 +216,7 @@ function polygones_js( $id ) {
 											google.maps.event.addListener(polygoneditmarker[j], 'click', function (event) {
 												var title = this.getTitle();
 												var index = title.replace("#", "");
+
 
 												polygoneditcoords.splice(index, 1);
 												polygoneditmarker.splice(index, 1);
@@ -203,6 +261,7 @@ function polygones_js( $id ) {
 												fillColor: "#" + fill_color,
 											});
 										})
+
 										google.maps.event.addListener(map_polygone_edit, "rightclick", function (event) {
 											//alert(event.latLng);
 											var edit_array_index = polygoneditmarker.length;
@@ -223,7 +282,6 @@ function polygones_js( $id ) {
 												this.setMap(null);
 												updatePolygoneEditInputs();
 												for (var z = 0; z < polygoneditcoords.length; z++) {
-													//console.log(z);
 													polygoneditmarker[z].setTitle("#" + z);
 												}
 											});
@@ -237,7 +295,9 @@ function polygones_js( $id ) {
 											})
 											updatePolygoneEditInputs();
 										})
+
 										updatePolygoneEditInputs();
+
 									}
 								}
 								return false;
@@ -311,6 +371,7 @@ function polygones_js( $id ) {
 						fillColor: polygone_fill_color,
 					})
 				}
+
 
 				i++
 			}

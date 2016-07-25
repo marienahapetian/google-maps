@@ -1,10 +1,5 @@
 <?php
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
-
-function circles_js( $id ) {
+function circle_js( $id ) {
 	global $wpdb;
 	$sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%d", $id );
 	$map = $wpdb->get_results( $sql );
@@ -43,13 +38,30 @@ function circles_js( $id ) {
 						var mapInfo = response.success;
 						var maps = mapInfo.maps;
 						for (var i = 0; i < maps.length; i++) {
+							var trafficLayer = new google.maps.TrafficLayer();
+							var trafficLayer1 = new google.maps.TrafficLayer();
+							var bikeLayer = new google.maps.BicyclingLayer();
+							var bikeLayer1 = new google.maps.BicyclingLayer();
+							var transitLayer = new google.maps.TransitLayer();
+							var transitLayer1 = new google.maps.TransitLayer();
 							var mapcenter = new google.maps.LatLng(
 								parseFloat(maps[i].center_lat),
 								parseFloat(maps[i].center_lng));
+							var styles = [
+								{
+									stylers: [
+										{hue: hue},
+										{saturation: saturation},
+										{lightness: lightness},
+										{gamma: gamma},
+									]
+								}
+							]
 
 							var mapOptions = {
 								zoom: parseInt(zoom),
 								center: mapcenter,
+								styles: styles,
 							}
 							mapcircle = new google.maps.Map(document.getElementById('g_map_circle'), mapOptions);
 							map_circle_edit = new google.maps.Map(document.getElementById('g_map_circle_edit'), mapOptions);
@@ -83,6 +95,36 @@ function circles_js( $id ) {
 									newcircle = "";
 								}
 							})
+
+							if (type == "ROADMAP") {
+								mapcircle.setOptions({mapTypeId: google.maps.MapTypeId.ROADMAP})
+								map_circle_edit.setOptions({mapTypeId: google.maps.MapTypeId.ROADMAP})
+							}
+							if (type == "SATELLITE") {
+								mapcircle.setOptions({mapTypeId: google.maps.MapTypeId.SATELLITE});
+								map_circle_edit.setOptions({mapTypeId: google.maps.MapTypeId.SATELLITE});
+							}
+							if (type == "HYBRID") {
+								mapcircle.setOptions({mapTypeId: google.maps.MapTypeId.HYBRID});
+								map_circle_edit.setOptions({mapTypeId: google.maps.MapTypeId.HYBRID});
+							}
+							if (type == "TERRAIN") {
+								mapcircle.setOptions({mapTypeId: google.maps.MapTypeId.TERRAIN});
+								map_circle_edit.setOptions({mapTypeId: google.maps.MapTypeId.TERRAIN});
+							}
+
+							if (bike == "true") {
+								bikeLayer.setMap(mapcircle);
+								bikeLayer1.setMap(map_circle_edit);
+							}
+							if (traffic == "true") {
+								trafficLayer.setMap(mapcircle);
+								trafficLayer1.setMap(map_circle_edit);
+							}
+							if (transit == "true") {
+								transitLayer.setMap(mapcircle);
+								transitLayer1.setMap(map_marker_edit);
+							}
 
 							google.maps.event.addListener(mapcircle, 'rightclick', function (event) {
 								placeCircle(event.latLng);
@@ -119,6 +161,10 @@ function circles_js( $id ) {
 										var line_opacity = circles[j].line_opacity;
 										var fill_color = circles[j].fill_color;
 										var fill_opacity = circles[j].fill_opacity;
+										var hover_line_color = circles[j].hover_line_color;
+										var hover_line_opacity = circles[j].hover_line_opacity;
+										var hover_fill_color = circles[j].hover_fill_color;
+										var hover_fill_opacity = circles[j].hover_fill_opacity;
 										var show_marker = circles[j].show_marker;
 										jQuery("#circle_edit_name").val(name);
 										jQuery("#circle_edit_center_lat").val(center_lat);
@@ -138,6 +184,12 @@ function circles_js( $id ) {
 										jQuery("#circle_edit_line_opacity").simpleSlider("setValue", line_opacity);
 										jQuery("#circle_edit_fill_color").val(fill_color);
 										jQuery("#circle_edit_fill_opacity").simpleSlider("setValue", fill_opacity);
+
+										jQuery("#hover_circle_edit_line_color").val(hover_line_color);
+										jQuery("#hover_circle_edit_line_opacity").simpleSlider("setValue", hover_line_opacity);
+										jQuery("#hover_circle_edit_fill_color").val(hover_fill_color);
+										jQuery("#hover_circle_edit_fill_opacity").simpleSlider("setValue", hover_fill_opacity);
+
 
 										editcircleposition = new google.maps.LatLng(parseFloat(circles[j].center_lat),
 											parseFloat(circles[j].center_lng));
