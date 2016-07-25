@@ -207,6 +207,22 @@
 <div class="element hugeitmicro-item">
 	<div class="left-block">
 		<div class="main-image-block">
+			<a href="http://huge-it.com/wordpress-responsive-slider/" target="_blank"><img src="<?php echo plugins_url( '../images/responsive-slider.png' , __FILE__ ); ?>"></a>
+		</div>
+	</div>
+	<div class="right-block">
+		<div class="title-block"><a href="http://huge-it.com/wordpress-responsive-slider/" target="_blank"><h3>WordPress Responsive Slider</h3></a></div>
+		<div class="description-block">
+			<p>Huge-IT Product Catalog is made for demonstration, sale, advertisements for your products. Imagine a stand with a variety of catalogs with a specific product category. To imagine is not difficult, to use is even easier.</p>
+		</div>
+		<div class="button-block">
+			<a href="http://huge-it.com/wordpress-responsive-slider/" target="_blank">View Plugin</a>
+		</div>
+	</div>
+</div>
+<div class="element hugeitmicro-item">
+	<div class="left-block">
+		<div class="main-image-block">
 			<a href="http://huge-it.com/product-catalog/" target="_blank"><img src="<?php echo plugins_url( '../images/catalog.png' , __FILE__ ); ?>"></a>
 		</div>
 	</div>
@@ -249,6 +265,22 @@
 		</div>			  				
 		<div class="button-block">
 			<a href="http://huge-it.com/wordpress-video-gallery/" target="_blank">View Plugin</a>
+		</div>
+	</div>
+</div>
+<div class="element hugeitmicro-item">
+	<div class="left-block">
+		<div class="main-image-block">
+			<a href="http://huge-it.com/video-player/" target="_blank"><img src="<?php echo plugins_url( '../images/video-player.png' , __FILE__ ); ?>"></a>
+		</div>
+	</div>
+	<div class="right-block">
+		<div class="title-block"><a href="http://huge-it.com/video-player/" target="_blank"><h3>WordPress Video Player</h3></a></div>
+		<div class="description-block">
+			<p>Lightbox is a perfect tool for viewing photos. It is created especially for simplification of using, permits you to view larger version of images and giving an interesting design. With the help of slideshow and various styles, betray a unique image to your website.</p>
+		</div>
+		<div class="button-block">
+			<a href="http://huge-it.com/video-player/" target="_blank">View Plugin</a>
 		</div>
 	</div>
 </div>
