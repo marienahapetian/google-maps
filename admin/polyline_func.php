@@ -1,10 +1,5 @@
 <?php
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
-
-function polylines_js( $id ) {
+function polyline_js( $id ) {
 	global $wpdb;
 	$sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $id );
 	$map = $wpdb->get_results( $sql );
@@ -24,13 +19,13 @@ function polylines_js( $id ) {
 			jQuery(document).ready(function () {
 				loadPolylineMap("<?php echo $map->id; ?>", "#<?php echo $map->styling_hue; ?>", "<?php echo $map->styling_saturation; ?>", "<?php echo $map->styling_lightness; ?>", "<?php echo $map->styling_gamma; ?>", "<?php echo $map->zoom; ?>", "<?php echo $map->type; ?>", "<?php echo $map->bike_layer; ?>", "<?php echo $map->traffic_layer; ?>", "<?php echo $map->transit_layer; ?>");
 
-			})
+			});
 			function loadPolylineMap(id, hue, saturation, lightness, gamma, zoom, type, bike, traffic, transit) {
 				data = {
 					action: 'g_map_options',
 					map_id: id,
-					task: "ajax",
-				}
+					task: "ajax"
+				};
 				jQuery.ajax({
 					url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
 					dataType: 'json',
@@ -48,13 +43,30 @@ function polylines_js( $id ) {
 						var mapInfo = response.success;
 						var maps = mapInfo.maps;
 						for (var i = 0; i < maps.length; i++) {
+							var trafficLayer = new google.maps.TrafficLayer();
+							var trafficLayer1 = new google.maps.TrafficLayer();
+							var bikeLayer = new google.maps.BicyclingLayer();
+							var bikeLayer1 = new google.maps.BicyclingLayer();
+							var transitLayer = new google.maps.TransitLayer();
+							var transitLayer1 = new google.maps.TransitLayer();
 							var mapcenter = new google.maps.LatLng(
 								parseFloat(maps[i].center_lat),
 								parseFloat(maps[i].center_lng));
+							var styles = [
+								{
+									stylers: [
+										{hue: hue},
+										{saturation: saturation},
+										{lightness: lightness},
+										{gamma: gamma}
+									]
+								}
+							];
 							var mapOptions = {
 								zoom: parseInt(zoom),
 								center: mapcenter,
-							}
+								styles: styles,
+							};
 							mappolyline = new google.maps.Map(document.getElementById('g_map_polyline'), mapOptions);
 							map_polyline_edit = new google.maps.Map(document.getElementById('g_map_polyline_edit'), mapOptions);
 
@@ -71,6 +83,37 @@ function polylines_js( $id ) {
 									polylinemarker = [];
 								}
 							})
+
+							if (type == "ROADMAP") {
+								mappolyline.setOptions({mapTypeId: google.maps.MapTypeId.ROADMAP})
+								map_polyline_edit.setOptions({mapTypeId: google.maps.MapTypeId.ROADMAP})
+							}
+							if (type == "SATELLITE") {
+								mappolyline.setOptions({mapTypeId: google.maps.MapTypeId.SATELLITE});
+								map_polyline_edit.setOptions({mapTypeId: google.maps.MapTypeId.SATELLITE});
+							}
+							if (type == "HYBRID") {
+								mappolyline.setOptions({mapTypeId: google.maps.MapTypeId.HYBRID});
+								map_polyline_edit.setOptions({mapTypeId: google.maps.MapTypeId.HYBRID});
+							}
+							if (type == "TERRAIN") {
+								mappolyline.setOptions({mapTypeId: google.maps.MapTypeId.TERRAIN});
+								map_polyline_edit.setOptions({mapTypeId: google.maps.MapTypeId.TERRAIN});
+							}
+
+							if (bike == "true") {
+								bikeLayer.setMap(mappolyline);
+								bikeLayer1.setMap(map_polyline_edit);
+							}
+							if (traffic == "true") {
+								trafficLayer.setMap(mappolyline);
+								trafficLayer1.setMap(map_polyline_edit);
+							}
+							if (transit == "true") {
+								transitLayer.setMap(mappolyline);
+								transitLayer1.setMap(map_polyline_edit);
+							}
+
 							google.maps.event.addListener(mappolyline, 'rightclick', function (event) {
 								placePolyline(event.latLng);
 								updatePolylineInputs(event.latLng);
@@ -84,10 +127,10 @@ function polylines_js( $id ) {
 									newpolyline.setOptions({
 										strokeColor: polyline_line_color,
 										strokeWeight: polyline_line_width,
-										strokeOpacity: polyline_line_opacity,
+										strokeOpacity: polyline_line_opacity
 									});
 								}
-							})
+							});
 
 
 							jQuery(".edit_polyline_list_delete a").on("click", function () {
@@ -118,8 +161,12 @@ function polylines_js( $id ) {
 										var line_opacity = polylines[e].line_opacity;
 										var line_color = polylines[e].line_color;
 										var line_width = polylines[e].line_width;
+										var hover_line_color = polylines[e].hover_line_color;
+										var hover_line_opacity = polylines[e].hover_line_opacity;
 										var latlngs = polylines[e].latlng;
 										jQuery("#polyline_edit_name").val(name);
+										jQuery("#hover_polyline_edit_line_opacity").simpleSlider("setValue", hover_line_opacity);
+										jQuery("#hover_polyline_edit_line_color").val(hover_line_color);
 										jQuery("#polyline_edit_line_opacity").simpleSlider("setValue", line_opacity);
 										jQuery("#polyline_edit_line_color").val(line_color);
 										jQuery("#polyline_edit_line_width").simpleSlider("setValue", line_width);
@@ -284,19 +331,6 @@ function polylines_js( $id ) {
 					})
 				}
 				i++
-			}
-			function deleteItem(id, table, li, x) {
-				var delete_data = {
-					action: 'g_map_options',
-					id: id,
-					table: table,
-				}
-				jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", delete_data, function (response) {
-					if (response.success) {
-						li.remove();
-					}
-				}, "json")
-
 			}
 		</script>
 		<?php ;
