@@ -50,7 +50,6 @@ jQuery(document).ready(function () {
         jQuery(".hg_gmaps_save_api_key_button").on('click', function () {
             var _this = jQuery(this);
             var key = jQuery(this).closest("form").find(".hg_gmaps_api_key_input").val();
-            console.log(key);
             if (key != undefined && key != "") {
                 var data = {
                     action: 'hg_gmaps_save_api_key',
@@ -98,7 +97,9 @@ jQuery(document).ready(function () {
                                 }
 
                             }, 1500);
-
+                            setTimeout(function () {
+                                location.reload();
+                            },2500);
                         }
                     },
                     error: function () {
