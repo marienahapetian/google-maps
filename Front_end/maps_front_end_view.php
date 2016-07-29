@@ -79,7 +79,6 @@ function showpublishedmap( $id ) {
 								});
 							}
 						}
-						console.log('<?php echo $map->draggable; ?>')
 						jQuery(document).on("click tap drag scroll", function (e) {
 							if (window.matchMedia('(max-width:768px)').matches) {
 								var container = jQuery("#huge_it_google_map<?php echo $i; ?>");
