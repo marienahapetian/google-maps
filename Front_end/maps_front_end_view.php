@@ -141,8 +141,8 @@ function showpublishedmap( $id ) {
 							});
 						} else {
 							front_end_map.setOptions({
-								draggable:<?php echo $map->draggable; ?>,
-								scrollwheel:<?php echo $map->wheel_scroll; ?>,
+								draggable: true,
+								scrollwheel: true
 							});
 						}
 						var huge_map_shown = 0;
