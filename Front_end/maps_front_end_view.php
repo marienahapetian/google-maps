@@ -87,12 +87,12 @@ function showpublishedmap( $id ) {
 								if (!container.is(e.target) && container.has(e.target).length === 0) {
 									front_end_map.setOptions({
 										draggable: false,
-										scrollwheel: false,
+										scrollwheel: false
 									});
 								} else {
 									front_end_map.setOptions({
-										draggable:<?php echo $map->draggable; ?>,
-										scrollwheel:<?php echo $map->wheel_scroll; ?>,
+										draggable: true,
+										scrollwheel: true
 									});
 								}
 							}
@@ -139,12 +139,12 @@ function showpublishedmap( $id ) {
 						if (window.matchMedia('(max-width:768px)').matches) {
 							front_end_map.setOptions({
 								draggable: false,
-								scrollwheel: false,
+								scrollwheel: false
 							});
 						} else {
 							front_end_map.setOptions({
-								draggable:<?php echo $map->draggable; ?>,
-								scrollwheel:<?php echo $map->wheel_scroll; ?>,
+								draggable: true,
+								scrollwheel: true
 							});
 						}
 						var huge_map_shown = 0;
