@@ -597,21 +597,6 @@ function maps_js( $id ) {
 								fillOpacity: circle_fill_opacity
 							});
 
-							google.maps.event.addListener(circle[u], 'mouseout', function (event) {
-
-								circle_index = circle.indexOf(this);
-								new_line_opacity = circles[circle_index].line_opacity;
-								new_line_color = "#" + circles[circle_index].line_color;
-								new_fill_opacity = circles[circle_index].fill_opacity;
-								new_fill_color = "#" + circles[circle_index].fill_color;
-								this.setOptions({
-									strokeColor: new_line_color,
-									strokeOpacity: new_line_opacity,
-									fillOpacity: new_fill_opacity,
-									fillColor: new_fill_color
-								});
-							});
-
 							if (circle_show_marker == '1') {
 								newcirclemarker[i] = new google.maps.Marker({
 									position: circlepoint,
