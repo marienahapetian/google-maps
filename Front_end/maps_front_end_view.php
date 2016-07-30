@@ -85,7 +85,7 @@ function showpublishedmap( $id ) {
 								if (!container.is(e.target) && container.has(e.target).length === 0) {
 									front_end_map.setOptions({
 										draggable: false,
-										scrollwheel: false,
+										scrollwheel: false
 									});
 								} else {
 									front_end_map.setOptions({
@@ -137,7 +137,7 @@ function showpublishedmap( $id ) {
 						if (window.matchMedia('(max-width:768px)').matches) {
 							front_end_map.setOptions({
 								draggable: false,
-								scrollwheel: false,
+								scrollwheel: false
 							});
 						} else {
 							front_end_map.setOptions({
