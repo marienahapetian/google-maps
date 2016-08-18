@@ -23,7 +23,7 @@
 	font-weight: bold !important;
 	display:block;
 	float:left;
-	width:270px;
+	width:300px;
 	margin-left:75px;
 	font-family:'Open Sans',sans-serif;
 	font-size:14px;
@@ -32,6 +32,7 @@
 	line-height:10px;
 	margin-top: 0;
 	padding-top: 15px;
+    position: absolute;
 }
 
 .free_version_banner .usermanual_text a,
@@ -63,7 +64,7 @@
 	top: 15px;
 	right: calc(50% - 167px);
 	height: 38px;
-	width: 268px;
+	width: 290px;
 	border: 1px solid rgba(255,255,255,.6);
 	font-family: 'Open Sans',sans-serif;
 	font-size: 23px;
@@ -127,7 +128,7 @@
 			font-weight: bold !important;
 			display:block;
 			float:left;
-			width:270px;
+			width:300px;
 			margin-left:75px;
 			font-family:'Open Sans',sans-serif;
 			font-size:14px;
@@ -136,6 +137,7 @@
 			line-height:10px;
 			margin-top: 0;
 			padding-top: 15px;
+            position: absolute;
 		}
 
 		.free_version_banner .usermanual_text a,
@@ -167,7 +169,7 @@
 			top: 15px;
 			right: calc(50% - 167px);
 			height: 38px;
-			width: 268px;
+			width: 290px;
 			border: 1px solid rgba(255,255,255,.6);
 			font-family: 'Open Sans',sans-serif;
 			font-size: 23px;
