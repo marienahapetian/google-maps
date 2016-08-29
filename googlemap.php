@@ -628,7 +628,8 @@ function g_map_options_callback() {
 				break;
 			case "post_shortcode_change_map":
 				global $wpdb;
-				$sql    = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%d", $_POST['id'] );
+				$id = intval( $_POST['id'] );
+				$sql    = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%d", $id );
 				$getMap = $wpdb->get_row( $sql );
 				if ( $getMap ) {
 					echo json_encode( array(
@@ -645,10 +646,11 @@ function g_map_options_callback() {
 				break;
 			case "styling_submit":
 				global $wpdb;
+				$id = intval( $_POST['id'] );
 				$sql = $wpdb->prepare( "UPDATE " . $wpdb->prefix . "g_maps SET styling_lightness=%d, styling_hue='%s', styling_gamma=%d, styling_saturation=%d WHERE id=%d",
-					$_POST['g_map_styling_lightness'], $_POST['g_map_styling_hue'], $_POST['g_map_styling_gamma'], $_POST['g_map_styling_saturation'], $_POST['id'] );
+					$_POST['g_map_styling_lightness'], $_POST['g_map_styling_hue'], $_POST['g_map_styling_gamma'], $_POST['g_map_styling_saturation'], $id );
 				if ( $wpdb->query( $sql ) ) {
-					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_POST['id'] ) );
+					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $id ) );
 					foreach ( $map_params as $param ) {
 						echo json_encode( array(
 								"success"    => 1,
@@ -696,7 +698,7 @@ function g_map_options_callback() {
 			case "submit_circle":
 				global $wpdb;
 				$sql = $wpdb->prepare( "INSERT INTO " . $wpdb->prefix . "g_circles (map, name, center_lat, center_lng, radius ,hover_line_color ,hover_line_opacity ,hover_fill_color ,hover_fill_opacity , line_width, line_color, line_opacity, fill_color, fill_opacity, show_marker) VALUES(%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d)",
-					$_POST['id'], $_POST['circle_name'], $_POST['circle_center_lat'], $_POST['circle_center_lng'], $_POST['circle_radius'], 'FF5C5C', '0.6', '96FFA1', '0.3', $_POST['circle_line_width'], $_POST['circle_line_color'], $_POST['circle_line_opacity'], $_POST['circle_fill_color'], $_POST['circle_fill_opacity'], $_POST['circle_marker_show'] );
+					intval($_POST['id']), $_POST['circle_name'], $_POST['circle_center_lat'], $_POST['circle_center_lng'], $_POST['circle_radius'], 'FF5C5C', '0.6', '96FFA1', '0.3', $_POST['circle_line_width'], $_POST['circle_line_color'], $_POST['circle_line_opacity'], $_POST['circle_fill_color'], $_POST['circle_fill_opacity'], $_POST['circle_marker_show'] );
 				if ( $wpdb->query( $sql ) ) {
 					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_POST['id'] ) );
 					foreach ( $map_params as $param ) {
@@ -724,7 +726,7 @@ function g_map_options_callback() {
 			case "polyline_edit_submit":
 				global $wpdb;
 				$sql = $wpdb->prepare( "UPDATE " . $wpdb->prefix . "g_polylines SET name=%s, data=%s ,hover_line_color=%s,hover_line_opacity=%s, line_opacity=%s, line_color=%s,line_width=%d WHERE id=%d",
-					$_POST['polyline_edit_name'], $_POST['polyline_edit_coords'], '11A000', '0.5', $_POST['polyline_edit_line_opacity'], $_POST['polyline_edit_line_color'], $_POST['polyline_edit_line_width'], $_POST['id'] );
+					$_POST['polyline_edit_name'], $_POST['polyline_edit_coords'], '11A000', '0.5', $_POST['polyline_edit_line_opacity'], $_POST['polyline_edit_line_color'], $_POST['polyline_edit_line_width'], intval($_POST['id']) );
 				if ( $wpdb->query( $sql ) ) {
 					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_POST['map_id'] ) );
 					foreach ( $map_params as $param ) {
@@ -749,7 +751,7 @@ function g_map_options_callback() {
 			case "submit_polyline":
 				global $wpdb;
 				$sql = $wpdb->prepare( "INSERT INTO " . $wpdb->prefix . "g_polylines (map,name,data,hover_line_color,hover_line_opacity,line_opacity,line_color ,line_width) VALUES (%d,%s,%s,%s,%s,%s,%s,%s)",
-					$_POST['id'], $_POST['polyline_name'], $_POST['polyline_coords'], '11A000', '0.5', $_POST['polyline_line_opacity'], $_POST['polyline_line_color'], $_POST['polyline_line_width'] );
+					intval($_POST['id']), $_POST['polyline_name'], $_POST['polyline_coords'], '11A000', '0.5', $_POST['polyline_line_opacity'], $_POST['polyline_line_color'], $_POST['polyline_line_width'] );
 				if ( $wpdb->query( $sql ) ) {
 					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_POST['id'] ) );
 					foreach ( $map_params as $param ) {
@@ -802,7 +804,7 @@ function g_map_options_callback() {
 			case "submit_polygon":
 				global $wpdb;
 				$sql = $wpdb->prepare( "INSERT INTO " . $wpdb->prefix . "g_polygones (map , name, url , data ,hover_line_opacity ,hover_line_color,hover_fill_opacity ,hover_fill_color  , line_opacity , line_color , fill_opacity , fill_color, line_width) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-					$_POST['id'], $_POST['polygone_name'], '', $_POST['polygone_coords'], '0.8', 'FF80B7', '0.5', '75FF7E', $_POST['polygone_line_opacity'], $_POST['polygone_line_color'], $_POST['polygone_fill_opacity'], $_POST['polygone_fill_color'], $_POST['polygone_line_width'] );
+					intval($_POST['id']), $_POST['polygone_name'], '', $_POST['polygone_coords'], '0.8', 'FF80B7', '0.5', '75FF7E', $_POST['polygone_line_opacity'], $_POST['polygone_line_color'], $_POST['polygone_fill_opacity'], $_POST['polygone_fill_color'], $_POST['polygone_line_width'] );
 				if ( $wpdb->query( $sql ) ) {
 					$map_params = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_POST['id']));
 					foreach ($map_params as $param) {
@@ -855,7 +857,7 @@ function g_map_options_callback() {
 			case "submit_marker":
 				global $wpdb;
 				$sql = $wpdb->prepare( "INSERT INTO " . $wpdb->prefix . "g_markers (map,title, animation,lat, lng, description, img, size) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-					$_POST['id'], $_POST['marker_title'], $_POST['marker_animation'], $_POST['marker_location_lat'], $_POST['marker_location_lng'], $_POST['marker_description'], '', '' );
+					intval($_POST['id']), $_POST['marker_title'], $_POST['marker_animation'], $_POST['marker_location_lat'], $_POST['marker_location_lng'], $_POST['marker_description'], '', '' );
 				if ( $wpdb->query( $sql ) ) {
 					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_POST['id'] ) );
 					foreach ( $map_params as $param ) {
@@ -931,9 +933,9 @@ function g_map_options_callback() {
 				break;
 			case "map_styles_set_default":
 				global $wpdb;
-				$sql = $wpdb->prepare( "UPDATE " . $wpdb->prefix . "g_maps SET styling_lightness=%s, styling_hue=%s, styling_gamma=%s, styling_saturation=%s WHERE id=%d", $_POST['map_lightness'], $_POST['map_hue'], $_POST['map_gamma'], $_POST['map_saturation'], $_POST['id'] );
+				$sql = $wpdb->prepare( "UPDATE " . $wpdb->prefix . "g_maps SET styling_lightness=%s, styling_hue=%s, styling_gamma=%s, styling_saturation=%s WHERE id=%d", $_POST['map_lightness'], $_POST['map_hue'], $_POST['map_gamma'], $_POST['map_saturation'], intval($_POST['id']) );
 				if ( $wpdb->query( $sql ) ) {
-					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_POST['id'] ) );
+					$map_params = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", intval($_POST['id']) ) );
 					foreach ( $map_params as $param ) {
 						echo json_encode( array(
 								"success"    => 1,
@@ -955,8 +957,8 @@ function g_map_options_callback() {
 				break;
 			case "change_name":
 				global $wpdb;
-				$name = $_POST['name'];
-				$id   = $_POST['id'];
+				$name = sanitize_text_field($_POST['name']);
+				$id   = intval($_POST['id']);
 				if ( $wpdb->query( $wpdb->prepare( "UPDATE " . $wpdb->prefix . "g_maps SET name='$name' WHERE id=%s", $id ) ) ) {
 					echo json_encode( array( "success" => 1 ) );
 					die();
@@ -965,12 +967,12 @@ function g_map_options_callback() {
 				break;
 			case "front_end_submit":
 				global $wpdb;
-				$name   = $_POST['name'];
+				$name   = sanitize_text_field($_POST['name']);
 				$type   = $_POST['type'];
 				$zoom   = $_POST['zoom'];
 				$width  = $_POST['width'];
 				$height = $_POST['height'];
-				$id     = $_POST['id'];
+				$id     = intval($_POST['id']);
 				$align  = $_POST['align'];
 				$sql    = $wpdb->prepare( "UPDATE " . $wpdb->prefix . "g_maps SET name=%s, type=%d, zoom = %d, width=%d, height=%d, align=%d WHERE id=%d", $name, $type, $zoom, $width, $height, $align, $id );
 				$update = $wpdb->query( $sql );
@@ -1076,12 +1078,7 @@ function g_map_options_callback() {
 				break;
 			case "export_to_csv":
 				global $wpdb;
-				$id = $_POST['map_id'];
-				/*header('Content-Type: application/excel');*/
-				/*header('Content-Disposition: attachment; filename="sample.csv"');*/
-
-
-				$map_string = "";
+				$id = intval($_POST['map_id']);
 
 				$queryMap   = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $id );
 				$mapResults = $wpdb->get_row( $queryMap );
@@ -1130,17 +1127,11 @@ function g_map_options_callback() {
 					}
 				}
 
-				/*$fp = fopen('php://output', 'w');
-                foreach ( $map_array as $line ) {
-                    $val = explode(",", $line);
-                    fputcsv($fp, $val);
-                }
-                fclose($fp);*/
 				echo json_encode( array( "success" => 1, "string" => $map_array, "map_name" => $mapResults->name ) );
 				die();
 				break;
 			case "ajax":
-				$id = $_POST['map_id'];
+				$id = intval($_POST['map_id']);
 
 				global $wpdb;
 

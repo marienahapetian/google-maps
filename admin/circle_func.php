@@ -1,6 +1,7 @@
 <?php
 function circle_js( $id ) {
 	global $wpdb;
+	$id=intval($id);
 	$sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%d", $id );
 	$map = $wpdb->get_results( $sql );
 	foreach ( $map as $map ) {

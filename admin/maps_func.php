@@ -18,6 +18,7 @@ function add_map() {
 
 function remove_map( $id ) {
 	global $wpdb;
+	$id = intval($id);
 	$removeMap       = $wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "g_maps WHERE id=%d", $id ) );
 	$removeMarkers   = $wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "g_markers WHERE map=%d", $id ) );
 	$removePolygons  = $wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "g_polygones WHERE map=%d", $id ) );
@@ -32,6 +33,7 @@ function remove_map( $id ) {
 
 function maps_js( $id ) {
 	global $wpdb;
+	$id = intval($id);
 	$sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%d", $id );
 	$map = $wpdb->get_results( $sql );
 	foreach ( $map as $map ) {
