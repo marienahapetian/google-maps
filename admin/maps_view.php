@@ -55,14 +55,25 @@ function edit_map() {
 	require_once( "polygone_func.php" );
 	require_once( "polyline_func.php" );
 	require_once( "circle_func.php" );
-	maps_js( $_GET['id'] );
-	marker_js( $_GET['id'] );
-	polygone_js( $_GET['id'] );
-	polyline_js( $_GET['id'] );
-	circle_js( $_GET['id'] );
-	ajax_js( $_GET['id'] );
+
+	if( !isset( $_GET['id'] ) ){
+		wp_die( __( 'Something went wrong','hg_gmaps' ) );
+	}
+
+	$map_id = intval( $_GET['id'] );
+
+	if( !$map_id ){
+		wp_die( __( 'Something went wrong','hg_gmaps' ) );
+	}
+
+	maps_js( $map_id );
+	marker_js( $map_id );
+	polygone_js( $map_id );
+	polyline_js( $map_id );
+	circle_js( $map_id );
+	ajax_js( $map_id );
 	global $wpdb;
-	$sql    = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $_GET['id'] );
+	$sql    = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $map_id );
 	$getMap = $wpdb->get_results( $sql );
 	if ( count( $getMap ) > 0 ) {
 
@@ -117,8 +128,8 @@ function edit_map() {
 						class="hg_gmaps_save_api_key_button hg_mui_btn hg_mui_btn_raised_green">Save
 					</button><span class="spinner"></span></span>
 		</form>
-		<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post" name="adminform" id="adminform">
-			<input type="hidden" name="map_id" id="map_id" value="<?php echo esc_attr($_GET['id']); ?>"/>
+		<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post" name="adminform" id="adminform">
+			<input type="hidden" name="map_id" id="map_id" value="<?php echo esc_attr(intval($_GET['id'])); ?>"/>
 			<div class="map_heading">
 				<ul class="maps_list">
 					<?php
@@ -126,7 +137,7 @@ function edit_map() {
 					$getAll = $wpdb->get_results( $sql );
 					if ( count( $getAll ) > 0 ) {
 						foreach ( $getAll as $mapname ) {
-							if ( $mapname->id == $_GET['id'] ) {
+							if ( $mapname->id == intval($_GET['id']) ) {
 								?>
 								<li class="active">
 									<input type="text" name="map_name_tab" maxlength="250" id="map_name_tab" value="<?php echo $mapname->name; ?>"/>
@@ -147,7 +158,6 @@ function edit_map() {
 							}
 						}
 					}
-					$id = $_GET['id'];
 					?>
 					<li>
 						<a class="new_map_button" href="admin.php?page=hugeitgooglemaps_main&task=add_cat">+</a>
@@ -157,7 +167,7 @@ function edit_map() {
 		</form>
 
 		<?php
-		$id      = $_GET['id'];
+		$id      = intval($_GET['id']);
 		$sql     = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_maps WHERE id=%s", $id );
 		$thisMap = $wpdb->get_row( $sql );
 		$type    = $thisMap->type;
@@ -178,7 +188,7 @@ function edit_map() {
 						<span class="heading_arrow"></span>
 					</div>
 					<div class="edit_content map_options hide">
-						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 							<ul>
 								<li class="has_background">
 									<label for="map_name">Map Name</label>
@@ -793,7 +803,7 @@ function edit_map() {
 						<span class="heading_arrow"></span>
 					</div>
 					<div class="edit_content hide" id="g_map_marker_options">
-						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 							<a class="add_button" id="marker_add_button" href="#">+Add New Marker</a>
 							<div class="hidden_edit_content hide">
 								<a href="#" id="back_marker" class="cancel left">◄ Back</a>
@@ -1022,7 +1032,7 @@ function edit_map() {
 
 
 							<?php
-							$id            = $_GET['id'];
+							$id            = intval($_GET['id']);
 							$i             = 1;
 							$sql           = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_markers WHERE map=%s", $id );
 							$getMarkerList = $wpdb->get_results( $sql );
@@ -1051,7 +1061,7 @@ function edit_map() {
 											</div>
 											<div class="edit_marker_list_delete edit_list_delete">
 												<form class="edit_list_delete_form" method="post"
-												      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>">
+												      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>">
 													<input type="submit" class="button edit_list_delete_submit" name="edit_list_delete_submit"
 													       value="x"/>
 													<input type="hidden" class="edit_list_delete_type" name="edit_list_delete_type" value="marker"/>
@@ -1077,7 +1087,7 @@ function edit_map() {
 							?>
 
 						</div>
-						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 							<input type="hidden" id="marker_get_id" name="marker_get_id"/>
 
 							<div class="update_list_item hide">
@@ -1307,7 +1317,7 @@ function edit_map() {
 					</div>
 					<div class="edit_content hide">
 						<div id="g_map_polygone_options">
-							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 								<a id="polygon_add_button" class="add_button clear" href="#">+Add New Polygone</a>
 								<div class="hidden_edit_content hide">
 									<a href="#" id="back_polygone" class="cancel left">◄ Back</a>
@@ -1417,7 +1427,7 @@ function edit_map() {
 								</div>
 
 								<?php
-								$id              = $_GET['id'];
+								$id              = intval($_GET['id']);
 								$i               = 1;
 								$sql             = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_polygones WHERE map=%s", $id );
 								$getPolygoneList = $wpdb->get_results( $sql );
@@ -1446,7 +1456,7 @@ function edit_map() {
 												</div>
 												<div class="edit_polygone_list_delete edit_list_delete">
 													<form class="edit_list_delete_form" method="post"
-													      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>">
+													      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>">
 														<input type="submit" class="button edit_list_delete_submit" name="edit_list_delete_submit"
 														       value="x"/>
 														<input type="hidden" class="edit_list_delete_type" name="edit_list_delete_type"
@@ -1472,7 +1482,7 @@ function edit_map() {
 								}
 								?>
 							</div>
-							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 								<input type="hidden" id="polygone_get_id" name="polygone_get_id"/>
 								<div class="update_list_item hide">
 									<a href="#" id="back_edit_polygone" class="cancel left">◄ Back</a>
@@ -1584,7 +1594,7 @@ function edit_map() {
 					</div>
 					<div class="edit_content hide">
 						<div id="g_map_polyline_options">
-							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 								<a id="polyline_add_button" class="add_button" href="#">+Add New Polyline</a>
 								<div class="hidden_edit_content hide">
 									<a href="#" id="back_polyline" class="cancel left">◄ Back</a>
@@ -1662,7 +1672,7 @@ function edit_map() {
 								</div>
 
 								<?php
-								$id              = $_GET['id'];
+								$id              = intval($_GET['id']);
 								$i               = 1;
 								$sql             = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_polylines WHERE map=%s", $id );
 								$getPolylineList = $wpdb->get_results( $sql );
@@ -1691,7 +1701,7 @@ function edit_map() {
 												</div>
 												<div class="edit_polyline_list_delete edit_list_delete">
 													<form class="edit_list_delete_form" method="post"
-													      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>">
+													      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>">
 														<input type="submit" class="button edit_list_delete_submit" name="edit_list_delete_submit"
 														       value="x"/>
 														<input type="hidden" class="edit_list_delete_type" name="edit_list_delete_type"
@@ -1719,7 +1729,7 @@ function edit_map() {
 								}
 								?>
 							</div>
-							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 								<input type="hidden" id="polyline_get_id" name="polyline_get_id"/>
 								<div class="update_list_item hide">
 									<a href="#" id="back_edit_polyline" class="cancel left">◄ Back</a>
@@ -1788,9 +1798,9 @@ function edit_map() {
 					</div>
 				</li>
 				<li class="editing_section">
-					<div class="pro_dir editing_heading">
+					<div class="hg_gmaps_white editing_heading">
 						<span class="heading_icon"><img src="<?php echo untrailingslashit(HG_GMAP_IMAGES_URL).'/images/menu-icons/direction.svg'; ?>" width="20" /></span>
-						<?php _e('Directions','hg_gmaps'); ?>
+						<?php _e('Directions','hg_gmaps'); ?><i class="hg_gmaps_pro_icon"></i>
 						<div class="help">?
 							<div class="help-block">
 								<span class="pnt"></span>
@@ -1816,7 +1826,7 @@ function edit_map() {
 					</div>
 					<div class="edit_content hide">
 						<div id="g_map_circle_options">
-							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 								<a id="circle_add_button" class="add_button" href="#">+Add New Circles</a>
 								<div class="hidden_edit_content hide">
 									<a href="#" id="back_circle" class="cancel left">◄ Back</a>
@@ -1940,7 +1950,7 @@ function edit_map() {
 								</div>
 
 								<?php
-								$id            = $_GET['id'];
+								$id            = intval($_GET['id']);
 								$i             = 1;
 								$sql           = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "g_circles WHERE map=%s", $id );
 								$getCircleList = $wpdb->get_results( $sql );
@@ -1969,7 +1979,7 @@ function edit_map() {
 												</div>
 												<div class="edit_circle_list_delete edit_list_delete">
 													<form class="edit_list_delete_form" method="post"
-													      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>">
+													      action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>">
 														<input type="submit" class="button edit_list_delete_submit" name="edit_list_delete_submit"
 														       value="x"/>
 														<input type="hidden" class="edit_list_delete_type" name="edit_list_delete_type"
@@ -1996,7 +2006,7 @@ function edit_map() {
 								}
 								?>
 							</div>
-							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+							<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 								<input type="hidden" id="circle_get_id" name="circle_get_id"/>
 								<div class="update_list_item hide">
 									<a href="#" id="back_edit_circle" class="cancel left">◄ Back</a>
@@ -2128,7 +2138,7 @@ function edit_map() {
 						<span class="heading_arrow"></span>
 					</div>
 					<div class="edit_content map_options hide">
-						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 							<ul>
 								<li class="pro has_background">
 									<label for="traffic_layer_enable">Enable Traffic Layer
@@ -2161,7 +2171,7 @@ function edit_map() {
 						<span class="heading_arrow"></span>
 					</div>
 					<div class="edit_content map_options hide">
-						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr($_GET['id']); ?>" method="post">
+						<form action="admin.php?page=hugeitgooglemaps_main&task=edit_cat&id=<?php echo esc_attr(intval($_GET['id'])); ?>" method="post">
 							<ul>
 								<li class="pro has_background">
 									<label for="g_map_styling_hue">Hue(color)</label>
@@ -2272,8 +2282,8 @@ function edit_map() {
 				cursor: pointer;
 				opacity: 0.6;
 			}
-			.pro_dir{
-				background: url(<?php echo plugins_url("../images/pro01.png",__FILE__); ?>) 25% center no-repeat;
+			.hg_gmaps_pro_icon{
+				background: url(<?php echo plugins_url("../images/pro01.png",__FILE__); ?>) 0% center no-repeat;
 			}
 		</style>
 		<?php ;
