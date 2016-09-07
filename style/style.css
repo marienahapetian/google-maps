@@ -98,7 +98,7 @@ tr, th, td, thead, tbody {
 }
 
 #g_maps .g_map {
-    float: right;
+    float: left;
     width: 50%;
     height: 500px;
     background-color: #CCC;
