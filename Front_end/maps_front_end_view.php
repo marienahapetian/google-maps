@@ -99,7 +99,6 @@ function showpublishedmap( $id ) {
 							var newwidth = jQuery("#huge_it_google_map").width();
 							var newheight = parseInt(newwidth) / parseInt(div) + "px";
 							jQuery("#huge_it_google_map").height(newheight);
-							console.log(jQuery("#huge_it_google_map").height());
 						})
 						var center_lat = <?php echo $map->center_lat; ?>;
 						var center_lng = <?php echo $map->center_lng; ?>;
