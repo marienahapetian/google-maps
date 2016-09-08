@@ -3,8 +3,8 @@ Contributors: Huge-IT
 Donate link: http://huge-it.com/google-map/
 Tags: google map, google maps, easy map, map, maps, map plugin, map markers, marker, polygons, polylines, store locator, google maps plugin,
 Requires at least: 3.0.1
-Tested up to: 4.5.3
-Stable tag: 2.1.4
+Tested up to: 4.6.1
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -245,6 +245,12 @@ In order to install pro version of the plugin, simply follow these steps:
 If you think, that you found a bug in our [WordPress Google Maps](http://huge-it.com/google-map/) plugin or have any question contact us at [info@huge-it.com](mailto:info@huge-it.com)
 
 == Changelog ==
+
+= 2.1.6 =
+*  A lot of users claimed that plugin menu disappeared today.We have fixed it and seems it was connected with recent updates of Google Maps JavaScript API from Google.
+
+= 2.1.5 =
+*  We have fixed a reflected cross-site scripting (XSS) vulnerability disclosed in the plugin.
 
 = 2.1.4 =
 *  We have fixed the reported bug in Free version of Googme Maps, where some users were not seeing saved changes on front end.
