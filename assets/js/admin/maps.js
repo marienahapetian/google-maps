@@ -426,40 +426,6 @@ function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bi
                     fillColor: new_fill_color,
                     draggable: false
                 });
-                google.maps.event.addListener(polygone[k], 'click', function (event) {
-                    var polygone_index = polygone.indexOf(this);
-                    var polygone_url = polygones[polygone_index].url;
-                    if (polygone_url != "") {
-                        window.open(polygone_url, '_blank');
-                    }
-                });
-                google.maps.event.addListener(polygone[k], 'mouseover', function (event) {
-                    var polygone_index = polygone.indexOf(this);
-                    hover_new_line_opacity = polygones[polygone_index].hover_line_opacity;
-                    hover_new_line_color = "#" + polygones[polygone_index].hover_line_color;
-                    hover_new_fill_opacity = polygones[polygone_index].hover_fill_opacity;
-                    hover_new_fill_color = "#" + polygones[polygone_index].hover_fill_color;
-                    this.setOptions({
-                        strokeColor: hover_new_line_color,
-                        strokeOpacity: hover_new_line_opacity,
-                        fillOpacity: hover_new_fill_opacity,
-                        fillColor: hover_new_fill_color,
-                    });
-                });
-                google.maps.event.addListener(polygone[k], 'mouseout', function (event) {
-                    polygone_index = polygone.indexOf(this);
-                    new_line_opacity = polygones[polygone_index].line_opacity;
-                    new_line_color = "#" + polygones[polygone_index].line_color;
-                    new_fill_opacity = polygones[polygone_index].fill_opacity;
-                    new_line_width = polygones[polygone_index].line_width;
-                    new_fill_color = "#" + polygones[polygone_index].fill_color;
-                    this.setOptions({
-                        strokeColor: new_line_color,
-                        strokeOpacity: new_line_opacity,
-                        fillOpacity: new_fill_opacity,
-                        fillColor: new_fill_color,
-                    });
-                });
 
 
             }
@@ -482,25 +448,6 @@ function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bi
                     strokeColor: "#" + line_color,
                     strokeOpacity: line_opacity,
                     strokeWeight: line_width
-                });
-                google.maps.event.addListener(polyline[q], 'mouseover', function (event) {
-                    var polyline_index = polyline.indexOf(this);
-                    hover_new_line_opacity = polylines[polyline_index].hover_line_opacity;
-                    hover_new_line_color = "#" + polylines[polyline_index].hover_line_color;
-                    this.setOptions({
-                        strokeColor: hover_new_line_color,
-                        strokeOpacity: hover_new_line_opacity
-                    });
-                });
-                google.maps.event.addListener(polyline[q], 'mouseout', function (event) {
-                    polyline_index = polyline.indexOf(this);
-                    new_line_opacity = polylines[polyline_index].line_opacity;
-                    new_line_color = "#" + polylines[polyline_index].line_color;
-                    new_line_width = polylines[polyline_index].line_width;
-                    this.setOptions({
-                        strokeColor: new_line_color,
-                        strokeOpacity: new_line_opacity
-                    });
                 });
             }
             var circles = mapInfo.circles;
@@ -527,32 +474,6 @@ function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bi
                     strokeWeight: circle_line_width,
                     fillColor: "#" + circle_fill_color,
                     fillOpacity: circle_fill_opacity
-                });
-                google.maps.event.addListener(circle[u], 'mouseover', function (event) {
-                    var circle_index = circle.indexOf(this);
-                    hover_new_line_opacity = circles[circle_index].hover_line_opacity;
-                    hover_new_line_color = "#" + circles[circle_index].hover_line_color;
-                    hover_new_fill_opacity = circles[circle_index].hover_fill_opacity;
-                    hover_new_fill_color = "#" + circles[circle_index].hover_fill_color;
-                    this.setOptions({
-                        strokeColor: hover_new_line_color,
-                        strokeOpacity: hover_new_line_opacity,
-                        fillOpacity: hover_new_fill_opacity,
-                        fillColor: hover_new_fill_color
-                    });
-                });
-                google.maps.event.addListener(circle[u], 'mouseout', function (event) {
-                    circle_index = circle.indexOf(this);
-                    new_line_opacity = circles[circle_index].line_opacity;
-                    new_line_color = "#" + circles[circle_index].line_color;
-                    new_fill_opacity = circles[circle_index].fill_opacity;
-                    new_fill_color = "#" + circles[circle_index].fill_color;
-                    this.setOptions({
-                        strokeColor: new_line_color,
-                        strokeOpacity: new_line_opacity,
-                        fillOpacity: new_fill_opacity,
-                        fillColor: new_fill_color
-                    });
                 });
 
                 if (circle_show_marker) {
