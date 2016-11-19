@@ -1,10 +1,10 @@
-=== Google Maps ===
+=== Google Map ===
 Contributors: Huge-IT
 Donate link: http://huge-it.com/google-map/
 Tags: google map, google maps, easy map, map, maps, map plugin, map markers, marker, polygons, polylines, store locator, google maps plugin,
 Requires at least: 3.0.1
 Tested up to: 4.6.1
-Stable tag: 2.1.6
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -245,6 +245,23 @@ In order to install pro version of the plugin, simply follow these steps:
 If you think, that you found a bug in our [WordPress Google Maps](http://huge-it.com/google-map/) plugin or have any question contact us at [info@huge-it.com](mailto:info@huge-it.com)
 
 == Changelog ==
+
+= 2.2.0 =
+**In the series of updates we will go through our plugins one by one and fix all technical issues with our code in order to meet the WordPress Coding Standards. These are the major updates that had been implemented to Google Maps in this new version of the plugin.**
+
+* 1) Changed function names, defines and classnames to have unique prefixes
+* 2) Refined folder and image names
+* 3) Fixed the issue with direct file access to plugin files
+* 4) Changed the code structure to be more Object Oriented, now all major functionality of plugin is stored in a single instance which is accessible via Hugeit_Maps() function, this allows other plugins/extensions to use the functionality of this plugin
+* 5) Removed Lazy codes both, from back and front end
+* 6) Removed unreadable codes, and replaced with documented codes
+* 7) Added additional credits where necessary
+* 8) Made further code optimization in order to meet required WordPress coding standards
+* 9) Optimized javascript for higher performance.
+* 10) Code optimization loads the admin panel more quickly now as well
+* 11) Added nonces for all _POST, _GET requests.
+* 12) Fixed a bug that caused API key not being saved  
+* 13) Made database refactoring to have more optimized tables; data types and columns: this was performed using backward compatibility, so that users with older versions of the plugin would not lose any data if they would have updated the plugin to latest version.
 
 = 2.1.6 =
 *  A lot of users claimed that plugin menu disappeared today.We have fixed it and seems it was connected with recent updates of Google Maps JavaScript API from Google.
