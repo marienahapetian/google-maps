@@ -5,7 +5,7 @@
 
 ?>
 
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/portfolio-gallery/" target="_blank"><img src="<?php echo Hugeit_Maps()->plugin_url().'/assets/images/featured-plugins/portfolio.png'; ?>"></a>
@@ -21,7 +21,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/slider/" rel="content" target="_blank"><img
@@ -46,7 +46,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/wordpress-gallery/" rel="content" target="_blank"><img
@@ -70,7 +70,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/wordpress-pricing-table-builder/" target="_blank"><img
@@ -87,7 +87,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/wordpress-responsive-slider/" target="_blank"><img
@@ -107,7 +107,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/lightbox/" rel="content" target="_blank"><img
@@ -130,7 +130,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/wordpress-video-gallery/" rel="content" target="_blank"><img
@@ -153,7 +153,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/share-buttons/" rel="content" target="_blank"><img
@@ -176,7 +176,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/colorbox/" rel="content" target="_blank"><img
@@ -198,7 +198,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/video-player/" rel="content" target="_blank"><img
@@ -221,7 +221,7 @@
 	</div>
 
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/product-catalog/" target="_blank">
@@ -246,7 +246,7 @@
 		</div>
 	</div>
 </div>
-<div class="element hugeitmicro-item">
+<div class="element">
 	<div class="left-block">
 		<div class="main-image-block">
 			<a href="http://huge-it.com/forms/" target="_blank">

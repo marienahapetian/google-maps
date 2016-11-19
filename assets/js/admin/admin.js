@@ -240,6 +240,34 @@ jQuery(document).ready(function () {
         jQuery(".g_map").css({width: width + "%", height: height + "px", borderRadius: border_radius + "px"})
     });
 
-
+    jQuery(".close_free_banner").click(function(){
+        jQuery(".free_version_banner").fadeOut();
+        hugeitMapsSetCookie( 'hugeitMapsFreeBannerShow', 'no', {expires:86400} );
+    });
+    function hugeitMapsSetCookie(name, value, options) {
+        options = options || {};
+        var expires = options.expires;
+        if (typeof expires == "number" && expires) {
+            var d = new Date();
+            d.setTime(d.getTime() + expires * 1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+        if(typeof value == "object"){
+            value = JSON.stringify(value);
+        }
+        value = encodeURIComponent(value);
+        var updatedCookie = name + "=" + value;
+        for (var propName in options) {
+            updatedCookie += "; " + propName;
+            var propValue = options[propName];
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+        document.cookie = updatedCookie;
+    }
 
 });
