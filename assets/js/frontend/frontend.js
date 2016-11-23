@@ -1,6 +1,13 @@
 var hugeitMaps = [];
 
-function hugeitMapsBindInfoWindow(marker, map, infowindow, description, info_type) {
+function hugeitMapsBindInfoWindow(marker, map, infowindow, description, infoType, openOnload) {
+    if(openOnload){
+        google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+            infowindow.setContent(description);
+            infowindow.open(map, marker);
+        });
+    }
+
     google.maps.event.addListener(marker, 'click', function () {
         infowindow.setContent(description);
         infowindow.open(map, marker);
@@ -32,6 +39,7 @@ jQuery(document).ready(function () {
             directionMarkers = [],
             newcircle = [],
             infowindow = new google.maps.InfoWindow,
+            infowindows = [],
             newcirclemarker = [],
             circlepoint,
             width = element.width(),
@@ -49,7 +57,8 @@ jQuery(document).ready(function () {
             dataScaleController = parseInt(element.data('scale-controller')),
             dataStreetViewController = parseInt(element.data('street-view-controller')),
             dataOverviewMapController = parseInt(element.data('overview-map-controller')),
-            dataInfoType = element.data('info-type');
+            dataInfoType = element.data('info-type'),
+            dataOpenInfowindowsOnload = element.data('open-infowindows-onload');
 
         jQuery(window).on("resize", function () {
             var newwidth = element.width();
@@ -108,8 +117,14 @@ jQuery(document).ready(function () {
                         content: description,
                         animation: google['maps']['Animation'][anim]
                     });
+                    var currentInfoWindow;
 
-                    hugeitMapsBindInfoWindow(marker[i], front_end_map, infowindow, description, dataInfoType);
+                    if(dataOpenInfowindowsOnload){
+                        currentInfoWindow = infowindows[i] = new google.maps.InfoWindow;
+                    }else{
+                        currentInfoWindow = infowindow;
+                    }
+                    hugeitMapsBindInfoWindow(marker[i], front_end_map, currentInfoWindow, description, dataInfoType, dataOpenInfowindowsOnload);
                 }
                 var polygones = mapInfo.polygons;
                 for (var i = 0; i < polygones.length; i++) {

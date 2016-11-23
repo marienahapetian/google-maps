@@ -115,6 +115,10 @@
 					<label for="map_border_radius"><?php _e( 'Border Radius', 'hugeit_maps' ); ?></label>
 					<input class="front_end_input_options" type="number" name="map_border_radius" id="map_border_radius" value="<?php echo $map->get_border_radius(); ?>"/>
 				</li>
+				<li>
+					<label for="open_infowindows_onload"><?php _e( 'Open infowindows on load', 'hugeit_maps' ); ?></label>
+					<input type="checkbox" value="1" id="open_infowindows_onload" name="open_infowindows_onload" <?php checked( $map->get_open_infowindows_onload(), 1 ); ?> />
+				</li>
 				<li class="pro">
 					<label for="map_type"><?php _e( 'Map Type', 'hugeit_maps' ); ?></label>
 					<select disabled id="map_type" name="map_type">

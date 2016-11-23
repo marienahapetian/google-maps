@@ -46,6 +46,7 @@ jQuery(document).ready(function(){
         var min_zoom = jQuery("#min_zoom").val();
         var max_zoom = jQuery("#max_zoom").val();
         var map_border_radius = jQuery("#map_border_radius").val();
+        var open_infowindows_onload = jQuery("#open_infowindows_onload").is(":checked") ? 1 : 0;
         var id = jQuery("#map_id").val();
         var general_data = {
             action: "hugeit_maps_save_map",
@@ -66,7 +67,8 @@ jQuery(document).ready(function(){
             map_width: map_width,
             map_height: map_height,
             map_align: map_align,
-            map_border_radius: map_border_radius
+            map_border_radius: map_border_radius,
+            open_infowindows_onload: open_infowindows_onload
         };
         jQuery("#map_submit").parent().find(".spinner").css("visibility","visible");
         jQuery.post(ajaxurl, general_data, function (response) {

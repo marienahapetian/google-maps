@@ -59,7 +59,7 @@ function hugeit_maps_autoload( $classname ){
 
     }
 
-    require_once $path;
+    require $path;
 
     if( !interface_exists( $classname ) && !class_exists( $classname ) ){
 
@@ -68,4 +68,21 @@ function hugeit_maps_autoload( $classname ){
     }
 }
 
-spl_autoload_register( 'hugeit_maps_autoload' );
+
+
+if( function_exists( 'spl_autoload_register' ) ){
+
+    spl_autoload_register( 'hugeit_maps_autoload' );
+
+}elseif( isset( $GLOBALS['_wp_spl_autoloaders'] ) ){
+
+    array_push($GLOBALS['_wp_spl_autoloaders'], 'hugeit_maps_autoload');
+
+}else{
+
+    throw new Exception( 'Something went wrong, looks like your server does not support autoload functionality, please check your php version and upgrade WordPress to the latest version.' );
+
+}
+
+
+

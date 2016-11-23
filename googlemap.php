@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-include_once('config.php');
+require('config.php');
 
 if( ! class_exists( 'Hugeit_Maps' ) ):
 	/**
@@ -27,7 +27,7 @@ if( ! class_exists( 'Hugeit_Maps' ) ):
 		 * Version of plugin
 		 * @var string
 		 */
-		public $version = '2.2.0';
+		public $version = '2.2.1';
 
 		/**
 		 * Google Maps API Key
