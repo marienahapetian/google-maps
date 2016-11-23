@@ -718,7 +718,8 @@ class Hugeit_Maps_Ajax {
 				->set_width( $_REQUEST['map_width'] )
 				->set_height( $_REQUEST['map_height'] )
 				->set_align( $_REQUEST['map_align'] )
-				->set_border_radius( $_REQUEST['map_border_radius'] );
+				->set_border_radius( $_REQUEST['map_border_radius'] )
+				->set_open_infowindows_onload( $_REQUEST['open_infowindows_onload'] );
 		} catch ( Exception $e ) {
 			die( $e->getMessage() );
 		}

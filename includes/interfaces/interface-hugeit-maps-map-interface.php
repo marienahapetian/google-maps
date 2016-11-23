@@ -13,7 +13,7 @@ interface Hugeit_Maps_Map_Interface {
 	 *
 	 * @param $id
 	 */
-	public function __construct($id);
+	public function __construct($id = null);
 
 	/**
 	 * @return int
@@ -246,6 +246,18 @@ interface Hugeit_Maps_Map_Interface {
 	 * @throws Exception
 	 */
 	public function set_info_type( $info_type );
+
+    /**
+     * @return int
+     */
+    public function get_open_infowindows_onload();
+
+    /**
+     * @param int $open_infowindows_onload
+     * @return Hugeit_Maps_Map
+     * @throws Exception
+     */
+    public function set_open_infowindows_onload($open_infowindows_onload);
 
 	/**
 	 * @return string

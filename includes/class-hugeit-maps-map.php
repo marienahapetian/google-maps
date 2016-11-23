@@ -150,6 +150,14 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
 	 */
 	private $info_type;
 
+    /**
+     * Open infowindows onload or not
+     *
+     * @values [1,0]
+     * @var int
+     */
+    private $open_infowindows_onload;
+
 	/**
 	 * Map animation on page load
 	 *
@@ -732,6 +740,31 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
 
 		return $this;
 	}
+
+    /**
+     * @return int
+     */
+    public function get_open_infowindows_onload(){
+        return (int) $this->open_infowindows_onload;
+    }
+
+    /**
+     * @param int $open_infowindows_onload
+     * @return Hugeit_Maps_Map
+     * @throws Exception
+     */
+    public function set_open_infowindows_onload($open_infowindows_onload){
+
+        if( !in_array( $open_infowindows_onload, array( 0, 1 ) ) ){
+            throw new Exception( 'Invalid value for "open_infowindows_onload" field' );
+        }
+
+        $this->open_infowindows_onload = (int) $open_infowindows_onload;
+
+        return $this;
+    }
+
+
 
 	/**
 	 * @return string
@@ -1387,6 +1420,7 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
 		$this->set_if_not_null( 'min_zoom', $this->min_zoom, $map_data );
 		$this->set_if_not_null( 'max_zoom', $this->max_zoom, $map_data );
 		$this->set_if_not_null( 'info_type', $this->info_type, $map_data );
+		$this->set_if_not_null( 'open_infowindows_onload', $this->open_infowindows_onload, $map_data );
 		$this->set_if_not_null( 'traffic_layer', $this->traffic_layer, $map_data );
 		$this->set_if_not_null( 'bike_layer', $this->bike_layer, $map_data );
 		$this->set_if_not_null( 'transit_layer', $this->transit_layer, $map_data );

@@ -148,6 +148,7 @@ class Hugeit_Maps_Install {
 				min_zoom int(2) NOT NULL DEFAULT 0,
 				max_zoom int(2) NOT NULL DEFAULT 22,
 				info_type enum('click','hover') NOT NULL DEFAULT 'click',
+				open_infowindows_onload int(1) UNSIGNED NOT NULL DEFAULT '0',
 				traffic_layer int(1) UNSIGNED NOT NULL DEFAULT '0',
 				bike_layer int(1) UNSIGNED NOT NULL DEFAULT '0',
 				transit_layer int(1) UNSIGNED NOT NULL DEFAULT '0',
@@ -255,7 +256,49 @@ class Hugeit_Maps_Install {
                 PRIMARY KEY (id)
             ){$collate}"
 		);
+
+        self::alter_tables();
+
 	}
+
+	private static function alter_tables(){
+        global $wpdb;
+        $maps_table = Hugeit_Maps()->get_table_name( 'maps' );
+
+        if( !self::table_row_exists( $maps_table, 'open_infowindows_onload' ) ){
+
+            $wpdb->query( "ALTER TABLE ".$maps_table." ADD open_infowindows_onload int(1) UNSIGNED NOT NULL DEFAULT '0' AFTER info_type" );
+
+        }
+
+    }
+
+
+    /**
+     * Check if table row exists
+     *
+     * @param null $table_name
+     * @param null $column_name
+     * @return bool
+     */
+    private static function table_row_exists( $table_name = null, $column_name = null ){
+        global $wpdb;
+        $sql    = $wpdb->get_results( "SHOW columns FROM ".$table_name."" );
+        $exists = false;
+
+        foreach ( $sql as $a ) {
+
+            if ( $a->Field == $column_name ) {
+
+                $exists = true;
+
+            }
+
+        }
+
+        return $exists;
+    }
+
 
     /**
      * Handle the default raws

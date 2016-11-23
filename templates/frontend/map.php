@@ -48,6 +48,7 @@ $i = random_int(0, 10000);
          data-height="<?php echo $map->get_height(); ?>"
          data-align="<?php echo $map->get_align(); ?>"
          data-info-type="<?php echo $map->get_info_type(); ?>"
+         data-open-infowindows-onload="<?php echo $map->get_open_infowindows_onload(); ?>"
          data-animation="<?php echo $map->get_animation(); ?>"
          data-language="<?php echo $map->get_language(); ?>"
          data-draggable="<?php echo $map->get_draggable(); ?>"
