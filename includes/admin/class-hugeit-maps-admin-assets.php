@@ -41,6 +41,10 @@ class Hugeit_Maps_Admin_Assets {
             wp_enqueue_style( 'simple-slider', Hugeit_Maps()->plugin_url().'/assets/css/simple-slider.css' );
         }
 
+        if($hook === Hugeit_Maps()->admin->pages['licensing']){
+            wp_enqueue_style( 'hugeit_maps_featured_plugins', Hugeit_Maps()->plugin_url().'/assets/css/licensing.css' );
+        }
+
 	}
 
     /**
