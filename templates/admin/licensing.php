@@ -1,11 +1,11 @@
 <div style="width:95%">
     <p style="font-size: 13px; line-height: 1.5; margin-top: 30px;">
-        <?php _e('You are using the Lite version of the Portfolio Gallery for WordPress. If you want to get more awesome options,
+        <?php _e('You are using the Lite version of the Google Map for WordPress. If you want to get more awesome options,
             advanced features, settings to customize every area of the plugin, then check out the Full License plugin. The
-            full version of the plugin is available in 3 different packages of one-time payment.','portfolio-gallery'); ?>
+            full version of the plugin is available in 3 different packages of one-time payment.','google-map'); ?>
     </p>
     <br/><br/><br/>
-    <a  target="_blank" href="http://huge-it.com/google-map/" class="button-primary" target="_blank"><?php _e('Purchase a License', 'portfolio-gallery' ); ?></a>
+    <a  target="_blank" href="http://huge-it.com/google-map/" class="button-primary" target="_blank"><?php _e('Purchase a License', 'google-map' ); ?></a>
 </div>
 <div class="maps">
     <div class="maps-block">
