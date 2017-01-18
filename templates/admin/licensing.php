@@ -57,8 +57,8 @@
     <p><?php _e('After the purchasing the commercial version follow this steps:','hugeit_maps'); ?></p>
     <br/>
     <ol style="list-style: square; padding-left: 15px;">
-        <li><?php _e('Deactivate Huge IT Portfolio / Google Map Plugin','hugeit_maps'); ?></li>
-        <li><?php _e('Delete Huge IT Portfolio / Google Map Plugin','hugeit_maps'); ?></li>
+        <li><?php _e('Deactivate Huge IT Google Map Plugin','hugeit_maps'); ?></li>
+        <li><?php _e('Delete Huge IT Google Map Plugin','hugeit_maps'); ?></li>
         <li><?php _e('Install the downloaded commercial version of the plugin','hugeit_maps'); ?></li>
     </ol>
 </div>
