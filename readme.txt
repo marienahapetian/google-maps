@@ -3,8 +3,8 @@ Contributors: Huge-IT
 Donate link: http://huge-it.com/google-map/
 Tags: google map, google maps, easy map, map, maps, map plugin, map markers, marker, polygons, polylines, store locator, google maps plugin,
 Requires at least: 3.0.1
-Tested up to: 4.6.1
-Stable tag: 2.2.1
+Tested up to: 4.7.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -245,6 +245,10 @@ In order to install pro version of the plugin, simply follow these steps:
 If you think, that you found a bug in our [WordPress Google Maps](http://huge-it.com/google-map/) plugin or have any question contact us at [info@huge-it.com](mailto:info@huge-it.com)
 
 == Changelog ==
+
+= 2.2.2 =
+* 1) Added featured plugins list.
+* 2) Added licensing page.
 
 = 2.2.1 =
 * 1) Fixed: after major code optimization update, some users reported an error: Message: Fatal error: Declaration of Hugeit_Maps_Map::__construct() must be compatible with that of Hugeit_Maps_Map_Interface::__construct()
