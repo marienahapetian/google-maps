@@ -14,7 +14,7 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
 	 * @var int
 	 */
 	private $id;
-	
+
 	/**
 	 * Map Name
 	 *
@@ -1430,14 +1430,12 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
 		$this->set_if_not_null( 'styling_saturation', $this->styling_saturation, $map_data );
 		$this->set_if_not_null( 'animation', $this->animation, $map_data );
 
-
-
         $this->set_if_not_null( 'id', $map_id, $map_data );
 
-        $map_success = is_null( $this->id )
-            ? $wpdb->insert( Hugeit_Maps()->get_table_name( 'maps' ), $map_data )
-            : $wpdb->update( Hugeit_Maps()->get_table_name( 'maps' ), $map_data, array( 'id' => $this->id ) );
 
+		$map_success = is_null( $this->id )
+			? $wpdb->insert( Hugeit_Maps()->get_table_name( 'maps' ), $map_data )
+			: $wpdb->update( Hugeit_Maps()->get_table_name( 'maps' ), $map_data, array( 'id' => $this->id ) );
 
 
 		if ( $map_success !== false && ! isset( $this->id ) ) {
