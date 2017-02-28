@@ -14,29 +14,22 @@ $styles = sprintf(
     $map->get_width() . '%',
     $map->get_border_radius() . 'px'
 );
-$inner_styles = sprintf(
-	'
-    position:relative !important;
-    height:%s;
-    ',
-	$map->get_height() . 'px'
-);
 
 if ($map->get_align() === 'left') {
-	$styles .= 'float:left;margin:0px !important;';
+    $styles .= 'float:left;margin:0px !important;';
 } elseif ($map->get_align() === 'right') {
-	$styles .= 'float:right;margin:0px !important;';
+    $styles .= 'float:right;margin:0px !important;';
 } else {
-	$styles .= 'margin:0px auto;';
+    $styles .= 'margin:0px auto;';
 }
 
-$i = rand(0, 10000);
+$i = random_int(0, 10000);
 
 ?>
 
-<div class="huge_it_google_map_container" style="<?php echo $styles; ?>">
-	<div id="huge_it_google_map_<?php echo $i; ?>" data-map_id="<?php echo $map->get_id(); ?>"
-	     class="huge_it_google_map" style="<?php echo $inner_styles; ?>"
+<div class="huge_it_google_map_container">
+    <div id="huge_it_google_map_<?php echo $i; ?>" data-map_id="<?php echo $map->get_id(); ?>"
+         class="huge_it_google_map" style="<?php echo $styles; ?>"
          data-name="<?php echo $map->get_name(); ?>"
          data-type="<?php echo $map->get_type(); ?>"
          data-zoom="<?php echo $map->get_zoom(); ?>"
