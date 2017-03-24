@@ -79,7 +79,8 @@ jQuery(document).ready(function () {
             overviewMapControl: dataOverviewMapController,
             mapTypeId: google['maps']['MapTypeId']['ROADMAP'],
             minZoom: dataMinZoom,
-            maxZoom: dataMaxZoom
+            maxZoom: dataMaxZoom,
+            fullscreenControl: true
         };
         var front_end_map = new google.maps.Map(document.getElementById(elementId), frontEndMapOptions);
         var front_end_data = {
