@@ -186,7 +186,8 @@ function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bi
                 var mapOptions = {
                     zoom: parseInt(zoom),
                     center: mapcenter,
-                    disableDefaultUI: true
+                    disableDefaultUI: true,
+                    fullscreenControl: true
                 };
 
 
