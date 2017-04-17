@@ -1,1 +1,1 @@
-# google-map-wp-pro
+# google-maps
