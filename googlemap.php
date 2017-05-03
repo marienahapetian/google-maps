@@ -218,6 +218,12 @@ if( ! class_exists( 'Hugeit_Maps' ) ):
 
 					break;
 
+                case 'stores':
+
+                    $table_name = $GLOBALS['wpdb']->prefix . "hugeit_maps_stores";
+
+                    break;
+
 			}
 
 			if( !$table_name ){

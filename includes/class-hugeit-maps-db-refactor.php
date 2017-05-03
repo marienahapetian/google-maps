@@ -247,4 +247,28 @@ class Hugeit_Maps_DB_Refactor {
 		}
 	}
 
+    /**
+     * transfer all locators from old table into the new table
+     */
+    public static function refactor_locators() {
+        global $wpdb;
+
+        $locators = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'g_locators' );
+
+        foreach ( $locators as $locator ) {
+
+            $new_locator = new Hugeit_Maps_Locator();//создать locator.js закончить div-ы создать классы и интерфейс
+
+            $new_locator
+                ->set_map_id( $locator->map )
+                ->set_name( $locator->name )
+                ->set_locator_lat( $locator->locator_lat )
+                ->set_locator_lng( $locator->locator_lng )
+                ->set_locator_addr($locator->locator_addr );
+
+            $new_locator->save();
+
+        }
+    }
+
 }

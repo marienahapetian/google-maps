@@ -1,7 +1,7 @@
 === Google Map ===
 Contributors: Huge-IT
 Donate link: https://huge-it.com/google-map/
-Tags: google map, google maps, easy map, map, maps, map plugin, map markers, marker, polygons, polylines, store locator, google maps plugin,
+Tags: google map, google maps, easy map, map, maps, map plugin, map markers, marker, polygons, polylines, google maps plugin,
 Requires at least: 3.0.1
 Tested up to: 4.7.2
 Stable tag: 2.2.4

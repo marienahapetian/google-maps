@@ -26,7 +26,11 @@ if ($map->get_align() === 'left') {
 $i = random_int(0, 10000);
 
 ?>
-
+<div class="clear-float">
+    <?php if($map->get_locator_enabled()){
+        Hugeit_Maps_Template_Loader::get_template( 'frontend/store-locator.php', array( 'map' => $map ) );
+    } ?>
+</div>
 <div class="huge_it_google_map_container">
     <div id="huge_it_google_map_<?php echo $i; ?>" data-map_id="<?php echo $map->get_id(); ?>"
          class="huge_it_google_map" style="<?php echo $styles; ?>"
@@ -35,6 +39,7 @@ $i = random_int(0, 10000);
          data-zoom="<?php echo $map->get_zoom(); ?>"
          data-min-zoom="<?php echo $map->get_min_zoom(); ?>"
          data-max-zoom="<?php echo $map->get_max_zoom(); ?>"
+         data-locator-enabled="<?php echo $map->get_locator_enabled() ?>"
          data-border-radius="<?php echo $map->get_border_radius(); ?>"
          data-center-lat="<?php echo $map->get_center_lat(); ?>"
          data-center-lng="<?php echo $map->get_center_lng(); ?>"
