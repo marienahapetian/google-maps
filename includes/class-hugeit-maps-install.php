@@ -91,7 +91,7 @@ class Hugeit_Maps_Install {
         );
         foreach ($new_columns as $table=>$columns){
             foreach($columns as $column=>$type){
-                $column_exists=$wpdb->get_var(" SELECT count('COLUMN_TYPE') FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '".$table."' AND column_name = '".$column."' ");
+                $column_exists=$wpdb->get_var(" SELECT count('COLUMN_TYPE') FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = '" . $wpdb->dbname . "' AND table_name = '".$table."' AND column_name = '".$column."' ");
 
                 if(!$column_exists){
                     $wpdb->query("ALTER TABLE $table ADD $column $type");
@@ -173,6 +173,7 @@ class Hugeit_Maps_Install {
 				styling_gamma int(2) UNSIGNED NOT NULL DEFAULT '1',
 				styling_saturation int(3) NOT NULL DEFAULT '0',
 				animation varchar(100) NOT NULL DEFAULT 'none',
+				locator_enabled int(2) NOT NULL DEFAULT '0',
 		
 				PRIMARY KEY (id)
 			) {$collate}"
