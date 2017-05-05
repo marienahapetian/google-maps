@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @harut-g
- Sign out
- Watch 2
-  Star 1
- Fork 4 Huge-IT/google-maps
- Code  Issues 0  Pull requests 1  Projects 0  Wiki  Pulse  Graphs
-Branch: master Find file Copy pathgoogle-maps/readme.txt
-cca19b1  on Mar 1
-@tiko35 tiko35 Edit version, edit short links.
-3 contributors @tiko35 @matos-hayrapetyan @argishtamiryan
-RawBlameHistory     
-438 lines (310 sloc)  21.3 KB
 === Google Map ===
 Contributors: Huge-IT
 Donate link: https://huge-it.com/google-map/
@@ -454,5 +436,3 @@ In order to add created Google Maps plugin in post/page, copy/past the shortcode
 * PRO On-Hover Fill Color. Choose color  for internal area of circle while hover
 * PRO On-Hover Line Transparency. Select the level of transparency for boundary line while hover
 * PRO On-Hover Line Color. Choose color for  boundary line while hover
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
