@@ -109,7 +109,7 @@ jQuery(document).ready(function(){
                         "<form class='edit_list_delete_form' method='post' action='admin.php?page=hugeitgooglemaps_main&task=edit_cat&id='" + map_id + "'>" +
                         "<input type='submit' class='button edit_list_delete_submit' name='edit_list_delete_submit' value='x' />" +
                         "<input type='hidden' class='edit_list_delete_type' name='edit_list_delete_type' value='locator' />" +
-                        "<input type='hidden' class='edit_list_delete_table' value='g_locators' />" +
+                        "<input type='hidden' class='edit_list_delete_table' value='hugeit_maps_stores' />" +
                         "<input type='hidden' name='delete_locator_id' class='edit_list_delete_id' value='" + response.last_id + "' />" +
                         "</form>" +
                         "<a href='#' class='button' class='edit_locator_list_item' ></a>" +
@@ -127,7 +127,7 @@ jQuery(document).ready(function(){
                         "<form class='edit_list_delete_form' method='post' action='admin.php?page=hugeitgooglemaps_main&task=edit_cat&id='" + map_id + "'>" +
                         "<input type='submit' class='button edit_list_delete_submit' name='edit_list_delete_submit' value='x' />" +
                         "<input type='hidden' class='edit_list_delete_type' name='edit_list_delete_type' value='locator' />" +
-                        "<input type='hidden' class='edit_list_delete_table' value='g_locators' />" +
+                        "<input type='hidden' class='edit_list_delete_table' value='hugeit_maps_stores' />" +
                         "<input type='hidden' name='delete_locator_id' class='edit_list_delete_id' value='" + response.last_id + "' />" +
                         "</form>" +
                         "<a href='#' class='button' class='edit_locator_list_item' ></a>" +
