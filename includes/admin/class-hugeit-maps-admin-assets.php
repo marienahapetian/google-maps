@@ -66,7 +66,7 @@ class Hugeit_Maps_Admin_Assets {
             }
 
             if( isset($_GET['task']) && $_GET['task'] == 'edit_map' ){
-                wp_enqueue_script( "hugeit-google-maps-api", 'https://maps.googleapis.com/maps/api/js?'.$key_param.'libraries=places' );
+                wp_enqueue_script( "hugeit-google-maps-api", 'https://maps.googleapis.com/maps/api/js?'.$key_param.'libraries=places,geometry' );
 
                 wp_enqueue_script( "hugeit-jscolor", Hugeit_Maps()->plugin_url()."/assets/jscolor/jscolor$suffix.js", array( 'jquery' ), false, true );
 
