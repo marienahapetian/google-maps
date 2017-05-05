@@ -1,11 +1,12 @@
 var hugeitMaps = [];
 
 function hugeitMapsBindInfoWindow(marker, map, infowindow, description, infoType, openOnload) {
+    debugger;
     if(openOnload){
-        google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+/* Temporarily unnecessary       google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
             infowindow.setContent(description);
             infowindow.open(map, marker);
-        });
+        });*/
     }
 
     google.maps.event.addListener(marker, 'click', function () {
