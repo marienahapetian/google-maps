@@ -2,10 +2,10 @@ var hugeitMaps = [];
 
 function hugeitMapsBindInfoWindow(marker, map, infowindow, description, infoType, openOnload) {
     if(openOnload){
-        google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+/* Temporarily unnecessary       google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
             infowindow.setContent(description);
             infowindow.open(map, marker);
-        });
+        });*/
     }
 
     google.maps.event.addListener(marker, 'click', function () {
@@ -42,6 +42,7 @@ jQuery(document).ready(function () {
             infowindows = [],
             newcirclemarker = [],
             circlepoint,
+            locatorEnabled = element.data('locator-enabled'),
             width = element.width(),
             height = element.height(),
             div = parseInt(width) / parseInt(height),
@@ -79,7 +80,8 @@ jQuery(document).ready(function () {
             overviewMapControl: dataOverviewMapController,
             mapTypeId: google['maps']['MapTypeId']['ROADMAP'],
             minZoom: dataMinZoom,
-            maxZoom: dataMaxZoom
+            maxZoom: dataMaxZoom,
+            fullscreenControl: true
         };
         var front_end_map = new google.maps.Map(document.getElementById(elementId), frontEndMapOptions);
         var front_end_data = {
@@ -95,6 +97,7 @@ jQuery(document).ready(function () {
             }
         }).done(function (response) {
             hugeitMapsInitializeMap(response);
+            locStores = response.success.locators;
         }).fail(function () {
             console.log('Failed to load response from database');
         });
@@ -208,6 +211,183 @@ jQuery(document).ready(function () {
                 }
             }
         }
+
+        /* locator start */
+        if (locatorEnabled != 0) {
+            var locpOptions = {
+                map: front_end_map,
+                strokeColor: "#00FF00",
+                strokeOpacity: 0.9 ,
+                strokeWeight: 4
+            };
+            var locDirectionsService = new google.maps.DirectionsService;
+            var locDirectionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true, polylineOptions: locpOptions});
+            var locRouteInfowindow = new google.maps.InfoWindow;
+            var locClosest,locClosetPosition,def,locClosetAddress,locInfoWindow,locCurrent,locMarker,finalStores = [],locClosetArr=[],locMarkers=[];
+            var locBounds = new google.maps.LatLngBounds();
+            var locMap_id = dataMapId;
+            var input = document.getElementById('searchLocator_' + locMap_id);
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            var searchBox = new google.maps.places.SearchBox(input);
+
+            function calcDistance(pointA, pointB) {
+
+                return (google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB) / 1000).toFixed(2);
+
+            }
+
+            function clearDistance() {
+                for(var i in locMarkers){
+                    if(locMarkers[i].get('name')=='closest'){
+                        locMarkers[i].setMap(null);
+                        locMarkers[i].length=0;
+                    }
+
+                    if(locCurrent){
+                        locCurrent.setMap(null);
+                        locCurrent.length = 0;
+                    }
+
+                }
+            }
+
+            function clearLocations() {
+                for(var i in locMarkers){
+                    locMarkers[i].setMap(null);
+                }
+                locMarkers.length= 0;
+            }
+
+            function clearDirections(){
+                locDirectionsDisplay.setMap(null);
+            }
+
+            jQuery(document).on("click", "#submitLocator_" + locMap_id, function () {
+                var locAddress = jQuery("#searchLocator_" + locMap_id).val();
+                var locRadius = jQuery("#locatorRadius_" + locMap_id).val();
+                if (locAddress != "" && locRadius != "") {
+                    finalStores = [];
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({'address': locAddress}, function (result, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            fromLatLng = new google.maps.LatLng(result[0].geometry.location.lat(), result[0].geometry.location.lng());
+
+                            for (var i in locStores) {
+
+                                locStores[i].latLng = new google.maps.LatLng(locStores[i].locator_lat, locStores[i].locator_lng);
+
+                                if (calcDistance(fromLatLng, locStores[i].latLng) < parseInt(locRadius)) {
+                                    locStores[i].distance = parseFloat(calcDistance(fromLatLng, locStores[i].latLng));
+                                    finalStores.push(locStores[i]);
+                                }
+                            }
+
+                            if(finalStores.length>0){
+                                locClosetArr=[];
+                                clearDistance();
+                                clearLocations();
+                                clearDirections();
+                                locClosest=parseInt(locRadius);
+
+                                for (var i in finalStores){
+                                    locClosetArr.push(finalStores[i].distance);
+                                }
+                                locClosest = Math.min.apply(null, locClosetArr);
+                                for(var i in finalStores){
+
+                                    locMarker = new google.maps.Marker({
+                                        map:front_end_map,
+                                        position:{lat:finalStores[i].locator_lat,lng:finalStores[i].locator_lng},
+                                        id:i
+
+                                    });
+                                    locInfoWindow = new google.maps.InfoWindow;
+
+
+                                    if(finalStores[i].distance <= locClosest){
+                                        locClosest = finalStores[i].distance;
+                                        locClosetPosition = {
+                                            lat:parseFloat(finalStores[i].locator_lat),
+                                            lng:parseFloat(finalStores[i].locator_lng)
+                                        };
+                                        locClosetAddress = finalStores[i].locator_addr;
+                                        locMarker.set('name','closest');
+                                        locMarker.set('label','B');
+                                    }
+
+                                    locBounds.extend(locMarker.getPosition());
+                                    google.maps.event.addListener(locMarker, 'click', function(i) {
+                                        return function() {
+                                            locInfoWindow.setContent("<b>"+finalStores[i].name+"</b><br/>"+finalStores[i].locator_addr);
+                                            locInfoWindow.open(front_end_map, this);
+                                        }
+                                    }(i));
+
+                                    locMarkers.push(locMarker);
+                                }
+
+                                locCurrent = new google.maps.Marker({
+                                    map:front_end_map,
+                                    icon:def,
+                                    label: "A",
+                                    position:fromLatLng
+                                });
+
+                                google.maps.event.addListener(locCurrent,"click",function () {
+                                    locInfoWindow.setContent(locAddress);
+                                    locInfoWindow.open(front_end_map,this);
+                                });
+
+                                locBounds.extend(locCurrent.getPosition());
+                                front_end_map.fitBounds(locBounds);
+                                var locRoute,locContent;
+                                locDirectionsDisplay.setMap(front_end_map);
+                                locDirectionsService.route({
+                                    origin: locCurrent.getPosition(),
+                                    destination: locClosetPosition,
+                                    travelMode: 'DRIVING'
+                                }, function(response, status) {
+                                    if (status === google.maps.DirectionsStatus.OK) {
+                                        locDirectionsDisplay.setDirections(response);
+                                        locRoute = response.routes[0];
+                                        locContent = "<b>Total distance: </b>"+locRoute.legs[0].distance.text;
+                                        front_end_map.fitBounds(locBounds);
+                                    }
+                                    else {
+                                        window.alert('Directions request failed due to ' + status);
+                                    }
+                                });
+                                locRouteInfowindow.close();
+                                google.maps.event.clearListeners(locpOptions, 'click');
+                                google.maps.event.addListener(locpOptions,"click",function (e) {
+                                    locRouteInfowindow.close();
+                                    locRouteInfowindow.setPosition(e.latLng);
+                                    locRouteInfowindow.setContent(locContent);
+                                    locRouteInfowindow.open(front_end_map);
+                                });
+                            }
+                            else {
+                                clearDistance();
+                                clearLocations();
+                                clearDirections();
+
+                                alert("Sorry, but there are not available stores in certain radius!");
+
+                            }
+
+                        }
+
+                        else {
+
+                            alert('Geocode was not successful for the following reason: ' + status);
+                        }
+
+                    });
+                }
+            });
+        }
+
+        /* locator end */
     }
 
     var allMaps = jQuery('.huge_it_google_map');
