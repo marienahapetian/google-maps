@@ -70,7 +70,7 @@
                             ?>
                             <li class="edit_list" data-list_id="<?php echo $locator->get_id(); ?>">
                                 <div class="list_number"><?php echo $i; ?></div>
-                                <div class="edit_list_item"><?php echo $locator->get_name(); ?></div>
+                                <div class="edit_list_item"><?php echo esc_html($locator->get_name()); ?></div>
                                 <div class="edit_locator_list_delete edit_list_delete">
                                     <form class="edit_list_delete_form" method="post"
                                           action="">
