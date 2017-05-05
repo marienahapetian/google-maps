@@ -1,7 +1,6 @@
 var hugeitMaps = [];
 
 function hugeitMapsBindInfoWindow(marker, map, infowindow, description, infoType, openOnload) {
-    debugger;
     if(openOnload){
 /* Temporarily unnecessary       google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
             infowindow.setContent(description);
