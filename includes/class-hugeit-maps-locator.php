@@ -46,9 +46,23 @@ class Hugeit_Maps_Locator implements Hugeit_Maps_Locator_Interface {
     /**
      * Store Locator address
      *
-     * @var float
+     * @var string
      */
     private $locator_addr;
+
+    /**
+     * Store Locator phone
+     *
+     * @var string
+     */
+    private $locator_phone;
+
+    /**
+     * Store Locator days
+     *
+     * @var string
+     */
+    private $locator_days;
 
 
 
@@ -192,6 +206,42 @@ class Hugeit_Maps_Locator implements Hugeit_Maps_Locator_Interface {
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function get_locator_phone() {
+        return (string) $this->locator_phone;
+    }
+
+    /**
+     * @param string $locator_phone
+     *
+     * @return Hugeit_Maps_Locator
+     */
+    public function set_locator_phone( $locator_phone ) {
+        $this->locator_phone = strval( $locator_phone );
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function get_locator_days() {
+        return (string) $this->locator_days;
+    }
+
+    /**
+     * @param string $locator_days
+     *
+     * @return Hugeit_Maps_Locator
+     */
+    public function set_locator_days( $locator_days ) {
+        $this->locator_days = strval(stripslashes($locator_days));
+
+        return $this;
+    }
+
 	/**
 	 * @return float
 	 */
@@ -249,11 +299,13 @@ class Hugeit_Maps_Locator implements Hugeit_Maps_Locator_Interface {
 
 		$locator_data = array();
 
-		$this->set_if_not_null( 'map_id',       $this->map_id,      $locator_data );
-		$this->set_if_not_null( 'name',         $this->name,        $locator_data );
-		$this->set_if_not_null( 'locator_lat',  $this->locator_lat, $locator_data );
-		$this->set_if_not_null( 'locator_lng',  $this->locator_lng, $locator_data );
-        $this->set_if_not_null( 'locator_addr', $this->locator_addr,$locator_data );
+		$this->set_if_not_null( 'map_id',       $this->map_id,       $locator_data );
+		$this->set_if_not_null( 'name',         $this->name,         $locator_data );
+		$this->set_if_not_null( 'locator_lat',  $this->locator_lat,  $locator_data );
+		$this->set_if_not_null( 'locator_lng',  $this->locator_lng,  $locator_data );
+        $this->set_if_not_null( 'locator_addr', $this->locator_addr, $locator_data );
+        $this->set_if_not_null( 'locator_phone',$this->locator_phone,$locator_data );
+        $this->set_if_not_null( 'locator_days', $this->locator_days, $locator_data );
 
 		$success = is_null( $this->id )
 			? $wpdb->insert( Hugeit_Maps()->get_table_name( 'stores' ), $locator_data )

@@ -119,18 +119,39 @@ function hugeitMapsLoadLocatorsMap(id, hue, saturation, lightness, gamma, zoom, 
                     var locator_lat = info_locators[e].locator_lat;
                     var locator_lng = info_locators[e].locator_lng;
                     var locator_addr = info_locators[e].locator_addr;
+                    var locator_phone = info_locators[e].locator_phone;
+                    var locator_days  = info_locators[e].locator_days;
                     jQuery("#locator_edit_name").val(locator_name);
                     jQuery("#locator_edit_lat").val(locator_lat);
                     jQuery("#locator_edit_lng").val(locator_lng);
                     jQuery("#locator_edit_addr").val(locator_addr);
+                    jQuery("#locator_edit_phone").val(locator_phone);
+                    jQuery("#locator_edit_days").val(locator_days);
 
+                    //Assign values to Operating Days from JSON
+                    var assignLocDays = JSON.parse(locator_days);
 
+                    for(var i in assignLocDays){
+                        for(var j in assignLocDays[i]){
+                            jQuery("#store_edit_days").find("#"+i).find("input[name="+j+"]").val(assignLocDays[i][j]);
+                        }
+                    }
+                    //Assign values to Operating Days
 
 
                 }
                 return false;
             });
 
+            //Timepicker
+
+
+            jQuery(".timepicker").timepicker({});
+            jQuery("#store_days input[type='text'], textarea").attr('spellcheck',false);
+            jQuery("#store_edit_days input[type='text'], textarea").attr('spellcheck',false);
+
+
+            //Timepicker
 
         }
 

@@ -41,6 +41,73 @@
                             <label for="locator_lng"><?php _e( 'Store Longitude', 'hugeit_maps' ); ?></label>
                             <input type="text" readonly="readonly"  name="locator_lng" id="locator_lng" placeholder="<?php _e( 'Longitude', 'hugeit_maps' ); ?>" />
                         </li>
+                        <li class="has_background">
+                            <label for="locator_phone"><?php _e( 'Phone Number', 'hugeit_maps' ); ?></label>
+                            <input type="tel"  name="locator_phone" id="locator_phone" placeholder="<?php _e( 'e.g. +1 123 4567', 'hugeit_maps' ); ?>" />
+                        </li>
+                        <li class="has_background">
+                            <label for="store_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
+                            <small class="storeClosed">*Leave fields empty if the store is closed</small>
+                            <table id="store_days">
+                                <tr id="sun">
+                                    <td>Sunday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="mon">
+                                    <td>Monday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="tue">
+                                    <td>Tuesday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="wed">
+                                    <td>Wednesday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="thu">
+                                    <td>Thursday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end" class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="fri">
+                                    <td>Friday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="sat">
+                                    <td>Saturday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" id="locator_days" name="locator_days">
+                        </li>
                         <li>
                             <ul class=""></ul>
                         </li>
@@ -117,6 +184,73 @@
                         <li class="has_background">
                             <label for="locator_edit_lng"><?php _e( 'Store Longitude', 'hugeit_maps' ); ?></label>
                             <input type="text" readonly="readonly"  name="locator_edit_lng" id="locator_edit_lng" />
+                        </li>
+                        <li class="has_background">
+                            <label for="locator_edit_phone"><?php _e( 'Phone Number', 'hugeit_maps' ); ?></label>
+                            <input type="text" name="locator_edit_phone" placeholder="<?php _e( 'e.g. +1 123 4567', 'hugeit_maps' ); ?>" id="locator_edit_phone" />
+                        </li>
+                        <li class="has_background">
+                            <label for="store_edit_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
+                            <small class="storeClosed">*Leave fields empty if the store is closed</small>
+                            <table id="store_edit_days">
+                                <tr id="sun">
+                                    <td>Sunday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="mon">
+                                    <td>Monday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="tue">
+                                    <td>Tuesday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="wed">
+                                    <td>Wednesday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="thu">
+                                    <td>Thursday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end" class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="fri">
+                                    <td>Friday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                                <tr id="sat">
+                                    <td>Saturday</td>
+                                    <td>
+                                        <input type="text" name="start" class="timepicker">
+                                        <span>&ndash;</span>
+                                        <input type="text" name="end"   class="timepicker">
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" id="locator_edit_days" name="locator_edit_days">
                         </li>
                     </ul>
                     <div id="new_locator_panel"></div>

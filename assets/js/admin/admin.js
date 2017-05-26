@@ -131,7 +131,8 @@ jQuery(document).ready(function () {
         jQuery("#g_map_locator").removeClass("hide");
         jQuery("#locator_edit_exist_section").hide(200).addClass("tab_options_hidden_section");
         jQuery("#g_map_locator_options .hidden_edit_content").show(200).addClass("tab_options_active_section");
-        jQuery("#locator_name,#locator_addr,#locator_lat,#locator_lng").val("");
+        jQuery("#locator_name,#locator_addr,#locator_lat,#locator_lng,#locator_phone,#locator_days").val("");
+        jQuery("#store_days").find("input").val("");
         var input        = document.getElementById('locator_addr');
         var autocomplete = new google.maps.places.Autocomplete(input);
         var searchBox    = new google.maps.places.SearchBox(input);
@@ -164,7 +165,7 @@ jQuery(document).ready(function () {
         jQuery("#locator_edit_exist_section").show(200);
         jQuery("#g_map_locator_options .hidden_edit_content").hide(200);
         jQuery('html, body').animate({scrollTop: 0}, 250);
-        jQuery("#locator_addr, #locator_lat, #locator_lng").val("");
+        jQuery("#locator_addr, #locator_lat, #locator_lng,#locator_phone,#locator_days").val("");
         jQuery("#locator_options_input").removeAttr("checked");
 
         return false;

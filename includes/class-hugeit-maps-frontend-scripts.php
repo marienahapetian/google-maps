@@ -51,6 +51,7 @@ class Hugeit_Maps_Frontend_Scripts {
 
         wp_localize_script( 'hugeit_maps_frontend', 'frontdir_options', array(
             'locator_enabled'      => $map->get_locator_enabled(),
+            'imgurl'               => HUGEIT_MAPS_IMAGES_URL,
         ) );
 
 	}

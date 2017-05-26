@@ -56,6 +56,7 @@ jQuery(document).ready(function () {
             dataZoomController = parseInt(element.data('zoom-controller')),
             dataTypeController = parseInt(element.data('type-controller')),
             dataScaleController = parseInt(element.data('scale-controller')),
+            imgurl         = element.data('img-url'),
             dataStreetViewController = parseInt(element.data('street-view-controller')),
             dataOverviewMapController = parseInt(element.data('overview-map-controller')),
             dataInfoType = element.data('info-type'),
@@ -229,7 +230,12 @@ jQuery(document).ready(function () {
             var input = document.getElementById('searchLocator_' + locMap_id);
             var autocomplete = new google.maps.places.Autocomplete(input);
             var searchBox = new google.maps.places.SearchBox(input);
-
+            var LocatorIcon = {
+                url:imgurl+"/str-marker-icon.png",
+                labelOrigin: new google.maps.Point(22, 20)
+            };
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var labelIndex = 1;
             function calcDistance(pointA, pointB) {
 
                 return (google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB) / 1000).toFixed(2);
@@ -283,6 +289,63 @@ jQuery(document).ready(function () {
                             }
 
                             if(finalStores.length>0){
+                                labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                labelIndex = 1;
+                                jQuery(document).find("#main_store_block").remove();
+                                jQuery(".huge_it_google_map_container").after("<div id='main_store_block'></div>");
+                                var StoreBlock="";
+                                StoreBlock += "<div class='str-block'>";
+                                StoreBlock += "        <div class='addr-info'>";
+                                StoreBlock += "            <div class='str-img'>";
+                                StoreBlock += "                <img src='"+imgurl+"\/str-marker.png' alt=''>";
+                                StoreBlock += "            <\/div>";
+                                StoreBlock += "            <div class='addr_block'>";
+                                StoreBlock += "                <p class='str-name'><\/p>";
+                                StoreBlock += "                <p class='str-dir'><a href='' target='_blank'>Get Directions<\/a><\/p>";
+                                StoreBlock += "                <div class='str-phone'>";
+                                StoreBlock += "                    <img src='"+imgurl+"\/phone.png' alt=''><p class='str-number'><\/p>";
+                                StoreBlock += "                <\/div>";
+                                StoreBlock += "";
+                                StoreBlock += "            <\/div>";
+                                StoreBlock += "";
+                                StoreBlock += "            <p class='str-addr'><\/p>";
+                                StoreBlock += "        <\/div>";
+                                StoreBlock += "";
+                                StoreBlock += "        <div class='a_info'>";
+                                StoreBlock += "            <table>";
+                                StoreBlock += "                <tr>";
+                                StoreBlock += "                    <td>Sun<\/td>";
+                                StoreBlock += "                    <td name='sun'><\/td>";
+                                StoreBlock += "                <\/tr>";
+                                StoreBlock += "                <tr>";
+                                StoreBlock += "                    <td>Mon<\/td>";
+                                StoreBlock += "                    <td name='mon'><\/td>";
+                                StoreBlock += "                <\/tr>";
+                                StoreBlock += "                <tr>";
+                                StoreBlock += "                    <td>Tue<\/td>";
+                                StoreBlock += "                    <td name='tue'><\/td>";
+                                StoreBlock += "                <\/tr>";
+                                StoreBlock += "                <tr>";
+                                StoreBlock += "                    <td>Wed<\/td>";
+                                StoreBlock += "                    <td name='wed'><\/td>";
+                                StoreBlock += "                <\/tr>";
+                                StoreBlock += "                <tr>";
+                                StoreBlock += "                    <td>Thu<\/td>";
+                                StoreBlock += "                    <td name='thu'><\/td>";
+                                StoreBlock += "                <\/tr>";
+                                StoreBlock += "                <tr>";
+                                StoreBlock += "                    <td>Fri<\/td>";
+                                StoreBlock += "                    <td name='fri'><\/td>";
+                                StoreBlock += "                <\/tr>";
+                                StoreBlock += "                <tr>";
+                                StoreBlock += "                    <td>Sat<\/td>";
+                                StoreBlock += "                    <td name='sat'><\/td>";
+                                StoreBlock += "                <\/tr>";
+                                StoreBlock += "";
+                                StoreBlock += "            <\/table>";
+                                StoreBlock += "";
+                                StoreBlock += "        <\/div>";
+                                StoreBlock += "    <\/div>";
                                 locClosetArr=[];
                                 clearDistance();
                                 clearLocations();
@@ -295,14 +358,19 @@ jQuery(document).ready(function () {
                                 locClosest = Math.min.apply(null, locClosetArr);
                                 for(var i in finalStores){
 
+                                    if(typeof(finalStores[i].locator_days) != "object"){
+                                        finalStores[i].locator_days = JSON.parse(finalStores[i].locator_days);
+                                    }
+
                                     locMarker = new google.maps.Marker({
                                         map:front_end_map,
                                         position:{lat:finalStores[i].locator_lat,lng:finalStores[i].locator_lng},
-                                        id:i
+                                        id:i,
+                                        icon:LocatorIcon,
+                                        label:labels[labelIndex++ % labels.length]
 
                                     });
                                     locInfoWindow = new google.maps.InfoWindow;
-
 
                                     if(finalStores[i].distance <= locClosest){
                                         locClosest = finalStores[i].distance;
@@ -312,7 +380,6 @@ jQuery(document).ready(function () {
                                         };
                                         locClosetAddress = finalStores[i].locator_addr;
                                         locMarker.set('name','closest');
-                                        locMarker.set('label','B');
                                     }
 
                                     locBounds.extend(locMarker.getPosition());
@@ -324,15 +391,36 @@ jQuery(document).ready(function () {
                                     }(i));
 
                                     locMarkers.push(locMarker);
+                                    jQuery("#main_store_block").append(StoreBlock);
+                                    if(finalStores[i].locator_phone==""){
+                                        jQuery(document).find(".str-phone").last().css("visibility",'hidden');
+                                    }
+                                    else {
+                                        jQuery(document).find(".str-phone").last().css("visibility",'visible');
+                                    }
+                                    var gDirQuery = finalStores[i].locator_addr;
+                                    gDirQuery = gDirQuery.replace(/ /g,'+');
+                                    jQuery(document).find("#main_store_block .str-name").last().text(finalStores[i].name);
+                                    jQuery(document).find("#main_store_block .str-addr").last().text(finalStores[i].locator_addr);
+                                    jQuery(document).find("#main_store_block .str-number").last().text(finalStores[i].locator_phone);
+                                    jQuery(document).find(".str-dir a").last().prop('href','https://www.google.com/maps/dir//'+gDirQuery);
+                                    jQuery(document).find(".str-img img").last().before("<p class='markerLabel'>"+locMarker.label+"</p>");
+                                    jQuery(document).find("#main_store_block .a_info").last().find("table tr td:last-child").each(function () {
+                                        var nameDayOfWeek = jQuery(this).attr('name');
+                                        if(finalStores[i].locator_days[nameDayOfWeek].start!="" && finalStores[i].locator_days[nameDayOfWeek].end!="" ){
+                                            jQuery(this).text(finalStores[i].locator_days[nameDayOfWeek].start +" - "+finalStores[i].locator_days[nameDayOfWeek].end);
+                                        }
+                                        else {
+                                            jQuery(this).text("Closed");
+                                        }
+                                    });
                                 }
-
                                 locCurrent = new google.maps.Marker({
                                     map:front_end_map,
-                                    icon:def,
-                                    label: "A",
+                                    icon:LocatorIcon,
+                                    label: 'A',
                                     position:fromLatLng
                                 });
-
                                 google.maps.event.addListener(locCurrent,"click",function () {
                                     locInfoWindow.setContent(locAddress);
                                     locInfoWindow.open(front_end_map,this);
@@ -340,6 +428,7 @@ jQuery(document).ready(function () {
 
                                 locBounds.extend(locCurrent.getPosition());
                                 front_end_map.fitBounds(locBounds);
+                                center_coords=null;
                                 var locRoute,locContent;
                                 locDirectionsDisplay.setMap(front_end_map);
                                 locDirectionsService.route({
@@ -365,12 +454,13 @@ jQuery(document).ready(function () {
                                     locRouteInfowindow.setContent(locContent);
                                     locRouteInfowindow.open(front_end_map);
                                 });
+
                             }
                             else {
                                 clearDistance();
                                 clearLocations();
                                 clearDirections();
-
+                                jQuery(document).find("#main_store_block").remove();
                                 alert("Sorry, but there are not available stores in certain radius!");
 
                             }

@@ -76,5 +76,29 @@ interface Hugeit_Maps_Locator_Interface {
      */
     public function set_locator_addr( $locator_addr );
 
+    /**
+     * @return string
+     */
+    public function get_locator_phone();
+
+    /**
+     * @param string $locator_phone
+     *
+     * @return Hugeit_Maps_Locator
+     */
+    public function set_locator_phone($locator_phone);
+
+    /**
+     * @return string
+     */
+    public function get_locator_days();
+
+    /**
+     * @param string $locator_days
+     *
+     * @return Hugeit_Maps_Locator
+     */
+    public function set_locator_days($locator_days);
+
 
 }
