@@ -422,7 +422,7 @@ jQuery(document).ready(function () {
                                         });
                                         locInfoWindow = new google.maps.InfoWindow;
 
-                                        if (finalStores[i].distance <= locClosest) {
+                                        if (parseFloat(finalStores[i].distance) <= parseFloat(locClosest)) {
                                             locClosest = finalStores[i].distance;
                                             locClosetPosition = {
                                                 lat: parseFloat(finalStores[i].locator_lat),
