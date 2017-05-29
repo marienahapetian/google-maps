@@ -304,9 +304,7 @@ jQuery(document).ready(function () {
 
 
                             testGetDist(fromLatLng, locStores[i].latLng).then(function (resp) {
-                                    debugger;
                                     if (resp < parseInt(locRadius)) {
-                                        debugger;
                                         locStores[i].distance = resp;
                                         finalStores.push(locStores[i]);
                                     }
@@ -405,7 +403,7 @@ jQuery(document).ready(function () {
                                     locClosest = Math.min.apply(null, locClosetArr);
                                     for (var i in finalStores) {
 
-                                        if (typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days != "") {
+                                        if (typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days != ""){
                                             finalStores[i].locator_days = JSON.parse(finalStores[i].locator_days);
                                         }
                                         else {
