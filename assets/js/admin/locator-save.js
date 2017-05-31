@@ -6,6 +6,7 @@ jQuery(document).ready(function(){
             locatorLat = jQuery("#locator_edit_lat").val(),
             locatorLng = jQuery("#locator_edit_lng").val(),
             locatorAddr = jQuery("#locator_edit_addr").val(),
+            locatorPhone= jQuery("#locator_edit_phone").val(),
             id = jQuery("#locator_get_id").val(),
             map_id = jQuery("#map_id").val();
 
@@ -18,7 +19,17 @@ jQuery(document).ready(function(){
                 return false;
             }
         }
-
+        var locatorDays = {};
+        jQuery('#store_edit_days').find('tr').each(function () {
+            var StrInpId = jQuery(this).attr('id');
+            var StrRow = {};
+            jQuery(this).find('input').each(function () {
+                StrRow[jQuery(this).attr('name')] = jQuery(this).val();
+            });
+            locatorDays[StrInpId] = StrRow;
+        });
+        locatorDays = JSON.stringify(locatorDays);
+        jQuery("locator_edit_days").val(locatorDays);
         var data = {
             action: "hugeit_maps_edit_locator",
             nonce : locatorSaveL10n.nonce,
@@ -27,7 +38,9 @@ jQuery(document).ready(function(){
             name: name,
             locatorLat: locatorLat,
             locatorLng: locatorLng,
-            locatorAddr: locatorAddr
+            locatorAddr: locatorAddr,
+            locatorPhone:locatorPhone,
+            locatorDays:locatorDays
         };
 
         jQuery.ajax({
@@ -66,6 +79,7 @@ jQuery(document).ready(function(){
             locatorLat = jQuery("#locator_lat").val(),
             locatorLng = jQuery("#locator_lng").val(),
             locatorAddr= jQuery("#locator_addr").val(),
+            locatorPhone= jQuery("#locator_phone").val(),
             map_id = jQuery("#map_id").val();
             checkVal.push(name,locatorLat,locatorLng,locatorAddr);
 
@@ -76,7 +90,17 @@ jQuery(document).ready(function(){
                     return false;
                 }
             }
-
+        var locatorDays = {};
+        jQuery('#store_days').find('tr').each(function () {
+            var StrInpId = jQuery(this).attr('id');
+            var StrRow = {};
+            jQuery(this).find('input').each(function () {
+                StrRow[jQuery(this).attr('name')] = jQuery(this).val();
+            });
+            locatorDays[StrInpId] = StrRow;
+        });
+        locatorDays = JSON.stringify(locatorDays);
+        jQuery("locator_days").val(locatorDays);
         var data = {
             action: "hugeit_maps_save_new_locator",
             nonce : locatorSaveL10n.nonce,
@@ -84,7 +108,9 @@ jQuery(document).ready(function(){
             name: name,
             locatorLat: locatorLat,
             locatorLng: locatorLng,
-            locatorAddr: locatorAddr
+            locatorAddr: locatorAddr,
+            locatorPhone:locatorPhone,
+            locatorDays:locatorDays
          };
 
         jQuery.ajax({

@@ -570,7 +570,9 @@ class Hugeit_Maps_Ajax {
             ->set_name( $_REQUEST['name'] )
             ->set_locator_lat( $_REQUEST['locatorLat'] )
             ->set_locator_lng( $_REQUEST['locatorLng'] )
-            ->set_locator_addr( $_REQUEST['locatorAddr'] );
+            ->set_locator_addr( $_REQUEST['locatorAddr'] )
+            ->set_locator_phone($_REQUEST['locatorPhone'])
+            ->set_locator_days($_REQUEST['locatorDays']);
 
         $saved = $locator->save();
 
@@ -626,7 +628,9 @@ class Hugeit_Maps_Ajax {
             ->set_name( $_REQUEST['name'] )
             ->set_locator_lat( $_REQUEST['locatorLat'] )
             ->set_locator_lng( $_REQUEST['locatorLng'] )
-            ->set_locator_addr( $_REQUEST['locatorAddr'] );
+            ->set_locator_addr( $_REQUEST['locatorAddr'] )
+            ->set_locator_phone($_REQUEST['locatorPhone'])
+            ->set_locator_days($_REQUEST['locatorDays']);
 
         $saved = $locator->save();
 
@@ -1047,6 +1051,8 @@ class Hugeit_Maps_Ajax {
                 'locator_lat'   => $locator->get_locator_lat(),
                 'locator_lng'   => $locator->get_locator_lng(),
                 'locator_addr'  => $locator->get_locator_addr(),
+                'locator_phone' => $locator->get_locator_phone(),
+                'locator_days' => $locator->get_locator_days(),
             );
         }
 
@@ -1198,7 +1204,7 @@ class Hugeit_Maps_Ajax {
         if ( $locators ) {
             array_push( $map_array, 'Locators' );
             foreach ( $locators as $locator ) {
-                array_push( $map_array, 'name:' . $locator->get_name() . ', locator latitude: ' . $locator->get_locator_lat() . ', locator longitude: ' . $locator->get_locator_lng() . ', locator address: ' . $locator->get_locator_addr() );
+                array_push( $map_array, 'name:' . $locator->get_name() . ', locator latitude: ' . $locator->get_locator_lat() . ', locator longitude: ' . $locator->get_locator_lng() . ', locator address: ' . $locator->get_locator_addr() . ', locator phone: ' . $locator->get_locator_phone() . ', locator days: ' . $locator->get_locator_days());
             }
         }
 

@@ -87,6 +87,10 @@ class Hugeit_Maps_Install {
         $new_columns=array(
             Hugeit_Maps()->get_table_name( 'maps' )=>array(
                 'locator_enabled'=>'INT DEFAULT 0',
+            ),
+            Hugeit_Maps()->get_table_name( 'stores' )=>array(
+                'locator_phone'=>'VARCHAR(80) NOT NULL',
+                'locator_days' =>'TEXT NOT NULL',
             )
         );
         foreach ($new_columns as $table=>$columns){
@@ -280,6 +284,8 @@ class Hugeit_Maps_Install {
                 map_id int(11) UNSIGNED DEFAULT NULL,
                 name varchar(60) NOT NULL,
                 locator_addr varchar(80) NOT NULL,
+                locator_phone varchar(80) NOT NULL,
+                locator_days TEXT NOT NULL,
                 locator_lat float(10,6) NOT NULL,
                 locator_lng float(10,6) NOT NULL,
                 

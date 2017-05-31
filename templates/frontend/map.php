@@ -40,6 +40,7 @@ $i = random_int(0, 10000);
          data-min-zoom="<?php echo esc_attr($map->get_min_zoom()); ?>"
          data-max-zoom="<?php echo esc_attr($map->get_max_zoom()); ?>"
          data-locator-enabled="<?php echo esc_attr($map->get_locator_enabled()); ?>"
+         data-img-url        ="<?php echo HUGEIT_MAPS_IMAGES_URL;?>"
          data-border-radius="<?php echo esc_attr($map->get_border_radius()); ?>"
          data-center-lat="<?php echo esc_attr($map->get_center_lat()); ?>"
          data-center-lng="<?php echo esc_attr($map->get_center_lng()); ?>"
