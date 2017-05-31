@@ -336,8 +336,8 @@ jQuery(document).ready(function () {
                                 if (finalStores.length > 0) {
                                     labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                                     labelIndex = 1;
-                                    jQuery(document).find("#main_store_block").remove();
-                                    jQuery(".huge_it_google_map_container").after("<div id='main_store_block'></div>");
+                                    jQuery(document).find("#huge_main_store_block").remove();
+                                    jQuery(".huge_it_google_map_container").after("<div id='huge_main_store_block'></div>");
                                     var StoreBlock = "";
                                     StoreBlock += "<div class='str-block'>";
                                     StoreBlock += "        <div class='addr-info'>";
@@ -446,7 +446,7 @@ jQuery(document).ready(function () {
                                         }(i));
 
                                         locMarkers.push(locMarker);
-                                        jQuery("#main_store_block").append(StoreBlock);
+                                        jQuery("#huge_main_store_block").append(StoreBlock);
                                         if (finalStores[i].locator_phone == "") {
                                             jQuery(document).find(".str-phone").last().css("visibility", 'hidden');
                                         }
@@ -455,12 +455,12 @@ jQuery(document).ready(function () {
                                         }
                                         var gDirQuery = finalStores[i].locator_addr;
                                         gDirQuery = gDirQuery.replace(/ /g, '+');
-                                        jQuery(document).find("#main_store_block .str-name").last().text(finalStores[i].name);
-                                        jQuery(document).find("#main_store_block .str-addr").last().text(finalStores[i].locator_addr);
-                                        jQuery(document).find("#main_store_block .str-number").last().text(finalStores[i].locator_phone);
+                                        jQuery(document).find("#huge_main_store_block .str-name").last().text(finalStores[i].name);
+                                        jQuery(document).find("#huge_main_store_block .str-addr").last().text(finalStores[i].locator_addr);
+                                        jQuery(document).find("#huge_main_store_block .str-number").last().text(finalStores[i].locator_phone);
                                         jQuery(document).find(".str-dir a").last().prop('href', 'https://www.google.com/maps/dir//' + gDirQuery);
                                         jQuery(document).find(".str-img img").last().before("<p class='markerLabel'>" + locMarker.label + "</p>");
-                                        jQuery(document).find("#main_store_block .a_info").last().find("table tr td:last-child").each(function () {
+                                        jQuery(document).find("#huge_main_store_block .a_info").last().find("table tr td:last-child").each(function () {
                                             var nameDayOfWeek = jQuery(this).attr('name');
                                             if (finalStores[i].locator_days[nameDayOfWeek].start != "" && finalStores[i].locator_days[nameDayOfWeek].end != "") {
                                                 jQuery(this).text(finalStores[i].locator_days[nameDayOfWeek].start + " - " + finalStores[i].locator_days[nameDayOfWeek].end);
@@ -515,7 +515,7 @@ jQuery(document).ready(function () {
                                     clearDistance();
                                     clearLocations();
                                     clearDirections();
-                                    jQuery(document).find("#main_store_block").remove();
+                                    jQuery(document).find("#huge_main_store_block").remove();
                                     alert("Sorry, but there are not available stores in certain radius!");
 
                                 }

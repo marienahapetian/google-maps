@@ -47,7 +47,7 @@
                         </li>
                         <li class="has_background">
                             <label for="store_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
-                            <small class="storeClosed">*Leave fields empty if the store is closed</small>
+                            <small class="storeClosed"><?php _e('*Leave fields empty if the store is closed'); ?></small>
                             <table id="store_days">
                                 <tr id="sun">
                                     <td>Sunday</td>
@@ -191,7 +191,7 @@
                         </li>
                         <li class="has_background">
                             <label for="store_edit_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
-                            <small class="storeClosed">*Leave fields empty if the store is closed</small>
+                            <small class="storeClosed"><?php _e('*Leave fields empty if the store is closed'); ?></small>
                             <table id="store_edit_days">
                                 <tr id="sun">
                                     <td>Sunday</td>

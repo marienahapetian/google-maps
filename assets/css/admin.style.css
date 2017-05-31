@@ -1164,27 +1164,27 @@
     opacity: 0.6;
 }
 /* Store locator Days */
-.timepicker {
+#g_map_locator_options .timepicker {
     width: 80px!important;
     font-size: 13px;
     padding: 3px;
     background: #fff;
 }
-.ui-timepicker-list li {
+#g_map_locator_options .ui-timepicker-list li {
     font-size: 14px;
     font-family: "Open Sans",sans-serif;
 }
 
-#store_days input {
+#g_map_locator_options #store_days input {
     float: none;
 }
-#store_days {
+#g_map_locator_options #store_days {
     font-family: "Open Sans",sans-serif;
 }
-#store_days td {
+#g_map_locator_options #store_days td {
     padding:0px;
 }
-.storeClosed {
+#g_map_locator_options .storeClosed {
     position: absolute;
     left: 0px;
     top: 25px;
