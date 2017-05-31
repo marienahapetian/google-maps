@@ -458,8 +458,8 @@ jQuery(document).ready(function () {
                                         jQuery(document).find("#huge_main_store_block .str-name").last().text(finalStores[i].name);
                                         jQuery(document).find("#huge_main_store_block .str-addr").last().text(finalStores[i].locator_addr);
                                         jQuery(document).find("#huge_main_store_block .str-number").last().text(finalStores[i].locator_phone);
-                                        jQuery(document).find(".str-dir a").last().prop('href', 'https://www.google.com/maps/dir//' + gDirQuery);
-                                        jQuery(document).find(".str-img img").last().before("<p class='markerLabel'>" + locMarker.label + "</p>");
+                                        jQuery(document).find("#huge_main_store_block .str-dir a").last().prop('href', 'https://www.google.com/maps/dir//' + gDirQuery);
+                                        jQuery(document).find("#huge_main_store_block .str-img img").last().before("<p class='markerLabel'>" + locMarker.label + "</p>");
                                         jQuery(document).find("#huge_main_store_block .a_info").last().find("table tr td:last-child").each(function () {
                                             var nameDayOfWeek = jQuery(this).attr('name');
                                             if (finalStores[i].locator_days[nameDayOfWeek].start != "" && finalStores[i].locator_days[nameDayOfWeek].end != "") {
