@@ -84,7 +84,6 @@
     perspective-origin: 64px 23px;
     transform-origin: 64px 23px;
     caret-color: rgb(51, 51, 51);
-    background: rgb(255, 255, 255) url("https://www.hollandandbarrett.com/ui/css/img/formalize-select-arrow.png?1370962643&Lo0P=4c648a76d0f3f6741c0722545ddf43ca") no-repeat scroll 100% 50% / auto padding-box padding-box;
     border: 1px solid rgb(151, 151, 151);
     font: normal normal normal normal 14px / normal sans-serif;
     list-style: none outside none;
