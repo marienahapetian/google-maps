@@ -8,18 +8,13 @@ if (!defined('ABSPATH')) {
 $license = array(
     array(
         "title" => "Custom Marker Upload",
-        "text" => "",
+        "text" => "Select colorful and bright marker from the big library of 44 markers in Maps Markers or upload your own. Choose the size and add the URL to it, so that users will be able to find the website connected with the marker easily",
         "icon" => "8px -219px"
     ),
     array(
         "title" => "Advanced Directions",
-        "text" => "",
+        "text" => "Functional directions tool will allow users to add destinations and get directions for it. See the distance for cars, bikes, buses and feet in miles and kilometers and search through the map",
         "icon" => "-93px -228px"
-    ),
-    array(
-        "title" => "Links and HTML support",
-        "text" => "",
-        "icon" => "-192px -237px"
     ),
     array(
         "title" => "Advanced Maps Styling",
@@ -40,6 +35,16 @@ $license = array(
         "title" => "CSV file export support",
         "text" => "CSV file exporting makes it easy to export data, creates a CSV file of the objects that you submit",
         "icon" => "-274px -323px"
+    ),
+    array(
+        "title" => "Store Locator",
+        "text" => "Locate your store and allow users to see the destination and ways to reach you. This is a great way to either see how to get to the store or see the stores nearby when needed....",
+        "icon" => "-10px -307px"
+    ),
+    array(
+        "title" => "Over 20 Map Options",
+        "text" => "In Huge-IT Google Map plugin you can find more than 20 various map options which will make your Map better for you and your visitors",
+        "icon" => "-186px -307px"
     )
 );
 ?>

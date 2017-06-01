@@ -340,6 +340,7 @@ jQuery(document).ready(function () {
                                         return false;
                                     }
                                 }
+
                             /* Compare old with new value */
                             getFinalStores(locStores).then(function () {
                                 if (finalStores.length > 0) {
