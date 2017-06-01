@@ -403,11 +403,15 @@ jQuery(document).ready(function () {
                                     locClosest = Math.min.apply(null, locClosetArr);
                                     for (var i in finalStores) {
 
-                                        if (typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days != ""){
+                                        if (typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days != "") {
                                             finalStores[i].locator_days = JSON.parse(finalStores[i].locator_days);
                                         }
                                         else {
-                                            finalStores[i].locator_days = JSON.parse(null);
+
+                                            if(typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days == ""){
+                                                finalStores[i].locator_days = JSON.parse(null);
+                                            }
+
                                         }
 
                                         locMarker = new google.maps.Marker({
