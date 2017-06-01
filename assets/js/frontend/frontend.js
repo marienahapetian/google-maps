@@ -272,9 +272,22 @@ jQuery(document).ready(function () {
 
 
 
+            var oldRadius;
+            var hgCounter=0;
+            var hgTheSame;
             jQuery(document).on("click", "#submitLocator_" + locMap_id, function () {
+                if(oldRadius!=jQuery("#locatorRadius_" + locMap_id).val()){
+                    debugger;
+                    oldRadius = jQuery("#locatorRadius_" + locMap_id).val();
+                    hgTheSame=false;
+                }
+                else {
+                    debugger;
+                    hgTheSame=true;
+                }
+
                 var locAddress = jQuery("#searchLocator_" + locMap_id).val();
-                var locRadius = jQuery("#locatorRadius_" + locMap_id).val();
+                var locRadius =  jQuery("#locatorRadius_" + locMap_id).val();
                 var testGetDist = function (lp1, lp2) {
                     var deferred = jQuery.Deferred();
                     var tLocRoute, tLocContent;
@@ -336,7 +349,7 @@ jQuery(document).ready(function () {
                             }
                             fromLatLng = new google.maps.LatLng(result[0].geometry.location.lat(), result[0].geometry.location.lng());
                                 if(!!oldLatLng){
-                                    if(oldLatLng.lat()===fromLatLng.lat() && oldLatLng.lng()===fromLatLng.lng() ){
+                                    if(oldLatLng.lat()===fromLatLng.lat() && oldLatLng.lng()===fromLatLng.lng() && hgTheSame ){
                                         return false;
                                     }
                                 }
