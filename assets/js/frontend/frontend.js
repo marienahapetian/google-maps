@@ -225,7 +225,7 @@ jQuery(document).ready(function () {
                 polylineOptions: locpOptions
             });
             var locRouteInfowindow = new google.maps.InfoWindow;
-            var locClosest, locClosetPosition, def, locClosetAddress, locInfoWindow, locCurrent, locMarker, finalStores = [], locClosetArr = [], locMarkers = [];
+            var locClosest, locClosetPosition, def, locClosetAddress, locInfoWindow, locCurrent,fromLatLng, locMarker, finalStores = [], locClosetArr = [], locMarkers = [];
             var locBounds = new google.maps.LatLngBounds();
             var locMap_id = dataMapId;
             var input = document.getElementById('searchLocator_' + locMap_id);
@@ -330,8 +330,17 @@ jQuery(document).ready(function () {
                     var geocoder = new google.maps.Geocoder();
                     geocoder.geocode({'address': locAddress}, function (result, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
+                            /* Compare old with new value */
+                            if(!!fromLatLng){
+                                var oldLatLng = fromLatLng;
+                            }
                             fromLatLng = new google.maps.LatLng(result[0].geometry.location.lat(), result[0].geometry.location.lng());
-
+                                if(!!oldLatLng){
+                                    if(oldLatLng.lat()===fromLatLng.lat() && oldLatLng.lng()===fromLatLng.lng() ){
+                                        return false;
+                                    }
+                                }
+                            /* Compare old with new value */
                             getFinalStores(locStores).then(function () {
                                 if (finalStores.length > 0) {
                                     labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
