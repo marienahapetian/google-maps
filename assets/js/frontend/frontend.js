@@ -277,12 +277,10 @@ jQuery(document).ready(function () {
             var hgTheSame;
             jQuery(document).on("click", "#submitLocator_" + locMap_id, function () {
                 if(oldRadius!=jQuery("#locatorRadius_" + locMap_id).val()){
-                    debugger;
                     oldRadius = jQuery("#locatorRadius_" + locMap_id).val();
                     hgTheSame=false;
                 }
                 else {
-                    debugger;
                     hgTheSame=true;
                 }
 
