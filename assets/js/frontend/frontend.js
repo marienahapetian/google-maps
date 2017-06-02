@@ -510,7 +510,7 @@ jQuery(document).ready(function () {
 
                                     locBounds.extend(locCurrent.getPosition());
                                     front_end_map.fitBounds(locBounds);
-                                    center_coords = null;
+                                    center_coords = locBounds;
                                     var locRoute, locContent;
                                     locDirectionsDisplay.setMap(front_end_map);
                                     locDirectionsService.route({
