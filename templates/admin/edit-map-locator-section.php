@@ -43,7 +43,7 @@
                         </li>
                         <li class="has_background">
                             <label for="locator_phone"><?php _e( 'Phone Number', 'hugeit_maps' ); ?></label>
-                            <input type="tel"  name="locator_phone" id="locator_phone" placeholder="<?php _e( 'e.g. +1 123 4567', 'hugeit_maps' ); ?>" />
+                            <input type="tel"  name="locator_phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="locator_phone" placeholder="<?php _e( 'e.g. +1 123 4567', 'hugeit_maps' ); ?>" />
                         </li>
                         <li class="has_background">
                             <label for="store_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
@@ -187,7 +187,7 @@
                         </li>
                         <li class="has_background">
                             <label for="locator_edit_phone"><?php _e( 'Phone Number', 'hugeit_maps' ); ?></label>
-                            <input type="text" name="locator_edit_phone" placeholder="<?php _e( 'e.g. +1 123 4567', 'hugeit_maps' ); ?>" id="locator_edit_phone" />
+                            <input type="text" name="locator_edit_phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="<?php _e( 'e.g. +1 123 4567', 'hugeit_maps' ); ?>" id="locator_edit_phone" />
                         </li>
                         <li class="has_background">
                             <label for="store_edit_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
