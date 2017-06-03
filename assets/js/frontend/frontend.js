@@ -225,7 +225,7 @@ jQuery(document).ready(function () {
                 polylineOptions: locpOptions
             });
             var locRouteInfowindow = new google.maps.InfoWindow;
-            var locClosest, locClosetPosition, def, locClosetAddress, locInfoWindow, locCurrent, locMarker, finalStores = [], locClosetArr = [], locMarkers = [];
+            var locClosest, locClosetPosition, def, locClosetAddress, locInfoWindow, locCurrent,fromLatLng, locMarker, finalStores = [], locClosetArr = [], locMarkers = [];
             var locBounds = new google.maps.LatLngBounds();
             var locMap_id = dataMapId;
             var input = document.getElementById('searchLocator_' + locMap_id);
@@ -272,9 +272,20 @@ jQuery(document).ready(function () {
 
 
 
+            var oldRadius;
+            var hgCounter=0;
+            var hgTheSame;
             jQuery(document).on("click", "#submitLocator_" + locMap_id, function () {
+                if(oldRadius!=jQuery("#locatorRadius_" + locMap_id).val()){
+                    oldRadius = jQuery("#locatorRadius_" + locMap_id).val();
+                    hgTheSame=false;
+                }
+                else {
+                    hgTheSame=true;
+                }
+
                 var locAddress = jQuery("#searchLocator_" + locMap_id).val();
-                var locRadius = jQuery("#locatorRadius_" + locMap_id).val();
+                var locRadius =  jQuery("#locatorRadius_" + locMap_id).val();
                 var testGetDist = function (lp1, lp2) {
                     var deferred = jQuery.Deferred();
                     var tLocRoute, tLocContent;
@@ -330,8 +341,18 @@ jQuery(document).ready(function () {
                     var geocoder = new google.maps.Geocoder();
                     geocoder.geocode({'address': locAddress}, function (result, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
+                            /* Compare old with new value */
+                            if(!!fromLatLng){
+                                var oldLatLng = fromLatLng;
+                            }
                             fromLatLng = new google.maps.LatLng(result[0].geometry.location.lat(), result[0].geometry.location.lng());
+                                if(!!oldLatLng){
+                                    if(oldLatLng.lat()===fromLatLng.lat() && oldLatLng.lng()===fromLatLng.lng() && hgTheSame ){
+                                        return false;
+                                    }
+                                }
 
+                            /* Compare old with new value */
                             getFinalStores(locStores).then(function () {
                                 if (finalStores.length > 0) {
                                     labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -403,11 +424,15 @@ jQuery(document).ready(function () {
                                     locClosest = Math.min.apply(null, locClosetArr);
                                     for (var i in finalStores) {
 
-                                        if (typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days != ""){
+                                        if (typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days != "") {
                                             finalStores[i].locator_days = JSON.parse(finalStores[i].locator_days);
                                         }
                                         else {
-                                            finalStores[i].locator_days = JSON.parse(null);
+
+                                            if(typeof(finalStores[i].locator_days) != "object" && finalStores[i].locator_days == ""){
+                                                finalStores[i].locator_days = JSON.parse(null);
+                                            }
+
                                         }
 
                                         locMarker = new google.maps.Marker({
@@ -483,7 +508,7 @@ jQuery(document).ready(function () {
 
                                     locBounds.extend(locCurrent.getPosition());
                                     front_end_map.fitBounds(locBounds);
-                                    center_coords = null;
+                                    center_coords = locBounds;
                                     var locRoute, locContent;
                                     locDirectionsDisplay.setMap(front_end_map);
                                     locDirectionsService.route({
