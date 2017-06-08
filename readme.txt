@@ -3,8 +3,8 @@ Contributors: Huge-IT
 Donate link: https://huge-it.com/google-map/
 Tags: google map, google maps, map, maps, marker,
 Requires at least: 3.0.1
-Tested up to: 4.7.4
-Stable tag: 2.2.5
+Tested up to: 4.7.5
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -261,6 +261,11 @@ In order to install pro version of the plugin, simply follow these steps:
 If you think, that you found a bug in our [WordPress Google Maps](https://huge-it.com/google-map/) plugin or have any question contact us at [info@huge-it.com](mailto:info@huge-it.com)
 
 == Changelog ==
+
+= 2.2.6 =
+* 1) ADD: Added advanced view for store locator ith detailed description.
+* 2) FIX: UX/UI issue fixes as well as functionality optimization.
+* 3) EDIT: Approved the licensing page with the whole list of pugin functionality.
 
 = 2.2.5 =
 * 1) We have added a new option of maps full screen.
