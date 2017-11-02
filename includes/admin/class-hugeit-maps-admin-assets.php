@@ -68,8 +68,19 @@ class Hugeit_Maps_Admin_Assets {
                 $key_param = '';
             }
 
+            $lang_param = '';
+
             if( isset($_GET['task']) && $_GET['task'] == 'edit_map' ){
-                wp_enqueue_script( "hugeit-google-maps-api", 'https://maps.googleapis.com/maps/api/js?'.$key_param.'libraries=places,geometry' );
+                if(isset($_GET['id']) && absint($_GET['id'])==$_GET['id']){
+                    $map = new Hugeit_Maps_Map( $_GET['id'] );
+
+                    $language = $map->get_language();
+
+                    $lang_param = $language != 'location based' ? 'language=' . $language . '&' : '';
+
+                }
+
+                wp_enqueue_script( "google-maps-api", 'https://maps.googleapis.com/maps/api/js?'.$key_param.$lang_param.'libraries=places,geometry',false, null,true );
 
                 wp_enqueue_script( "hugeit-jscolor", Hugeit_Maps()->plugin_url()."/assets/jscolor/jscolor$suffix.js", array( 'jquery' ), false, true );
 

@@ -1,5 +1,5 @@
 function hugeitMapsInitializeAllMaps(id, response){
-    hugeitMapsLoadMap(id, "#" + response.hue, response.saturation, response.lightness, response.gamma, response.zoom, response.type, response.bike, response.traffic, response.transit, response.animation);
+    hugeitMapsLoadMap(id, "#" + response.hue, response.saturation, response.lightness, response.gamma, response.zoom, response.type, response.bike, response.traffic, response.transit, response.animation, response.draggable, response.wheel_scroll);
     hugeitMapsLoadMarkerMap(id, "#" + response.hue, response.saturation, response.lightness, response.gamma, response.zoom, response.type, response.bike, response.traffic, response.transit);
     hugeitMapsLoadPolygonMap(id, "#" + response.hue, response.saturation, response.lightness, response.gamma, response.zoom, response.type, response.bike, response.traffic, response.transit);
     hugeitMapsLoadPolylineMap(id, "#" + response.hue, response.saturation, response.lightness, response.gamma, response.zoom, response.type, response.bike, response.traffic, response.transit);
@@ -141,7 +141,7 @@ jQuery(document).ready(function () {
     );
 
 });
-function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bike, traffic, transit, animation) {
+function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bike, traffic, transit, animation , draggable, wheel_scroll) {
 
     data = {
         action: 'hugeit_maps_get_info',
@@ -173,6 +173,8 @@ function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bi
                 var scale_controller = maps[i].scale_controller;
                 var street_view_controller = maps[i].street_view_controller;
                 var overview_map_controller = maps[i].overview_map_controller;
+                var draggable = maps[i].draggable;
+                var wheel_scroll = maps[i].wheel_scroll;
                 var mapcenter = new google.maps.LatLng(
                     parseFloat(maps[i].center_lat),
                     parseFloat(maps[i].center_lng)
@@ -234,60 +236,80 @@ function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bi
                     map_admin_view.setOptions({
                         panControl: true
                     })
-                }
-                else {
+                } else {
                     map_admin_view.setOptions({
                         panControl: false
                     })
                 }
+
                 if (zoom_controller) {
                     map_admin_view.setOptions({
                         zoomControl: true
                     })
-                }
-                else {
+                } else {
                     map_admin_view.setOptions({
                         zoomControl: false
                     })
                 }
+
                 if (type_controller) {
                     map_admin_view.setOptions({
                         mapTypeControl: true
                     })
-                }
-                else {
+                } else {
                     map_admin_view.setOptions({
                         mapTypeControl: false
                     })
                 }
+
                 if (scale_controller) {
                     map_admin_view.setOptions({
                         scaleControl: true
                     })
-                }
-                else {
+                } else {
                     map_admin_view.setOptions({
                         scaleControl: false
                     })
                 }
+
                 if (street_view_controller) {
                     map_admin_view.setOptions({
                         streetViewControl: true
                     })
-                }
-                else {
+                } else {
                     map_admin_view.setOptions({
                         streetViewControl: false
                     })
                 }
+
                 if (overview_map_controller) {
                     map_admin_view.setOptions({
                         overviewMapControl: true
                     })
-                }
-                else {
+                } else {
                     map_admin_view.setOptions({
                         overviewMapControl: false
+                    })
+                }
+
+                if (draggable) {
+                    map_admin_view.setOptions({
+                        draggable: true
+                    })
+                } else {
+                    map_admin_view.setOptions({
+                        draggable: false
+                    })
+                }
+
+
+                if (wheel_scroll) {
+                    map_admin_view.setOptions({
+                        scrollwheel: true
+                    })
+                } else {
+                    map_admin_view.setOptions({
+                        scrollwheel: false
                     })
                 }
 
@@ -296,58 +318,57 @@ function hugeitMapsLoadMap(id, hue, saturation, lightness, gamma, zoom, type, bi
                         map_admin_view.setOptions({
                             panControl: true
                         })
-                    }
-                    else {
+                    } else {
                         map_admin_view.setOptions({
                             panControl: false
                         })
                     }
+
                     if (jQuery('#map_controller_zoom').is(':checked')) {
                         map_admin_view.setOptions({
                             zoomControl: true
                         })
-                    }
-                    else {
+                    } else {
                         map_admin_view.setOptions({
                             zoomControl: false
                         })
                     }
+
                     if (jQuery('#map_controller_type').is(':checked')) {
                         map_admin_view.setOptions({
                             mapTypeControl: true
                         })
-                    }
-                    else {
+                    } else {
                         map_admin_view.setOptions({
                             mapTypeControl: false
                         })
                     }
+
                     if (jQuery('#map_controller_scale').is(':checked')) {
                         map_admin_view.setOptions({
                             scaleControl: true
                         })
-                    }
-                    else {
+                    } else {
                         map_admin_view.setOptions({
                             scaleControl: false
                         })
                     }
+
                     if (jQuery('#map_controller_street_view').is(':checked')) {
                         map_admin_view.setOptions({
                             streetViewControl: true
                         })
-                    }
-                    else {
+                    } else {
                         map_admin_view.setOptions({
                             streetViewControl: false
                         })
                     }
+
                     if (jQuery('#map_controller_overview').is(':checked')) {
                         map_admin_view.setOptions({
                             overviewMapControl: true
                         })
-                    }
-                    else {
+                    } else {
                         map_admin_view.setOptions({
                             overviewMapControl: false
                         })

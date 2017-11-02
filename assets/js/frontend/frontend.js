@@ -65,6 +65,7 @@ jQuery(document).ready(function () {
             var newheight = parseInt(newwidth) / parseInt(div) + "px";
             element.height(newheight);
         });
+
         var center_coords = new google.maps.LatLng(dataCenterLat, dataCenterLng);
 
         var frontEndMapOptions = {
@@ -83,6 +84,51 @@ jQuery(document).ready(function () {
             fullscreenControl: true
         };
         var front_end_map = new google.maps.Map(document.getElementById(elementId), frontEndMapOptions);
+
+
+        function hugeitMapsFrontRefresh() {
+            google.maps.event.trigger(front_end_map, 'resize');
+            front_end_map.setCenter(center_coords);
+        }
+
+        jQuery(document).on('click',function () {
+            setTimeout(function () {
+                hugeitMapsFrontRefresh();
+            }, 500);
+        })
+
+        var styles = [{
+            "stylers": [{
+                "saturation": -100
+            }]
+            },
+            {
+                "featureType": "transit.line",
+                "stylers": [{
+                    "saturation": 100
+                }, {
+                    "color": "#ff3183"
+                }]
+            },
+            {
+                featureType: "road",
+                elementType: "labels",
+                stylers: [
+                    { visibility: "off" }
+                ]
+            },
+            { }
+            ];
+
+        // Create a new StyledMapType object, passing it the array of styles, as well as the name to be displayed on the map type control.
+        var styledMap = new google.maps.StyledMapType(styles, {
+            name: "Styled Map"
+        });
+
+        // Associate the styled map with the MapTypeId and set it to display.
+        front_end_map.mapTypes.set('map_style', styledMap);
+        front_end_map.setMapTypeId('map_style');
+
         var front_end_data = {
             action: 'hugeit_maps_get_info',
             map_id: dataMapId
@@ -315,10 +361,12 @@ jQuery(document).ready(function () {
 
 
                             testGetDist(fromLatLng, locStores[i].latLng).then(function (resp) {
+                               if(locRadius && jQuery.isNumeric(locRadius)){
                                     if (resp < parseInt(locRadius)) {
                                         locStores[i].distance = resp;
                                         finalStores.push(locStores[i]);
                                     }
+                                }
 
                                 },
                                 function (err) {

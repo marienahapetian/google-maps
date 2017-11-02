@@ -60,7 +60,7 @@ $license = array(
             </div>
             <p><?= $val["text"] ?></p>
             <div class="col-footer">
-                <a href="https://goo.gl/4ZkFas" class="a-upgrate">Upgrade</a>
+                <a href="https://goo.gl/4ZkFas" target="_blank" class="a-upgrate">Upgrade</a>
             </div>
         </div>
     <?php } ?>

@@ -3,6 +3,12 @@
  * @var $map Hugeit_Maps_Map
  */
 
+$locStyles = sprintf(
+    '
+    width:%s;
+    ',
+    $map->get_width() . '%'
+);
 $styles = sprintf(
     '
     position:relative !important;
@@ -17,8 +23,10 @@ $styles = sprintf(
 
 if ($map->get_align() === 'left') {
     $styles .= 'float:left;margin:0px !important;';
+    $locStyles .= 'float:left;margin:0px !important;';
 } elseif ($map->get_align() === 'right') {
     $styles .= 'float:right;margin:0px !important;';
+    $locStyles .= 'float:right;margin:0px !important;';
 } else {
     $styles .= 'margin:0px auto;';
 }
@@ -26,7 +34,7 @@ if ($map->get_align() === 'left') {
 $i = random_int(0, 10000);
 
 ?>
-<div class="clear-float">
+<div class="clear-float" style="<?php echo $locStyles; ?>">
     <?php if($map->get_locator_enabled()){
         Hugeit_Maps_Template_Loader::get_template( 'frontend/store-locator.php', array( 'map' => $map ) );
     } ?>

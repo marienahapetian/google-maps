@@ -119,6 +119,10 @@
 					<label for="open_infowindows_onload"><?php _e( 'Open infowindows on load', 'hugeit_maps' ); ?></label>
 					<input type="checkbox" value="1" id="open_infowindows_onload" name="open_infowindows_onload" <?php checked( $map->get_open_infowindows_onload(), 1 ); ?> />
 				</li>
+                <li class="pro">
+                    <label for="open_infowindows_onload"><?php _e( 'Enable Full Screen', 'hugeit_maps' ); ?></label>
+                    <input type="checkbox" value="1" id="" name="" checked disabled />
+                </li>
 				<li class="pro">
 					<label for="map_type"><?php _e( 'Map Type', 'hugeit_maps' ); ?></label>
 					<select disabled id="map_type" name="map_type">

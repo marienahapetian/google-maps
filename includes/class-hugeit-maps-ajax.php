@@ -895,6 +895,8 @@ class Hugeit_Maps_Ajax {
 				"traffic"    => $map->get_traffic_layer(),
 				"transit"    => $map->get_transit_layer(),
 				"animation"  => $map->get_animation(),
+                "draggable"    => $map->get_draggable(),
+                "wheel_scroll" => $map->get_wheel_scroll(),
 			) );
 			die();
 
@@ -940,7 +942,9 @@ class Hugeit_Maps_Ajax {
 				'type'                    => $map->get_type(),
 				'zoom'                    => $map->get_zoom(),
 				'center_lat'              => $map->get_center_lat(),
-				'center_lng'              => $map->get_center_lng()
+				'center_lng'              => $map->get_center_lng(),
+                'draggable'               => $map->get_draggable(),
+                'wheel_scroll'            => $map->get_wheel_scroll()
 			);
 		}
 

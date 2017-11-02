@@ -144,7 +144,6 @@
 #huge_main_store_block .str-block {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     background-color: #f1f1f7;
-    min-width:650px;
     width:100%;
     height: auto;
     margin-top:10px;

@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-require('config.php');
+require( plugin_dir_path(__FILE__) . '/config.php');
 
 if( ! class_exists( 'Hugeit_Maps' ) ):
 	/**

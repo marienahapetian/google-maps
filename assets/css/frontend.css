@@ -14,9 +14,9 @@
 }
 
 
-.huge_it_google_map img {
+.huge_it_google_map div:not(.gm-svpc) img {
     max-width: none !important;
-    visibility: visible !important;
+    /*visibility: visible !important;*/
 }
 
 .huge_it_google_map.hide {
