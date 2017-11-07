@@ -88,7 +88,6 @@ jQuery(document).ready(function () {
 
         function hugeitMapsFrontRefresh() {
             google.maps.event.trigger(front_end_map, 'resize');
-            front_end_map.setCenter(center_coords);
         }
 
         jQuery(document).on('click',function () {
