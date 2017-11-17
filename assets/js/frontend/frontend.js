@@ -96,38 +96,6 @@ jQuery(document).ready(function () {
             }, 500);
         })
 
-        var styles = [{
-            "stylers": [{
-                "saturation": -100
-            }]
-            },
-            {
-                "featureType": "transit.line",
-                "stylers": [{
-                    "saturation": 100
-                }, {
-                    "color": "#ff3183"
-                }]
-            },
-            {
-                featureType: "road",
-                elementType: "labels",
-                stylers: [
-                    { visibility: "off" }
-                ]
-            },
-            { }
-            ];
-
-        // Create a new StyledMapType object, passing it the array of styles, as well as the name to be displayed on the map type control.
-        var styledMap = new google.maps.StyledMapType(styles, {
-            name: "Styled Map"
-        });
-
-        // Associate the styled map with the MapTypeId and set it to display.
-        front_end_map.mapTypes.set('map_style', styledMap);
-        front_end_map.setMapTypeId('map_style');
-
         var front_end_data = {
             action: 'hugeit_maps_get_info',
             map_id: dataMapId

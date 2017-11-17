@@ -17,6 +17,9 @@ class Hugeit_Maps_Shortcode {
 		add_action( 'admin_footer', array( $this, 'inline_popup_content' ) );
 
 		add_action( 'media_buttons_context', array( $this, 'add_editor_media_button' ) );
+
+        add_filter( 'mce_external_plugins', array( $this, 'hugeit_maps_tinymce_shortcode_placeholder' ));
+
 	}
 
 	/**
@@ -76,6 +79,19 @@ class Hugeit_Maps_Shortcode {
 
 		return $context;
 	}
+
+	/**
+     * Replase Shortcode with Image
+	 * @param $plugins
+     *
+     * @return array $plugins
+     *
+	 */
+    function hugeit_maps_tinymce_shortcode_placeholder($plugins)
+    {
+        $plugins['hg_maps_shortcode'] = untrailingslashit( Hugeit_Maps()->plugin_url() ) . "/assets/js/admin/shortcode-placeholder.js";
+        return $plugins;
+    }
 
 	/**
 	 * Inline popup contents
