@@ -524,7 +524,8 @@ class Hugeit_Maps_Ajax {
         $map = new Hugeit_Maps_Map( $map_id );
 
         $map
-            ->set_locator_enabled( (int)$_REQUEST['locator_enabled'] );
+            ->set_locator_enabled( (int)$_REQUEST['locator_enabled'] )
+            ->set_locator_default_address($_REQUEST['locator_default_address']);
 
         $saved = $map->save();
 

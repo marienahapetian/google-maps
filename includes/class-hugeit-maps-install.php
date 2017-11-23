@@ -87,6 +87,7 @@ class Hugeit_Maps_Install {
         $new_columns=array(
             Hugeit_Maps()->get_table_name( 'maps' )=>array(
                 'locator_enabled'=>'INT DEFAULT 0',
+                'locator_default_address'=> 'text DEFAULT NULL',
             ),
             Hugeit_Maps()->get_table_name( 'stores' )=>array(
                 'locator_phone'=>'VARCHAR(80) NOT NULL',
@@ -178,7 +179,8 @@ class Hugeit_Maps_Install {
 				styling_saturation int(3) NOT NULL DEFAULT '0',
 				animation varchar(100) NOT NULL DEFAULT 'none',
 				locator_enabled int(2) NOT NULL DEFAULT '0',
-		
+				locator_default_address text DEFAULT NULL,
+
 				PRIMARY KEY (id)
 			) {$collate}"
 		);
@@ -375,7 +377,8 @@ class Hugeit_Maps_Install {
             ->set_border_radius( 0 )
             ->set_language( 'location based' )
             ->set_animation( 'none' )
-            ->set_locator_enabled(0);;
+            ->set_locator_enabled(0)
+            ->set_locator_default_address('');
 
         $saved_map = $map->save();
 

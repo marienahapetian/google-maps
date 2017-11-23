@@ -271,7 +271,13 @@
                     <input type="checkbox" class="locator_enabled" id="locator_enabled" name="locator_enabled"
                            value="1" <?php checked($map->get_locator_enabled(), 1); ?> />
                 </li>
+                <li>
+                    <label for="locator_enabled"><?php _e('Locator Search Box Default Location', 'hugeit_maps'); ?></label>
+                    <input type="text" class="locator_default_address" id="locator_default_address" name="locator_default_address"
+                           value="<?php echo $map->get_locator_default_address(); ?>" />
+                </li>
             </ul>
+            <input type="submit" class="button-primary" name="locator_general_edit_submit" id="locator_general_edit_submit" value="<?php _e( 'Save', 'hugeit_maps' ); ?>"/>
             <span class="spinner"></span>
         </form>
     </div>
