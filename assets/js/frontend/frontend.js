@@ -60,12 +60,6 @@ jQuery(document).ready(function () {
             dataInfoType = element.data('info-type'),
             dataOpenInfowindowsOnload = element.data('open-infowindows-onload');
 
-        jQuery(window).on("resize", function () {
-            var newwidth = element.width();
-            var newheight = parseInt(newwidth) / parseInt(div) + "px";
-            element.height(newheight);
-        });
-
         var center_coords = new google.maps.LatLng(dataCenterLat, dataCenterLng);
 
         var frontEndMapOptions = {
