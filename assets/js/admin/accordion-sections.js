@@ -57,8 +57,6 @@ jQuery(document).ready(function(){
             jQuery("#g_map_canvas").removeClass("hide");
 
         }
-
-        jQuery('html, body').animate({scrollTop: 0}, 250);
     });
 
 });

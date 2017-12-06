@@ -47,7 +47,6 @@ jQuery(document).ready(function () {
         jQuery(".update_marker_list_item").show(200);
         jQuery(".marker_image_choose ul li.active").removeClass("active");
         jQuery("#g_map_marker_options .hidden_edit_content").hide(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         return false;
     });
 
@@ -59,7 +58,6 @@ jQuery(document).ready(function () {
         jQuery("#markers_edit_exist_section").show(200);
         jQuery(this).parentsUntil(".editing_section").find(".update_list_item").hide(200);
         jQuery("#marker_add_button").show(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         return false;
     });
 
@@ -69,7 +67,6 @@ jQuery(document).ready(function () {
         jQuery("#g_map_canvas").removeClass("hide");
         jQuery("#polygone_edit_exist_section").show(200);
         jQuery("#g_map_polygone_options .hidden_edit_content").hide(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         return false;
     });
 
@@ -80,7 +77,6 @@ jQuery(document).ready(function () {
         jQuery("#polygone_edit_exist_section").show(200);
         jQuery(this).parent().parent().parent().parent().parent().find(".update_list_item").hide(200);
         jQuery("#polygon_add_button").show(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         return false;
     });
     jQuery("#polygon_add_button").on('click', function (e) {
@@ -99,7 +95,6 @@ jQuery(document).ready(function () {
         jQuery("#g_map_canvas").removeClass("hide");
         jQuery("#polyline_edit_exist_section").show(200);
         jQuery("#g_map_polyline_options .hidden_edit_content").hide(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         return false;
     });
 
@@ -110,7 +105,6 @@ jQuery(document).ready(function () {
         jQuery("#polyline_edit_exist_section").show(200);
         jQuery(this).parent().parent().parent().parent().parent().find(".update_list_item").hide(200);
         jQuery("#polyline_add_button").show(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         return false;
     });
 
@@ -164,7 +158,6 @@ jQuery(document).ready(function () {
         jQuery("#g_map_canvas").removeClass("hide");
         jQuery("#locator_edit_exist_section").show(200);
         jQuery("#g_map_locator_options .hidden_edit_content").hide(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         jQuery("#locator_addr, #locator_lat, #locator_lng,#locator_phone,#locator_days").val("");
         jQuery("#locator_options_input").removeAttr("checked");
 
@@ -179,7 +172,6 @@ jQuery(document).ready(function () {
         jQuery("#locator_edit_exist_section").show(200);
         jQuery(this).parent().parent().parent().parent().parent().find(".update_list_item").hide(200);
         jQuery("#locator_add_button").show(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
 
         return false;
     });
@@ -192,7 +184,6 @@ jQuery(document).ready(function () {
         jQuery("#g_map_canvas").removeClass("hide");
         jQuery("#circle_edit_exist_section").show(200);
         jQuery("#g_map_circle_options .hidden_edit_content").hide(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
         return false;
     });
 
@@ -202,7 +193,6 @@ jQuery(document).ready(function () {
         jQuery("#circle_edit_exist_section").show(200);
         jQuery(this).parent().parent().parent().parent().parent().find(".update_list_item").hide(200);
         jQuery("#circle_add_button").show(200);
-        //jQuery('html, body').animate({scrollTop: 0}, 250);
     });
 
     jQuery("#circle_add_button").on("click", function (e) {

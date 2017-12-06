@@ -29,6 +29,7 @@ if ($map->get_align() === 'left') {
     $locStyles .= 'float:right;margin:0px !important;';
 } else {
     $styles .= 'margin:0px auto;';
+    $locStyles .= 'margin:0px auto;';
 }
 
 $i = random_int(0, 10000);
