@@ -1,4 +1,7 @@
 jQuery(document).ready(function(){
+    var input = document.getElementById("locator_default_address");
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
     jQuery("#locator_edit_submit").on("click",function(){
         var checkEmpty,checkVal=[];
         var _this = jQuery(this),
@@ -6,11 +9,11 @@ jQuery(document).ready(function(){
             locatorLat = jQuery("#locator_edit_lat").val(),
             locatorLng = jQuery("#locator_edit_lng").val(),
             locatorAddr = jQuery("#locator_edit_addr").val(),
-            locatorPhone= jQuery("#locator_edit_phone").val(),
+            locatorPhone = jQuery("#locator_edit_phone").val(),
             id = jQuery("#locator_get_id").val(),
             map_id = jQuery("#map_id").val();
 
-            checkVal.push(name,locatorLat,locatorLng,locatorAddr);
+        checkVal.push(name,locatorLat,locatorLng,locatorAddr);
 
         for(var i in checkVal){
             checkEmpty = checkVal[i] || '';
@@ -79,17 +82,18 @@ jQuery(document).ready(function(){
             locatorLat = jQuery("#locator_lat").val(),
             locatorLng = jQuery("#locator_lng").val(),
             locatorAddr= jQuery("#locator_addr").val(),
-            locatorPhone= jQuery("#locator_phone").val(),
+            locatorPhone=jQuery("#locator_phone").val(),
             map_id = jQuery("#map_id").val();
-            checkVal.push(name,locatorLat,locatorLng,locatorAddr);
+        checkVal.push(name,locatorLat,locatorLng,locatorAddr);
 
-            for(var i in checkVal){
-                checkEmpty = checkVal[i] || '';
-                if(checkEmpty==''){
-                    alert("Please fill up the blanks!");
-                    return false;
-                }
+        for(var i in checkVal){
+            checkEmpty = checkVal[i] || '';
+            if(checkEmpty==''){
+                alert("Please fill up the blanks!");
+                return false;
             }
+        }
+
         var locatorDays = {};
         jQuery('#store_days').find('tr').each(function () {
             var StrInpId = jQuery(this).attr('id');
@@ -111,7 +115,7 @@ jQuery(document).ready(function(){
             locatorAddr: locatorAddr,
             locatorPhone:locatorPhone,
             locatorDays:locatorDays
-         };
+        };
 
         jQuery.ajax({
             url:ajaxurl,

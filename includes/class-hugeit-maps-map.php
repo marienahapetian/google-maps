@@ -39,6 +39,13 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
      */
     private $locator_enabled;
 
+    /**
+     * Default Location of Locator Search Box
+     *
+     * @var  string
+     */
+    private $locator_default_address;
+
 	/**
 	 * Map Default Zoom that displays on page load
 	 *
@@ -364,7 +371,7 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
 	 * @return string
 	 */
 	public function get_name() {
-		return (!empty($this->name) ? $this->name : __( '(no title)', 'hugeit_maps' ) );
+		return (!empty($this->name) ? wp_unslash($this->name) : __( '(no title)', 'hugeit_maps' ) );
 	}
 
 	/**
@@ -799,6 +806,25 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
         }
 
         $this->locator_enabled = (int) $locator_enabled;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function get_locator_default_address() {
+        return $this->locator_default_address;
+    }
+
+    /**
+     * @param string $value
+     * @return Hugeit_Maps_Map
+     * @throws Exception
+     */
+    public function set_locator_default_address( $value ) {
+
+        $this->locator_default_address = sanitize_text_field($value);
 
         return $this;
     }
@@ -1493,6 +1519,7 @@ class Hugeit_Maps_Map implements Hugeit_Maps_Map_Interface {
 		$this->set_if_not_null( 'styling_lightness', $this->styling_lightness, $map_data );
 		$this->set_if_not_null( 'styling_gamma', $this->styling_gamma, $map_data );
         $this->set_if_not_null( 'locator_enabled', $this->locator_enabled, $map_data );
+        $this->set_if_not_null( 'locator_default_address', $this->locator_default_address, $map_data );
 		$this->set_if_not_null( 'styling_saturation', $this->styling_saturation, $map_data );
 		$this->set_if_not_null( 'animation', $this->animation, $map_data );
 

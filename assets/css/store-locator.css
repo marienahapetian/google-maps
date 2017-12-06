@@ -194,11 +194,13 @@
     table-layout:auto;
     width: auto;
 }
-#huge_main_store_block .str-block .a_info table th, td
+#huge_main_store_block .str-block .a_info table th,
+#huge_main_store_block .str-block .a_info table td
 {
     padding: 0 0 0 10px;
 }
-#huge_main_store_block .str-block .a_info table th, td:nth-of-type(2){
+#huge_main_store_block .str-block .a_info table th,
+#huge_main_store_block .str-block .a_info table td:nth-of-type(2){
     text-align: center;
 }
 
