@@ -50,7 +50,7 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function upload_image() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_marker' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		$filename = $_POST['filename'];
@@ -76,11 +76,11 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function shortcode_change_map() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_save_shortcode_options' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -106,11 +106,11 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function save_shortcode_options() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_save_shortcode_options' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -144,11 +144,11 @@ class Hugeit_Maps_Ajax {
 	public static function save_stylings() {
 
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-styling-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -192,21 +192,21 @@ class Hugeit_Maps_Ajax {
 	 */
 	public function edit_circle() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-circle-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['id'] ) ) {
-			wp_die( __( 'missing "id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "id" parameter', 'hg_gmaps' ) );
 		}
 
 		$id = $_REQUEST['id'];
 
 		if ( absint( $id ) != $id ) {
-			wp_die( __( '"id" parameter must be non negative integer', 'hugeit_maps' ) );
+			wp_die( __( '"id" parameter must be non negative integer', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -261,11 +261,11 @@ class Hugeit_Maps_Ajax {
 	 */
 	public function save_circle() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-circle-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -322,21 +322,21 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function edit_polyline() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-polyline-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['id'] ) ) {
-			wp_die( __( 'missing "id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "id" parameter', 'hg_gmaps' ) );
 		}
 
 		$id = $_REQUEST['id'];
 
 		if ( absint( $id ) != $id ) {
-			wp_die( __( '"id" parameter must be non negative integer', 'hugeit_maps' ) );
+			wp_die( __( '"id" parameter must be non negative integer', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -386,11 +386,11 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function save_polyline() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-polyline-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -444,21 +444,21 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function edit_polygon() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-polygon-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['id'] ) ) {
-			wp_die( __( 'missing "id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "id" parameter', 'hg_gmaps' ) );
 		}
 
 		$id = $_REQUEST['id'];
 
 		if ( absint( $id ) != $id ) {
-			wp_die( __( '"id" parameter must be non negative integer', 'hugeit_maps' ) );
+			wp_die( __( '"id" parameter must be non negative integer', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -512,11 +512,11 @@ class Hugeit_Maps_Ajax {
     public static function save_locator() {
 
         if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-map-save' ) ) {
-            wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+            wp_die( __( 'Security check failed', 'hg_gmaps' ) );
         }
 
         if ( ! isset( $_REQUEST['map_id'] ) ) {
-            wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+            wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
         }
 
         $map_id = absint( $_REQUEST['map_id'] );
@@ -555,11 +555,11 @@ class Hugeit_Maps_Ajax {
      */
     public static function save_new_locator() {
         if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-locator-save' ) ) {
-            wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+            wp_die( __( 'Security check failed', 'hg_gmaps' ) );
         }
 
         if ( ! isset( $_REQUEST['map_id'] ) ) {
-            wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+            wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
         }
 
         $map_id = absint( $_REQUEST['map_id'] );
@@ -604,21 +604,21 @@ class Hugeit_Maps_Ajax {
     public static function edit_locator() {
 
         if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-locator-save' ) ) {
-            wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+            wp_die( __( 'Security check failed', 'hg_gmaps' ) );
         }
 
         if ( ! isset( $_REQUEST['id'] ) ) {
-            wp_die( __( 'missing "id" parameter', 'hugeit_maps' ) );
+            wp_die( __( 'missing "id" parameter', 'hg_gmaps' ) );
         }
 
         $id = $_REQUEST['id'];
 
         if ( absint( $id ) != $id ) {
-            wp_die( __( '"id" parameter must be non negative integer', 'hugeit_maps' ) );
+            wp_die( __( '"id" parameter must be non negative integer', 'hg_gmaps' ) );
         }
 
         if ( ! isset( $_REQUEST['map_id'] ) ) {
-            wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+            wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
         }
 
         $map_id = absint( $_REQUEST['map_id'] );
@@ -663,11 +663,11 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function save_polygon() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-polygon-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -722,21 +722,21 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function edit_marker() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-marker-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['id'] ) ) {
-			wp_die( __( 'missing "id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "id" parameter', 'hg_gmaps' ) );
 		}
 
 		$id = $_REQUEST['id'];
 
 		if ( absint( $id ) != $id ) {
-			wp_die( __( '"id" parameter must be non negative integer', 'hugeit_maps' ) );
+			wp_die( __( '"id" parameter must be non negative integer', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -787,11 +787,11 @@ class Hugeit_Maps_Ajax {
 	public static function save_marker() {
 
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-marker-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];
@@ -843,11 +843,11 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function save_map() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit-maps-map-save' ) ) {
-			wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+			wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 		}
 
 		if ( ! isset( $_REQUEST['map_id'] ) ) {
-			wp_die( __( 'missing "map_id" parameter', 'hugeit_maps' ) );
+			wp_die( __( 'missing "map_id" parameter', 'hg_gmaps' ) );
 		}
 
 		$map_id = $_REQUEST['map_id'];

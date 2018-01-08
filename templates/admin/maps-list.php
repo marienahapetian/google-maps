@@ -10,15 +10,15 @@ $new_map_link = wp_nonce_url( $new_map_link, 'hugeit_maps_create_new_map' );
 
 ?>
 <div class="wrap maps_list_container">
-	<h1><?php _e( 'Huge-IT Google maps', 'hugeit_maps' ); ?><a class="page-title-action" href="<?php echo $new_map_link; ?>"><?php _e( 'Add New Map', 'hugeit_maps' ); ?></a></h1>
+	<h1><?php _e( 'Huge-IT Google maps', 'hg_gmaps' ); ?><a class="page-title-action" href="<?php echo $new_map_link; ?>"><?php _e( 'Add New Map', 'hg_gmaps' ); ?></a></h1>
 
 	<table class="widefat striped fixed maps_table">
 		<thead>
 			<tr>
-				<th scope="col" id="header-id" style="width:30px"><span><?php _e( 'ID', 'hugeit_maps' ); ?></span></span></th>
-				<th scope="col" id="header-name" style="width:85px"><span><?php _e( 'Name', 'hugeit_maps' ); ?></span></th>
-				<th scope="col" id="header-shortcode" style="width:85px"><span><?php _e( 'Shortcode', 'hugeit_maps' ); ?></span></th>
-				<th style="width:40px"><?php _e( 'Delete', 'hugeit_maps' ); ?></th>
+				<th scope="col" id="header-id" style="width:30px"><span><?php _e( 'ID', 'hg_gmaps' ); ?></span></span></th>
+				<th scope="col" id="header-name" style="width:85px"><span><?php _e( 'Name', 'hg_gmaps' ); ?></span></th>
+				<th scope="col" id="header-shortcode" style="width:85px"><span><?php _e( 'Shortcode', 'hg_gmaps' ); ?></span></th>
+				<th style="width:40px"><?php _e( 'Delete', 'hg_gmaps' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -43,10 +43,10 @@ $new_map_link = wp_nonce_url( $new_map_link, 'hugeit_maps_create_new_map' );
 		</tbody>
 		<tfoot>
 			<tr>
-				<th scope="col" class="footer-id" style="width:30px"><span><?php _e( 'ID', 'hugeit_maps' ); ?></th>
-				<th scope="col" class="footer-name" style="width:85px"><span><?php _e( 'Name', 'hugeit_maps' ); ?></span></th>
-				<th scope="col" class="footer-shortcode" style="width:85px"><span><?php _e( 'Shortcode', 'hugeit_maps' ); ?></span></th>
-				<th style="width:40px"><?php _e( 'Delete', 'hugeit_maps' ); ?></th>
+				<th scope="col" class="footer-id" style="width:30px"><span><?php _e( 'ID', 'hg_gmaps' ); ?></th>
+				<th scope="col" class="footer-name" style="width:85px"><span><?php _e( 'Name', 'hg_gmaps' ); ?></span></th>
+				<th scope="col" class="footer-shortcode" style="width:85px"><span><?php _e( 'Shortcode', 'hg_gmaps' ); ?></span></th>
+				<th style="width:40px"><?php _e( 'Delete', 'hg_gmaps' ); ?></th>
 			</tr>
 		</tfoot>
 	</table>

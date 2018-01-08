@@ -72,8 +72,8 @@ class Hugeit_Maps_Shortcode {
 	public function add_editor_media_button( $context ) {
 		$img          = untrailingslashit( Hugeit_Maps()->plugin_url() ) . "/assets/images/google-maps-20-x-20.png";
 		$container_id = 'hugeit_maps';
-		$title        = __( 'Select Huge IT Google Maps to insert into post', 'hugeit_maps' );
-		$button_text  = __( 'Add Google Maps', 'hugeit_maps' );
+		$title        = __( 'Select Huge IT Google Maps to insert into post', 'hg_gmaps' );
+		$button_text  = __( 'Add Google Maps', 'hg_gmaps' );
 		$context .= '<a class="button thickbox" title="' . $title . '"    href="#TB_inline?width=400&inlineId=' . $container_id . '">
 		<span class="wp-media-buttons-icon" style="background: url(' . $img . '); background-repeat: no-repeat; background-position: left bottom;background-size: 18px 18px;"></span>' . $button_text . '</a>';
 

@@ -144,7 +144,7 @@ class Hugeit_Maps_Polygon implements Hugeit_Maps_Polygon_Interface {
 
 		} else {
 
-			$this->name = __( 'New Polygon', 'hugeit_maps' );
+			$this->name = __( 'New Polygon', 'hg_gmaps' );
 
 		}
 
@@ -195,7 +195,7 @@ class Hugeit_Maps_Polygon implements Hugeit_Maps_Polygon_Interface {
 	 * @return string
 	 */
 	public function get_name() {
-		return (!empty($this->name) ? wp_unslash($this->name) : __( '(no title)', 'hugeit_maps' ) );
+		return (!empty($this->name) ? wp_unslash($this->name) : __( '(no title)', 'hg_gmaps' ) );
 	}
 
 	/**

@@ -107,7 +107,7 @@ class Hugeit_Maps_Locator implements Hugeit_Maps_Locator_Interface {
 
 		} else {
 
-			$this->name = __( 'New Store Locator', 'hugeit_maps' );
+			$this->name = __( 'New Store Locator', 'hg_gmaps' );
 
 		}
 
@@ -156,7 +156,7 @@ class Hugeit_Maps_Locator implements Hugeit_Maps_Locator_Interface {
 	 * @return string
 	 */
 	public function get_name() {
-		return (!empty($this->name) ? wp_unslash($this->name): __( '(no title)', 'hugeit_maps' ) );
+		return (!empty($this->name) ? wp_unslash($this->name): __( '(no title)', 'hg_gmaps' ) );
 	}
 
 	/**

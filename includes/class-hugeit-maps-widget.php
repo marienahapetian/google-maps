@@ -10,8 +10,8 @@ class Hugeit_Maps_Widget extends WP_Widget  {
     public function __construct() {
         parent::__construct(
             'Hugeit_Maps_Widget',
-            __( 'Huge IT Google Maps', 'hugeit_maps' ),
-            array( 'description' => __( 'Huge IT Google Maps', 'hugeit_maps' ), )
+            __( 'Huge IT Google Maps', 'hg_gmaps' ),
+            array( 'description' => __( 'Huge IT Google Maps', 'hg_gmaps' ), )
         );
     }
 
@@ -66,7 +66,7 @@ class Hugeit_Maps_Widget extends WP_Widget  {
                        name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
                        value="<?php echo esc_attr( $title ); ?>"/>
             </p>
-            <label for="<?php echo $this->get_field_id( 'g_map_id' ); ?>"><?php _e( 'Select map:', 'hugeit_maps' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'g_map_id' ); ?>"><?php _e( 'Select map:', 'hg_gmaps' ); ?></label>
             <select id="<?php echo $this->get_field_id( 'g_map_id' ); ?>" name="<?php echo $this->get_field_name( 'g_map_id' ); ?>">
                 <?php
                 $maps = Hugeit_Maps_Query::get_maps();

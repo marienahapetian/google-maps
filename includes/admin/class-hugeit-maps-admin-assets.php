@@ -198,8 +198,8 @@ class Hugeit_Maps_Admin_Assets {
 
         wp_localize_script( 'hugeit-maps-admin-locator', 'locatorL10n', array(
             'map'=>$localized_map,
-            'startPointTitle' => __( 'Start Point', 'hugeit_maps' ),
-            'invalidLocatorPoints' => __( 'Could not construct a route with the given options', 'hugeit_maps' )
+            'startPointTitle' => __( 'Start Point', 'hg_gmaps' ),
+            'invalidLocatorPoints' => __( 'Could not construct a route with the given options', 'hg_gmaps' )
         ) );
 
         wp_localize_script( 'hugeit-maps-admin-circles', 'circleL10n', array('map'=>$localized_map) );

@@ -71,18 +71,18 @@ Hugeit_Maps_Template_Loader::get_template( 'admin/api-key-form.php' );
 	</div>
 
 	<div class="map_database_actions_section">
-		<div class="button copy_map_button" data-map-id="<?php echo $map->get_id(); ?>"><?php _e( 'Create Copy Of This Map', 'hugeit_maps' ); ?></div>
-		<div class="button extract_to_csv_button" data-map-id="<?php echo $map->get_id(); ?>"><?php _e( 'Export This Map To CSV', 'hugeit_maps' ); ?></div>
+		<div class="button copy_map_button" data-map-id="<?php echo $map->get_id(); ?>"><?php _e( 'Create Copy Of This Map', 'hg_gmaps' ); ?></div>
+		<div class="button extract_to_csv_button" data-map-id="<?php echo $map->get_id(); ?>"><?php _e( 'Export This Map To CSV', 'hg_gmaps' ); ?></div>
 	</div>
 	<div class="shortcode_containers">
 		<div class="shortcode_container">
-			<div class="shortcode_heading"><?php _e( 'Shortcode', 'hugeit_maps' ); ?></div>
-			<p class="shortcode_description"><?php _e( 'Copy & paste the shortcode directly into any WordPress post or page.', 'hugeit_maps' ); ?></p>
+			<div class="shortcode_heading"><?php _e( 'Shortcode', 'hg_gmaps' ); ?></div>
+			<p class="shortcode_description"><?php _e( 'Copy & paste the shortcode directly into any WordPress post or page.', 'hg_gmaps' ); ?></p>
 			<div class="shortcode_view">[huge_it_maps id="<?php echo $map->get_id(); ?>"]</div>
 		</div>
 		<div class="shortcode_container">
-			<div class="shortcode_heading"><?php _e( 'Template Include', 'hugeit_maps' ); ?></div>
-			<p class="shortcode_description"><?php _e( 'Copy & paste this code into a template file to include the map within your theme.', 'hugeit_maps' ); ?></p>
+			<div class="shortcode_heading"><?php _e( 'Template Include', 'hg_gmaps' ); ?></div>
+			<p class="shortcode_description"><?php _e( 'Copy & paste this code into a template file to include the map within your theme.', 'hg_gmaps' ); ?></p>
 			<div class="shortcode_view">&lt;?php echo do_shortcode("[huge_it_maps id='<?php echo $map->get_id(); ?>']"); ?&gt;</div>
 		</div>
 	</div>

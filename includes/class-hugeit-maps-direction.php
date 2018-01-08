@@ -135,7 +135,7 @@ class Hugeit_Maps_Direction implements Hugeit_Maps_Direction_Interface {
 
 		} else {
 
-			$this->name = __( 'New Direction', 'hugeit_maps' );
+			$this->name = __( 'New Direction', 'hg_gmaps' );
 
 		}
 
@@ -184,7 +184,7 @@ class Hugeit_Maps_Direction implements Hugeit_Maps_Direction_Interface {
 	 * @return string
 	 */
 	public function get_name() {
-		return (!empty($this->name) ? wp_unslash($this->name) : __( '(no title)', 'hugeit_maps' ) );
+		return (!empty($this->name) ? wp_unslash($this->name) : __( '(no title)', 'hg_gmaps' ) );
 	}
 
 	/**

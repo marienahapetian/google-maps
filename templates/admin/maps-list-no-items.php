@@ -5,5 +5,5 @@
 
 ?>
 <tr>
-	<td colspan="5"><?php _e( 'No items', 'hugeit_maps' ); ?></td>
+	<td colspan="5"><?php _e( 'No items', 'hg_gmaps' ); ?></td>
 </tr>

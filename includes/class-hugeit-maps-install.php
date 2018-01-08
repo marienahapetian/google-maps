@@ -395,11 +395,11 @@ class Hugeit_Maps_Install {
 
         $marker1
             ->set_map_id( $map )
-            ->set_name( __('New York','hugeit_maps') )
+            ->set_name( __('New York','hg_gmaps') )
             ->set_lat( 40.7127837 )
             ->set_lng( -74.00594130000002 )
             ->set_animation( 'BOUNCE' )
-            ->set_description( __( 'New York City', 'hugeit_maps' ) );
+            ->set_description( __( 'New York City', 'hg_gmaps' ) );
 
         $marker1->save();
 
@@ -408,11 +408,11 @@ class Hugeit_Maps_Install {
 
         $marker2
             ->set_map_id( $map )
-            ->set_name( __( 'Delaver', 'hugeit_maps' ) )
+            ->set_name( __( 'Delaver', 'hg_gmaps' ) )
             ->set_lat( 39.189690821096804 )
             ->set_lng( -75.7562255859375 )
             ->set_animation( 'DROP' )
-            ->set_description( __( 'Delaver', 'hugeit_maps' ) );
+            ->set_description( __( 'Delaver', 'hg_gmaps' ) );
 
         $marker2->save();
     }
@@ -428,7 +428,7 @@ class Hugeit_Maps_Install {
         $polygon
             ->set_map_id($map)
             ->set_url( 'http://www.huge-it.com' )
-            ->set_name( __( 'My First Polygon', 'hugeit_maps' ) )
+            ->set_name( __( 'My First Polygon', 'hg_gmaps' ) )
             ->set_data( '(40.538851525354666, -74.3060302734375),(40.16208338164619, -73.9764404296875),(39.40224434029277, -74.3499755859375),(38.950865400920016, -74.8883056640625),(39.13858199058352, -75.0091552734375),(39.46164364205549, -75.5035400390625),(39.774769485295465, -75.4815673828125),(39.86758762451019, -75.0201416015625)' )
             ->set_hover_line_opacity( 0.8 )
             ->set_hover_line_color('FF80B7')
@@ -453,7 +453,7 @@ class Hugeit_Maps_Install {
 
         $polyline
             ->set_map_id( $map )
-            ->set_name( __( 'My First Polyline', 'hugeit_maps' ) )
+            ->set_name( __( 'My First Polyline', 'hg_gmaps' ) )
             ->set_hover_line_opacity( 0.5 )
             ->set_hover_line_color( '11A000' )
             ->set_line_opacity( 0.9 )
@@ -474,7 +474,7 @@ class Hugeit_Maps_Install {
 
         $circle
             ->set_map_id( $map )
-            ->set_name( __( 'My First Circle', 'hugeit_maps' ) )
+            ->set_name( __( 'My First Circle', 'hg_gmaps' ) )
             ->set_hover_fill_color( '96FFA1' )
             ->set_hover_fill_opacity( 0.3 )
             ->set_hover_line_color( 'FF5C5C' )

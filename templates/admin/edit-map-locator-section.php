@@ -9,11 +9,11 @@
     <div class="editing_heading">
         <span class="heading_icon"><img src="<?php echo HUGEIT_MAPS_IMAGES_URL . 'menu-icons/store.svg'; ?>"
                                         width="20"/></span>
-        <?php _e('Store Locator', 'hugeit_maps'); ?>
+        <?php _e('Store Locator', 'hg_gmaps'); ?>
         <div class="help">?
             <div class="help-block">
                 <span class="pnt"></span>
-                <p><?php _e('Store Locator settings for current map', 'hugeit_maps'); ?></p>
+                <p><?php _e('Store Locator settings for current map', 'hg_gmaps'); ?></p>
             </div>
         </div>
         <span class="heading_arrow"></span>
@@ -21,36 +21,36 @@
     <div class="edit_content hide">
         <div id="g_map_locator_options">
             <form action="" method="post">
-                <a id="locator_add_button" class="add_button clear" href="#">+<?php _e( 'Add New Store Locator', 'hugeit_maps' ); ?></a>
+                <a id="locator_add_button" class="add_button clear" href="#">+<?php _e( 'Add New Store Locator', 'hg_gmaps' ); ?></a>
                 <div class="hidden_edit_content hide">
-                    <a href="#" id="back_locator" class="cancel left">◄ <?php _e( 'Back', 'hugeit_maps' ); ?></a>
+                    <a href="#" id="back_locator" class="cancel left">◄ <?php _e( 'Back', 'hg_gmaps' ); ?></a>
                     <ul>
                         <li class="has_background">
-                            <label for="locator_name"><?php _e( 'Store Name', 'hugeit_maps' ); ?></label>
-                            <input type="text" name="locator_name" id="locator_name" placeholder="<?php _e( 'Optional Name', 'hugeit_maps' ); ?>" />
+                            <label for="locator_name"><?php _e( 'Store Name', 'hg_gmaps' ); ?></label>
+                            <input type="text" name="locator_name" id="locator_name" placeholder="<?php _e( 'Optional Name', 'hg_gmaps' ); ?>" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_addr"><?php _e( 'Store Address', 'hugeit_maps' ); ?></label>
-                            <input type="text" name="locator_addr" id="locator_addr" placeholder="<?php _e( 'Store Address', 'hugeit_maps' ); ?>" />
+                            <label for="locator_addr"><?php _e( 'Store Address', 'hg_gmaps' ); ?></label>
+                            <input type="text" name="locator_addr" id="locator_addr" placeholder="<?php _e( 'Store Address', 'hg_gmaps' ); ?>" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_lat"><?php _e( 'Store Latitude', 'hugeit_maps' ); ?></label>
-                            <input type="text" readonly="readonly" name="locator_lat" id="locator_lat" placeholder="<?php _e( 'Latitude', 'hugeit_maps' ); ?>" />
+                            <label for="locator_lat"><?php _e( 'Store Latitude', 'hg_gmaps' ); ?></label>
+                            <input type="text" readonly="readonly" name="locator_lat" id="locator_lat" placeholder="<?php _e( 'Latitude', 'hg_gmaps' ); ?>" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_lng"><?php _e( 'Store Longitude', 'hugeit_maps' ); ?></label>
-                            <input type="text" readonly="readonly"  name="locator_lng" id="locator_lng" placeholder="<?php _e( 'Longitude', 'hugeit_maps' ); ?>" />
+                            <label for="locator_lng"><?php _e( 'Store Longitude', 'hg_gmaps' ); ?></label>
+                            <input type="text" readonly="readonly"  name="locator_lng" id="locator_lng" placeholder="<?php _e( 'Longitude', 'hg_gmaps' ); ?>" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_phone"><?php _e( 'Phone Number', 'hugeit_maps' ); ?></label>
-                            <input type="tel"  name="locator_phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="locator_phone" placeholder="<?php _e( 'e.g. 1 123 4567', 'hugeit_maps' ); ?>" />
+                            <label for="locator_phone"><?php _e( 'Phone Number', 'hg_gmaps' ); ?></label>
+                            <input type="tel"  name="locator_phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="locator_phone" placeholder="<?php _e( 'e.g. 1 123 4567', 'hg_gmaps' ); ?>" />
                         </li>
                         <li class="has_background">
-                            <label for="store_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
-                            <small class="storeClosed"><?php _e('*Leave fields empty if the store is closed'); ?></small>
+                            <label for="store_days"><?php _e( 'Operating Days', 'hg_gmaps' ); ?></label>
+                            <small class="storeClosed"><?php _e('*Leave fields empty if the store is closed','hg_gmaps'); ?></small>
                             <table id="store_days">
                                 <tr id="sun">
-                                    <td>Sunday</td>
+                                    <td><?php _e( 'Sunday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -58,7 +58,7 @@
                                     </td>
                                 </tr>
                                 <tr id="mon">
-                                    <td>Monday</td>
+                                    <td><?php _e( 'Monday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -66,7 +66,7 @@
                                     </td>
                                 </tr>
                                 <tr id="tue">
-                                    <td>Tuesday</td>
+                                    <td><?php _e( 'Tuesday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -74,7 +74,7 @@
                                     </td>
                                 </tr>
                                 <tr id="wed">
-                                    <td>Wednesday</td>
+                                    <td><?php _e( 'Wednesday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -82,7 +82,7 @@
                                     </td>
                                 </tr>
                                 <tr id="thu">
-                                    <td>Thursday</td>
+                                    <td><?php _e( 'Thursday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -90,7 +90,7 @@
                                     </td>
                                 </tr>
                                 <tr id="fri">
-                                    <td>Friday</td>
+                                    <td><?php _e( 'Friday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -98,7 +98,7 @@
                                     </td>
                                 </tr>
                                 <tr id="sat">
-                                    <td>Saturday</td>
+                                    <td><?php _e( 'Saturday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -113,17 +113,17 @@
                         </li>
                     </ul>
                     <div>
-                        <input type="submit" class="button-primary" name="locator_submit" id="locator_submit" value="<?php _e( 'Save', 'hugeit_maps' ); ?>"/>
+                        <input type="submit" class="button-primary" name="locator_submit" id="locator_submit" value="<?php _e( 'Save', 'hg_gmaps' ); ?>"/>
                         <span class="spinner"></span>
-                        <a href="#" id="cancel_locator" class="cancel">Cancel</a>
+                        <a href="#" id="cancel_locator" class="cancel"><?php _e( 'Cancel', 'hg_gmaps' ); ?></a>
                     </div>
                 </div>
             </form>
             <div id="locator_edit_exist_section">
                 <div class="edit_list_heading">
-                    <div class="list_number"><?php _e( 'ID', 'hugeit_maps' ); ?></div>
-                    <div class="edit_list_item"><?php _e( 'Title', 'hugeit_maps' ); ?></div>
-                    <div class="edit_list_delete"><?php _e( 'Action', 'hugeit_maps' ); ?></div>
+                    <div class="list_number"><?php _e( 'ID', 'hg_gmaps' ); ?></div>
+                    <div class="edit_list_item"><?php _e( 'Title', 'hg_gmaps' ); ?></div>
+                    <div class="edit_list_delete"><?php _e( 'Action', 'hg_gmaps' ); ?></div>
                 </div>
                 <?php
 
@@ -160,41 +160,41 @@
                     </ul>
                     <?php
                 }else{
-                    echo "<p class='empty_locator'>".__('You have 0 stores','hugeit_maps')."</p>";
+                    echo "<p class='empty_locator'>".__('You have 0 stores','hg_gmaps')."</p>";
                 }
                 ?>
             </div>
             <form action="" method="post">
                 <input type="hidden" id="locator_get_id" name="locator_get_id"/>
                 <div class="update_list_item hide">
-                    <a href="#" id="back_edit_locator" class="cancel left">◄ <?php _e( 'Back', 'hugeit_maps' ); ?></a>
+                    <a href="#" id="back_edit_locator" class="cancel left">◄ <?php _e( 'Back', 'hg_gmaps' ); ?></a>
                     <ul>
                         <li class="has_background">
-                            <label for="locator_edit_name"><?php _e( 'Name', 'hugeit_maps' ); ?></label>
-                            <input type="text" name="locator_edit_name" id="locator_edit_name" placeholder="<?php _e( 'Store Name', 'hugeit_maps' ); ?>" />
+                            <label for="locator_edit_name"><?php _e( 'Name', 'hg_gmaps' ); ?></label>
+                            <input type="text" name="locator_edit_name" id="locator_edit_name" placeholder="<?php _e( 'Store Name', 'hg_gmaps' ); ?>" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_edit_addr"><?php _e( 'Store Location', 'hugeit_maps' ); ?></label>
-                            <input type="text" name="locator_edit_addr" id="locator_edit_addr" placeholder="<?php _e( 'Store Location', 'hugeit_maps' ); ?>" />
+                            <label for="locator_edit_addr"><?php _e( 'Store Location', 'hg_gmaps' ); ?></label>
+                            <input type="text" name="locator_edit_addr" id="locator_edit_addr" placeholder="<?php _e( 'Store Location', 'hg_gmaps' ); ?>" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_edit_lat"><?php _e( 'Store Latitude', 'hugeit_maps' ); ?></label>
+                            <label for="locator_edit_lat"><?php _e( 'Store Latitude', 'hg_gmaps' ); ?></label>
                             <input type="text" readonly="readonly"  name="locator_edit_lat" id="locator_edit_lat" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_edit_lng"><?php _e( 'Store Longitude', 'hugeit_maps' ); ?></label>
+                            <label for="locator_edit_lng"><?php _e( 'Store Longitude', 'hg_gmaps' ); ?></label>
                             <input type="text" readonly="readonly"  name="locator_edit_lng" id="locator_edit_lng" />
                         </li>
                         <li class="has_background">
-                            <label for="locator_edit_phone"><?php _e( 'Phone Number', 'hugeit_maps' ); ?></label>
-                            <input type="text" name="locator_edit_phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="<?php _e( 'e.g. 1 123 4567', 'hugeit_maps' ); ?>" id="locator_edit_phone" />
+                            <label for="locator_edit_phone"><?php _e( 'Phone Number', 'hg_gmaps' ); ?></label>
+                            <input type="text" name="locator_edit_phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="<?php _e( 'e.g. 1 123 4567', 'hg_gmaps' ); ?>" id="locator_edit_phone" />
                         </li>
                         <li class="has_background">
-                            <label for="store_edit_days"><?php _e( 'Operating Days', 'hugeit_maps' ); ?></label>
+                            <label for="store_edit_days"><?php _e( 'Operating Days', 'hg_gmaps' ); ?></label>
                             <small class="storeClosed"><?php _e('*Leave fields empty if the store is closed'); ?></small>
                             <table id="store_edit_days">
                                 <tr id="sun">
-                                    <td>Sunday</td>
+                                    <td><?php _e( 'Sunday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -202,7 +202,7 @@
                                     </td>
                                 </tr>
                                 <tr id="mon">
-                                    <td>Monday</td>
+                                    <td><?php _e( 'Monday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -210,7 +210,7 @@
                                     </td>
                                 </tr>
                                 <tr id="tue">
-                                    <td>Tuesday</td>
+                                    <td><?php _e( 'Tuesday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -218,7 +218,7 @@
                                     </td>
                                 </tr>
                                 <tr id="wed">
-                                    <td>Wednesday</td>
+                                    <td><?php _e( 'Wednesday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -226,7 +226,7 @@
                                     </td>
                                 </tr>
                                 <tr id="thu">
-                                    <td>Thursday</td>
+                                    <td><?php _e( 'Thursday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -234,7 +234,7 @@
                                     </td>
                                 </tr>
                                 <tr id="fri">
-                                    <td>Friday</td>
+                                    <td><?php _e( 'Friday','hg_gmaps'); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -242,7 +242,7 @@
                                     </td>
                                 </tr>
                                 <tr id="sat">
-                                    <td>Saturday</td>
+                                    <td><?php _e( 'Saturday', 'hg_gmaps' ); ?></td>
                                     <td>
                                         <input type="text" name="start" class="timepicker">
                                         <span>&ndash;</span>
@@ -255,9 +255,9 @@
                     </ul>
                     <div id="new_locator_panel"></div>
                     <div>
-                        <input type="submit" class="button-primary" name="locator_edit_submit" id="locator_edit_submit" value="<?php _e( 'Save', 'hugeit_maps' ); ?>"/>
+                        <input type="submit" class="button-primary" name="locator_edit_submit" id="locator_edit_submit" value="<?php _e( 'Save', 'hg_gmaps' ); ?>"/>
                         <span class="spinner"></span>
-                        <a href="#" id="cancel_edit_locator" class="cancel"><?php _e( 'Cancel', 'hugeit_maps' ); ?></a>
+                        <a href="#" id="cancel_edit_locator" class="cancel"><?php _e( 'Cancel', 'hg_gmaps' ); ?></a>
                     </div>
                 </div>
             </form>
@@ -267,17 +267,17 @@
         <form action="" method="post">
             <ul>
                 <li>
-                    <label for="locator_enabled"><?php _e('Enable Store Locator', 'hugeit_maps'); ?></label>
+                    <label for="locator_enabled"><?php _e('Enable Store Locator', 'hg_gmaps'); ?></label>
                     <input type="checkbox" class="locator_enabled" id="locator_enabled" name="locator_enabled"
                            value="1" <?php checked($map->get_locator_enabled(), 1); ?> />
                 </li>
                 <li>
-                    <label for="locator_enabled"><?php _e('Locator Search Box Default Location', 'hugeit_maps'); ?></label>
+                    <label for="locator_enabled"><?php _e('Locator Search Box Default Location', 'hg_gmaps'); ?></label>
                     <input type="text" class="locator_default_address" id="locator_default_address" name="locator_default_address"
                            value="<?php echo $map->get_locator_default_address(); ?>" />
                 </li>
             </ul>
-            <input type="submit" class="button-primary" name="locator_general_edit_submit" id="locator_general_edit_submit" value="<?php _e( 'Save', 'hugeit_maps' ); ?>"/>
+            <input type="submit" class="button-primary" name="locator_general_edit_submit" id="locator_general_edit_submit" value="<?php _e( 'Save', 'hg_gmaps' ); ?>"/>
             <span class="spinner"></span>
         </form>
     </div>

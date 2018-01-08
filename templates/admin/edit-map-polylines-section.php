@@ -8,11 +8,11 @@
 <li class="editing_section">
     <div class="editing_heading">
         <span class="heading_icon"><img src="<?php echo HUGEIT_MAPS_IMAGES_URL.'menu-icons/polyline.svg'; ?>" width="20" /></span>
-        <?php _e( 'Polylines', 'hugeit_maps' ); ?>
+        <?php _e( 'Polylines', 'hg_gmaps' ); ?>
         <div class="help">?
             <div class="help-block">
                 <span class="pnt"></span>
-                <p><?php _e( 'Continuous line composed of one or more line segments, which creates specific track. Right click on the map to add point. Hold pressed and drag to move it. Left click to remove it.', 'hugeit_maps' ); ?></p>
+                <p><?php _e( 'Continuous line composed of one or more line segments, which creates specific track. Right click on the map to add point. Hold pressed and drag to move it. Left click to remove it.', 'hg_gmaps' ); ?></p>
             </div>
         </div>
         <span class="heading_arrow"></span>
@@ -20,21 +20,21 @@
     <div class="edit_content hide">
         <div id="g_map_polyline_options">
             <form action="" method="post">
-                <a id="polyline_add_button" class="add_button" href="#">+<?php _e( 'Add New Polyline', 'hugeit_maps' ); ?></a>
+                <a id="polyline_add_button" class="add_button" href="#">+<?php _e( 'Add New Polyline', 'hg_gmaps' ); ?></a>
                 <div class="hidden_edit_content hide">
-                    <a href="#" id="back_polyline" class="cancel left">◄ <?php _e( 'Back', 'hugeit_maps' ); ?></a>
+                    <a href="#" id="back_polyline" class="cancel left">◄ <?php _e( 'Back', 'hg_gmaps' ); ?></a>
                     <ul>
                         <li>
-                            <label for="polyline_name"><?php _e( 'Name', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_name"><?php _e( 'Name', 'hg_gmaps' ); ?></label>
                             <input type="text" id="polyline_name" name="polyline_name"/>
                         </li>
                         <li>
-                            <label for="polyline_coords"><?php _e( 'data', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_coords"><?php _e( 'data', 'hg_gmaps' ); ?></label>
                             <textarea id="polyline_coords" class="polycoords" name="polyline_coords" readonly="readonly"
-                                      placeholder="<?php _e( 'Right click on the map to add point. Hold pressed and drag to move it. Left click to remove it.', 'hugeit_maps' ); ?>"></textarea>
+                                      placeholder="<?php _e( 'Right click on the map to add point. Hold pressed and drag to move it. Left click to remove it.', 'hg_gmaps' ); ?>"></textarea>
                         </li>
                         <li>
-                            <label for="polyline_line_opacity"><?php _e( 'Line Transparency', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_line_opacity"><?php _e( 'Line Transparency', 'hg_gmaps' ); ?></label>
                             <div class="slider-container" style="float:left; width:55%; height:25px; ">
                                 <input type="text" name="polyline_line_opacity" id="polyline_line_opacity"
                                        class="polyline_options_input" data-slider-highlight="true"
@@ -44,12 +44,12 @@
                             </div>
                         </li>
                         <li>
-                            <label for="polyline_line_color"><?php _e( 'Line Color', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_line_color"><?php _e( 'Line Color', 'hg_gmaps' ); ?></label>
                             <input type="text" class="jscolor polyline_options_input" name="polyline_line_color"
                                    id="polyline_line_color" value="18A326"/>
                         </li>
                         <li>
-                            <label for="polyline_line_width"><?php _e( 'Line Width', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_line_width"><?php _e( 'Line Width', 'hg_gmaps' ); ?></label>
                             <div class="slider-container" style="float:left; width:55%; height:25px; ">
                                 <input type="text" name="polyline_line_width" class="polyline_options_input " id="polyline_line_width"
                                        data-slider-highlight="true" data-slider-values="<?php echo implode( ',', range( 0, 50 ) ); ?>" data-slider="true" value="5"/>
@@ -57,12 +57,12 @@
                             </div>
                         </li>
                         <li class="pro">
-                            <label for="hover_polyline_line_color"><?php _e( 'On-Hover Line Color', 'hugeit_maps' ); ?></label>
+                            <label for="hover_polyline_line_color"><?php _e( 'On-Hover Line Color', 'hg_gmaps' ); ?></label>
                             <input disabled type="text" class="jscolor polyline_options_input" name="hover_polyline_line_color"
                                    id="hover_polyline_line_color" value="11A000"/>
                         </li>
                         <li class="pro">
-                            <label for="hover_polyline_line_opacity"><?php _e( 'On-Hover Line Transparency', 'hugeit_maps' ); ?></label>
+                            <label for="hover_polyline_line_opacity"><?php _e( 'On-Hover Line Transparency', 'hg_gmaps' ); ?></label>
                             <div class="slider-container" style="float:left; width:55%; height:25px; ">
                                 <input disabled type="text" name="hover_polyline_line_opacity" class="polyline_options_input "
                                        id="hover_polyline_line_opacity" data-slider-highlight="true"
@@ -74,16 +74,16 @@
                     </ul>
                     <div>
                         <span class="spinner"></span>
-                        <input type="submit" class="button-primary" id="polyline_submit" name="polyline_submit" value="<?php _e( 'Save', 'hugeit_maps' ); ?>"/>
-                        <a href="#" id="cancel_polyline" class="cancel"><?php _e( 'Cancel', 'hugeit_maps' ); ?></a>
+                        <input type="submit" class="button-primary" id="polyline_submit" name="polyline_submit" value="<?php _e( 'Save', 'hg_gmaps' ); ?>"/>
+                        <a href="#" id="cancel_polyline" class="cancel"><?php _e( 'Cancel', 'hg_gmaps' ); ?></a>
                     </div>
                 </div>
             </form>
             <div id="polyline_edit_exist_section">
                 <div class="edit_list_heading">
-                    <div class="list_number"><?php _e( 'ID', 'hugeit_maps' ); ?></div>
-                    <div class="edit_list_item"><?php _e( 'Title', 'hugeit_maps' ); ?></div>
-                    <div class="edit_list_delete"><?php _e( 'Action', 'hugeit_maps' ); ?></div>
+                    <div class="list_number"><?php _e( 'ID', 'hg_gmaps' ); ?></div>
+                    <div class="edit_list_item"><?php _e( 'Title', 'hg_gmaps' ); ?></div>
+                    <div class="edit_list_delete"><?php _e( 'Action', 'hg_gmaps' ); ?></div>
                 </div>
                 <?php
 
@@ -118,26 +118,26 @@
                     </ul>
                     <?php
                 }else{
-                    echo "<p class='empty_polyline'>".__('You have 0 polylines on this map','hugeit_maps')."</p>";
+                    echo "<p class='empty_polyline'>".__('You have 0 polylines on this map','hg_gmaps')."</p>";
                 }
                 ?>
             </div>
             <form action="" method="post">
                 <input type="hidden" id="polyline_get_id" name="polyline_get_id"/>
                 <div class="update_list_item hide">
-                    <a href="#" id="back_edit_polyline" class="cancel left">◄ <?php _e( 'Back', 'hugeit_maps' ); ?></a>
+                    <a href="#" id="back_edit_polyline" class="cancel left">◄ <?php _e( 'Back', 'hg_gmaps' ); ?></a>
                     <ul>
                         <li>
-                            <label for="polyline_edit_name"><?php _e( 'Name', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_edit_name"><?php _e( 'Name', 'hg_gmaps' ); ?></label>
                             <input type="text" id="polyline_edit_name" name="polyline_edit_name"/>
                         </li>
                         <li>
-                            <label for="polyline_edit_coords"><?php _e( 'data', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_edit_coords"><?php _e( 'data', 'hg_gmaps' ); ?></label>
                             <textarea id="polyline_edit_coords" class="polycoords" name="polyline_edit_coords" readonly="readonly"
-                                      placeholder="<?php _e( 'Right click on the map to add point. Hold pressed and drag to move it. Left click to remove it.', 'hugeit_maps' ); ?>"></textarea>
+                                      placeholder="<?php _e( 'Right click on the map to add point. Hold pressed and drag to move it. Left click to remove it.', 'hg_gmaps' ); ?>"></textarea>
                         </li>
                         <li>
-                            <label for="polyline_edit_line_opacity"><?php _e( 'Line Transparency', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_edit_line_opacity"><?php _e( 'Line Transparency', 'hg_gmaps' ); ?></label>
                             <div class="slider-container" style="float:left; width:55%; height:25px; ">
                                 <input type="text" name="polyline_edit_line_opacity" id="polyline_edit_line_opacity"
                                        class="polyline_edit_options_input" data-slider-highlight="true"
@@ -147,12 +147,12 @@
                             </div>
                         </li>
                         <li>
-                            <label for="polyline_edit_line_color"><?php _e( 'Line Color', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_edit_line_color"><?php _e( 'Line Color', 'hg_gmaps' ); ?></label>
                             <input type="text" class="jscolor polyline_edit_options_input" name="polyline_edit_line_color"
                                    id="polyline_edit_line_color" value="FF0F0F"/>
                         </li>
                         <li>
-                            <label for="polyline_edit_line_width"><?php _e( 'Line Width', 'hugeit_maps' ); ?></label>
+                            <label for="polyline_edit_line_width"><?php _e( 'Line Width', 'hg_gmaps' ); ?></label>
                             <div class="slider-container" style="float:left; width:55%; height:25px; ">
                                 <input type="text" name="polyline_edit_line_width" class="polyline_edit_options_input "
                                        id="polyline_edit_line_width" data-slider-highlight="true"
@@ -161,12 +161,12 @@
                             </div>
                         </li>
                         <li class="pro">
-                            <label for="hover_polyline_edit_line_color"><?php _e( 'On-Hover Line Color', 'hugeit_maps' ); ?></label>
+                            <label for="hover_polyline_edit_line_color"><?php _e( 'On-Hover Line Color', 'hg_gmaps' ); ?></label>
                             <input disabled type="text" class="jscolor polyline_options_input" name="hover_polyline_edit_line_color"
                                    id="hover_polyline_edit_line_color"/>
                         </li>
                         <li class="pro">
-                            <label for="hover_polyline_edit_line_opacity"><?php _e( 'On-Hover Line Transparency', 'hugeit_maps' ); ?></label>
+                            <label for="hover_polyline_edit_line_opacity"><?php _e( 'On-Hover Line Transparency', 'hg_gmaps' ); ?></label>
                             <div class="slider-container" style="float:left; width:55%; height:25px; ">
                                 <input disabled type="text" name="hover_polyline_edit_line_opacity" class="polyline_options_input "
                                        id="hover_polyline_edit_line_opacity" data-slider-highlight="true"
@@ -177,8 +177,8 @@
                     </ul>
                     <div>
                         <span class="spinner"></span>
-                        <input type="submit" class="button-primary" id="polyline_edit_submit" name="polyline_edit_submit" value="<?php _e( 'Save', 'hugeit_maps' ); ?>"/>
-                        <a href="#" id="cancel_edit_polyline" class="cancel"><?php _e( 'Cancel', 'hugeit_maps' ); ?></a>
+                        <input type="submit" class="button-primary" id="polyline_edit_submit" name="polyline_edit_submit" value="<?php _e( 'Save', 'hg_gmaps' ); ?>"/>
+                        <a href="#" id="cancel_edit_polyline" class="cancel"><?php _e( 'Cancel', 'hg_gmaps' ); ?></a>
                     </div>
                 </div>
             </form>

@@ -44,12 +44,12 @@ class Hugeit_Maps_Admin {
 			'init_main_page'
 		), HUGEIT_MAPS_IMAGES_URL . 'google-maps-20-x-20.png' );
 
-		$this->pages['featured_plugins'] = add_submenu_page( 'hugeit_maps', __( 'Featured Plugins', 'hugeit_maps' ), __( 'Featured plugins', 'hugeit_maps' ), 'manage_options', 'hugeit_maps_featured_plugins', array(
+		$this->pages['featured_plugins'] = add_submenu_page( 'hugeit_maps', __( 'Featured Plugins', 'hg_gmaps' ), __( 'Featured plugins', 'hg_gmaps' ), 'manage_options', 'hugeit_maps_featured_plugins', array(
             $this,
             'init_featured_plugins_page'
         ) );
 
-        $this->pages['licensing'] = add_submenu_page( 'hugeit_maps', __( 'Licensing', 'hugeit_maps' ), __( 'Licensing', 'hugeit_maps' ), 'manage_options', 'hugeit_maps_licensing', array(
+        $this->pages['licensing'] = add_submenu_page( 'hugeit_maps', __( 'Licensing', 'hg_gmaps' ), __( 'Licensing', 'hg_gmaps' ), 'manage_options', 'hugeit_maps_licensing', array(
             $this,
             'init_licensing_plugins_page'
         ) );
@@ -57,7 +57,7 @@ class Hugeit_Maps_Admin {
 
 	public function print_error( $error_message, $die = true ) {
 
-		$str = sprintf( '<div class="error"><p>%s&nbsp;<a href="#" onclick="window.history.back()">%s</a></p></div>', $error_message, __( 'Go back', 'hugeit_maps' ) );
+		$str = sprintf( '<div class="error"><p>%s&nbsp;<a href="#" onclick="window.history.back()">%s</a></p></div>', $error_message, __( 'Go back', 'hg_gmaps' ) );
 
 		if ( $die ) {
 
@@ -97,7 +97,7 @@ class Hugeit_Maps_Admin {
 
 					if ( ! isset( $_GET['id'] ) ) {
 
-						Hugeit_Maps()->admin->print_error( __( 'Missing "id" parameter.', 'hugeit_maps' ) );
+						Hugeit_Maps()->admin->print_error( __( 'Missing "id" parameter.', 'hg_gmaps' ) );
 
 					}
 
@@ -105,13 +105,13 @@ class Hugeit_Maps_Admin {
 
 					if ( ! $id ) {
 
-						Hugeit_Maps()->admin->print_error( __( '"id" parameter must be not negative integer.', 'hugeit_maps' ) );
+						Hugeit_Maps()->admin->print_error( __( '"id" parameter must be not negative integer.', 'hg_gmaps' ) );
 
 					}
 
 					if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'hugeit_maps_edit_map_' . $id ) ) {
 
-						Hugeit_Maps()->admin->print_error( __( 'Security check failed.', 'hugeit_maps' ) );
+						Hugeit_Maps()->admin->print_error( __( 'Security check failed.', 'hg_gmaps' ) );
 
 					}
 
@@ -146,7 +146,7 @@ class Hugeit_Maps_Admin {
 			case "create_new_map":
 
 				if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'hugeit_maps_create_new_map' ) ) {
-					wp_die( sprintf( '<div class="error"><p>%s</p></div>', __( 'Security check failed.', 'hugeit_maps' ) ) );
+					wp_die( sprintf( '<div class="error"><p>%s</p></div>', __( 'Security check failed.', 'hg_gmaps' ) ) );
 				}
 
 				$new_map = $this->create_new_map();
@@ -169,24 +169,24 @@ class Hugeit_Maps_Admin {
 
 				} else {
 
-					wp_die( __( 'Problems occured while creating new map.', 'hugeit_maps' ) );
+					wp_die( __( 'Problems occured while creating new map.', 'hg_gmaps' ) );
 
 				}
 
 				break;
 			case "remove_map":
 				if ( ! isset( $_GET['id'] ) ) {
-					wp_die( __( '"id" parameter is required', 'hugeit_maps' ) );
+					wp_die( __( '"id" parameter is required', 'hg_gmaps' ) );
 				}
 
 				$id = $_GET['id'];
 
 				if ( absint( $id ) != $id ) {
-					wp_die( __( '"id" parameter must be non negative integer', 'hugeit_maps' ) );
+					wp_die( __( '"id" parameter must be non negative integer', 'hg_gmaps' ) );
 				}
 
 				if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'hugeit_maps_remove_map_' . $id ) ) {
-					wp_die( __( 'Security check failed', 'hugeit_maps' ) );
+					wp_die( __( 'Security check failed', 'hg_gmaps' ) );
 				}
 
 				Hugeit_Maps_Map::delete( $id );

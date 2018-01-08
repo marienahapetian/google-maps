@@ -28,5 +28,5 @@ $remove_url = wp_nonce_url( $remove_url, 'hugeit_maps_remove_map_'.$map_id );
 	<td class="map-id"><?php echo $map_id; ?></td>
 	<td class="map-name"><a href="<?php echo $edit_url; ?>" ><?php echo esc_html( stripslashes( $map->get_name() ) ); ?></a></td>
 	<td class="map-shortcode">[huge_it_maps id="<?php echo $map_id; ?>"]</td>
-	<td class="map-delete"><a class="hugeit_maps_delete_map_from_list" href="<?php echo $remove_url; ?>" ><?php _e( 'Delete', 'hugeit_maps' ); ?></a></td>
+	<td class="map-delete"><a class="hugeit_maps_delete_map_from_list" href="<?php echo $remove_url; ?>" ><?php _e( 'Delete', 'hg_gmaps' ); ?></a></td>
 </tr>
