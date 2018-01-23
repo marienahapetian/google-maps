@@ -56,11 +56,11 @@ $license = array(
             <div class="header">
                 <div class="col-icon" style="background-position: <?= $val["icon"] ?>; ">
                 </div>
-                <?= $val["title"] ?>
+                <?php echo __($val["title"],'hg_gmaps'); ?>
             </div>
-            <p><?= $val["text"] ?></p>
+            <p><?php echo  __($val["text"],'hg_gmaps'); ?></p>
             <div class="col-footer">
-                <a href="https://goo.gl/4ZkFas" target="_blank" class="a-upgrate">Upgrade</a>
+                <a href="https://goo.gl/4ZkFas" target="_blank" class="a-upgrate"><?php _e('Upgrade','hg_gmaps');?></a>
             </div>
         </div>
     <?php } ?>
@@ -69,17 +69,17 @@ $license = array(
 
 <div class="license-footer">
     <p class="footer-text">
-        You are using the Lite version of the Huge IT Google Map Plugin for WordPress. If you want to get more awesome options,
+        <?php _e('You are using the Lite version of the Huge IT Google Map Plugin for WordPress. If you want to get more awesome options,
         advanced features, settings to customize every area of the plugin, then check out the Full License plugin.
-        The full version of the plugin is available in 3 different packages of one-time payment.
+        The full version of the plugin is available in 3 different packages of one-time payment.','hg_gmaps');?>
     </p>
     <p class="this-steps max-width">
-        After the purchasing the commercial version follow this steps
+        <?php _e('After the purchasing the commercial version follow this steps','hg_gmaps');?>
     </p>
     <ul class="steps">
-        <li>Deactivate Huge IT Google Map Plugin</li>
-        <li>Delete Huge IT Google Map</li>
-        <li>Install the downloaded commercial version of the plugin</li>
+        <li><?php _e('Deactivate Huge IT Google Map Plugin','hg_gmaps');?></li>
+        <li><?php _e('Delete Huge IT Google Map','hg_gmaps');?></li>
+        <li><?php _e('Install the downloaded commercial version of the plugin','hg_gmaps');?></li>
     </ul>
-    <a href="https://goo.gl/4ZkFas" target="_blank">Purchase a License</a>
+    <a href="https://goo.gl/4ZkFas" target="_blank"><?php _e('Purchase a License','hg_gmaps');?></a>
 </div>
