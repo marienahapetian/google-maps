@@ -11,7 +11,7 @@
         <div class="help">?
             <div class="help-block">
                 <span class="pnt"></span>
-                <p><?php _e('You can calculate directions by using the DirectionsService/feature. Directions are displayed as a polyline drawing the route on a map. The right click adds and varies  the strating and finishing point. Hold pressed the left click and drug the marker.','hg_gmaps'); ?></p>
+                <p><?php _e('You can calculate directions by using the DirectionsService/feature. Directions are displayed as a polyline drawing the route on a map. The right click adds and varies  the starting and finishing point. Hold pressed the left click and drag the marker.','hg_gmaps'); ?></p>
             </div>
         </div>
         <span class="heading_arrow"></span>

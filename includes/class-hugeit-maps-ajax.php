@@ -1104,7 +1104,7 @@ class Hugeit_Maps_Ajax {
 	public static function delete_item() {
 
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_delete_item' ) ) {
-			die( 'security check failed' );
+			die( 'Security check failed' );
 		}
 
 		global $wpdb;
@@ -1129,7 +1129,7 @@ class Hugeit_Maps_Ajax {
 
 	public static function change_map_name() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_save_map' ) ) {
-			die( 'security check failed' );
+			die( 'Security check failed' );
 		}
 
 		$name = $_REQUEST['name'];
@@ -1156,7 +1156,7 @@ class Hugeit_Maps_Ajax {
 	 */
 	public static function export_to_csv() {
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_extract_to_csv' ) ) {
-			die( 'security check failed' );
+			die( 'Security check failed' );
 		}
 
 		global $wpdb;
@@ -1229,7 +1229,7 @@ class Hugeit_Maps_Ajax {
 	public static function copy_map() {
 		$id = intval( $_POST['map_id'] );
 		if ( ! $id ) {
-			die( '"id" parameter must be not negative integer.' );
+			die( '"id" parameter must be non negative integer.' );
 		}
 
 		$map = new Hugeit_Maps_Map( $id );

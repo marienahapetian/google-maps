@@ -69,7 +69,7 @@ msgid "Security check failed."
 msgstr "Controllo di sicurezza fallito."
 
 #: includes/admin/class-hugeit-maps-admin.php:163
-msgid "Problems occured while creating new map."
+msgid "Problems occurred while creating new map."
 msgstr "Si è verificato un problema durante la creazione della nuova mappa."
 
 #: includes/admin/class-hugeit-maps-admin.php:170
@@ -1315,7 +1315,7 @@ msgid "Border radius"
 msgstr "Raggio degli angoli"
 
 #: templates/admin/inline-popup.php:48
-msgid "You have not creted any maps"
+msgid "You have not created any maps"
 msgstr "Non hai creato mappe"
 
 #: templates/admin/inline-popup.php:50

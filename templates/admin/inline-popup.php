@@ -45,7 +45,7 @@ $maps = Hugeit_Maps_Query::get_maps();
     }else{
         printf(
             '<p>%s<a class="button" href="%s">%s</a></p>',
-            __('You have not creted any maps', 'hg_gmaps'),
+            __('You have not created any maps', 'hg_gmaps'),
             admin_url('admin.php?page=hugeit_maps&task=create_new_map'),
             __( 'Create new Map', 'hg_gmaps' )
         );

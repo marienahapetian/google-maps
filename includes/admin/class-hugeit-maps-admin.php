@@ -97,7 +97,7 @@ class Hugeit_Maps_Admin {
 
 					if ( ! isset( $_GET['id'] ) ) {
 
-						Hugeit_Maps()->admin->print_error( __( 'Missing "id" parameter.', 'hg_gmaps' ) );
+						Hugeit_Maps()->admin->print_error( __( 'missing "id" parameter.', 'hg_gmaps' ) );
 
 					}
 
@@ -105,7 +105,7 @@ class Hugeit_Maps_Admin {
 
 					if ( ! $id ) {
 
-						Hugeit_Maps()->admin->print_error( __( '"id" parameter must be not negative integer.', 'hg_gmaps' ) );
+						Hugeit_Maps()->admin->print_error( __( '"id" parameter must be non negative integer.', 'hg_gmaps' ) );
 
 					}
 
@@ -169,7 +169,7 @@ class Hugeit_Maps_Admin {
 
 				} else {
 
-					wp_die( __( 'Problems occured while creating new map.', 'hg_gmaps' ) );
+					wp_die( __( 'Problems occurred while creating new map.', 'hg_gmaps' ) );
 
 				}
 
