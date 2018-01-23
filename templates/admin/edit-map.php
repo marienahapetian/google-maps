@@ -72,7 +72,7 @@ Hugeit_Maps_Template_Loader::get_template( 'admin/api-key-form.php' );
 
 	<div class="map_database_actions_section">
 		<div class="button copy_map_button" data-map-id="<?php echo $map->get_id(); ?>"><?php _e( 'Create Copy Of This Map', 'hg_gmaps' ); ?></div>
-		<div class="button extract_to_csv_button" data-map-id="<?php echo $map->get_id(); ?>"><?php _e( 'Export This Map To CSV', 'hg_gmaps' ); ?></div>
+		<div class="button extract_to_json_button" data-map-id="<?php echo $map->get_id(); ?>"><?php _e( 'Export This Map To JSON', 'hg_gmaps' ); ?></div>
 	</div>
 	<div class="shortcode_containers">
 		<div class="shortcode_container">

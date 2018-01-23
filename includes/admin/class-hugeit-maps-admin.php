@@ -123,6 +123,124 @@ class Hugeit_Maps_Admin {
 					Hugeit_Maps_Template_Loader::get_template( 'admin/edit-map.php', array( 'map' => $map ) );
 
 					break;
+
+                case "import_map":
+                    $file = $_FILES['huge-map-import-file'];
+                    $content = file_get_contents($file['tmp_name']);
+                    $content = json_decode($content);
+                    if(!empty($content)){
+                        $map = new Hugeit_Maps_Map();
+                        $map->set_name($content->name)
+                            ->set_type($content->type)
+                            ->set_zoom($content->zoom)
+                            ->set_border_radius($content->border_radius)
+                            ->set_center_lat($content->center_lat)
+                            ->set_center_lng($content->center_lng)
+                            ->set_width($content->width)
+                            ->set_height($content->height)
+                            ->set_align($content->align)
+                            ->set_wheel_scroll($content->wheel_scroll)
+                            ->set_draggable($content->draggable)
+                            ->set_min_zoom($content->min_zoom)
+                            ->set_max_zoom($content->max_zoom)
+                            ->set_info_type($content->info_type);
+                        $newMapId = $map->save();
+                        if($newMapId){
+                            foreach ($content->markers as $marker){
+                                $newmarker = new Hugeit_Maps_Marker();
+                                $newmarker->set_map_id($newMapId)
+                                    ->set_name($marker->title)
+                                    ->set_lat($marker->lat)
+                                    ->set_lng($marker->lng)
+                                    ->set_animation($marker->animation)
+                                    ->set_description($marker->description)
+                                    ->set_size($marker->size)
+                                    ->set_img($marker->image);
+                                $newmarker->save();
+                            }
+                            foreach ($content->polygons as $polygon){
+                                $newpolygon = new Hugeit_Maps_Polygon();
+                                $newpolygon->set_map_id($newMapId)
+                                    ->set_name($polygon->name)
+                                    ->set_data($polygon->data)
+                                    ->set_line_width($polygon->line_width)
+                                    ->set_line_opacity($polygon->line_transp)
+                                    ->set_line_color($polygon->line_color)
+                                    ->set_fill_opacity($polygon->fill_transp)
+                                    ->set_fill_color($polygon->fill_color)
+                                    ->set_hover_line_opacity($polygon->hover_line_transp)
+                                    ->set_hover_line_color($polygon->hover_line_color)
+                                    ->set_hover_fill_opacity($polygon->hover_fill_transp)
+                                    ->set_hover_fill_color($polygon->hover_fill_color)
+                                    ->set_url($polygon->link);
+
+                                $newpolygon->save();
+                            }
+
+                            foreach ($content->polylines as $polyline){
+                                $newpolyline = new Hugeit_Maps_Polyline();
+                                $newpolyline->set_map_id($newMapId)
+                                    ->set_name($polyline->name)
+                                    ->set_data($polyline->data)
+                                    ->set_line_width($polyline->line_width)
+                                    ->set_line_opacity($polyline->line_transp)
+                                    ->set_line_color($polyline->line_color)
+                                    ->set_hover_line_opacity($polyline->hover_line_transp)
+                                    ->set_hover_line_color($polyline->hover_line_color);
+                                $newpolyline->save();
+                            }
+                            foreach ($content->circles as $circle){
+                                $newcircle = new Hugeit_Maps_Circle();
+                                $newcircle->set_map_id($newMapId)
+                                    ->set_name($circle->name)
+                                    ->set_center_lat($circle->center_lat)
+                                    ->set_center_lng($circle->center_lng)
+                                    ->set_radius($circle->radius)
+                                    ->set_line_width($circle->line_width)
+                                    ->set_line_color($circle->line_color)
+                                    ->set_fill_color($circle->fill_color)
+                                    ->set_fill_opacity($circle->fill_transp)
+                                    ->set_hover_line_opacity($circle->hover_line_transp)
+                                    ->set_hover_line_color($circle->hover_line_color)
+                                    ->set_hover_fill_color($circle->hover_fill_color)
+                                    ->set_hover_fill_opacity($circle->hover_fill_transp)
+                                    ->set_show_marker($circle->show_marker);
+                                $newcircle->save();
+                            }
+                            foreach ($content->directions as $direction){
+                                $newdirection = new Hugeit_Maps_Direction();
+                                $newdirection->set_map_id($newMapId)
+                                    ->set_name($direction->name)
+                                    ->set_start_lat($direction->start_lat)
+                                    ->set_start_lng($direction->start_lng)
+                                    ->set_end_lat($direction->end_lat)
+                                    ->set_end_lng($direction->end_lng)
+                                    ->set_line_color($direction->line_color)
+                                    ->set_line_width($direction->line_width)
+                                    ->set_line_opacity($direction->line_transp)
+                                    ->set_show_steps($direction->show_steps)
+                                    ->set_travel_mode($direction->travel_mode);
+                                $newdirection->save();
+                            }
+                            foreach ($content->locators as $locator){
+                                $newlocator = new Hugeit_Maps_Locator();
+                                $newlocator->set_map_id($newMapId)
+                                    ->set_name($locator->name)
+                                    ->set_locator_lat($locator->lat)
+                                    ->set_locator_lng($locator->lng)
+                                    ->set_locator_addr($locator->address)
+                                    ->set_locator_phone($locator->phone)
+                                    ->set_locator_days($locator->days);
+                                $newlocator->save();
+                            }
+                            $location = admin_url( 'admin.php?page=hugeit_maps&task=edit_map&id='.$newMapId );
+                            $location = wp_nonce_url( $location, 'hugeit_maps_create_new_map' );
+                            header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+                            header("Location: $location");
+                        }
+                    }
+                    exit;
+                    break;
 			}
 
 		}

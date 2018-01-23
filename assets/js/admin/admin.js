@@ -79,6 +79,13 @@ jQuery(document).ready(function () {
         jQuery("#polygon_add_button").show(200);
         return false;
     });
+
+    jQuery(".page-title-action.import-map").on("click", function (e) {
+        e.preventDefault();
+        jQuery(this).next('form').show(200);
+        return false;
+    });
+
     jQuery("#polygon_add_button").on('click', function (e) {
         jQuery(this).hide(100).addClass("tab_options_hidden_section");
         jQuery("#g_maps > div").not("#g_map_polygon").addClass("hide");

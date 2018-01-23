@@ -12,7 +12,7 @@ class Hugeit_Maps_Ajax {
 
 		add_action( 'wp_ajax_hugeit_maps_save_map', array( __CLASS__, 'save_map' ) );
 		add_action( 'wp_ajax_hugeit_maps_copy_map', array( __CLASS__, 'copy_map' ) );
-		add_action( 'wp_ajax_hugeit_maps_export_to_csv', array( __CLASS__, 'export_to_csv' ) );
+		add_action( 'wp_ajax_hugeit_maps_export_to_json', array( __CLASS__, 'export_to_json' ) );
         add_action( 'wp_ajax_hugeit_maps_save_locator', array( __CLASS__, 'save_locator' ) );
 
 		add_action( 'wp_ajax_hugeit_maps_save_marker', array( __CLASS__, 'save_marker' ) );
@@ -1151,79 +1151,141 @@ class Hugeit_Maps_Ajax {
 	}
 
 	/**
-	 * Export current map to CSV Format
-	 * todo: create import functionality
+	 * Export current map to JSON Format
 	 */
-	public static function export_to_csv() {
-		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_extract_to_csv' ) ) {
-			die( 'Security check failed' );
-		}
-
-		global $wpdb;
-		$id = $_POST['map_id'];
-
-		$map = new Hugeit_Maps_Map( $id );
-
-		$map_array = array(
-			'Map ID:' . $id,
-			'name:' . $map->get_name() . ', type :' . $map->get_type() . ', zoom: ' . $map->get_zoom() . ', border radius: ' . $map->get_border_radius() . ', center latitude: ' . $map->get_center_lat() . ', center longitude: ' . $map->get_center_lng() . ', width: ' . $map->get_width() . '%, height: ' . $map->get_height() . 'px, align:' . $map->get_align() . ', wheel scroll:' . $map->get_wheel_scroll() . ', draggable: ' . $map->get_draggable() . ', language:' . $map->get_language() . ', minimum zoom: ' . $map->get_min_zoom() . ', max_zoom:' . $map->get_max_zoom() . ', info_type: ' . $map->get_info_type(),
-		);
-
-		$markers = $map->get_markers();
-		if ( $markers ) {
-			array_push( $map_array, 'Markers' );
-			foreach ( $markers as $marker ) {
-				array_push( $map_array, 'ID: ' . $marker->get_id() . ', title: ' . $marker->get_name() . ', latitude: ' . $marker->get_lat() . ', longitude:' . $marker->get_lng() . ', animation:' . $marker->get_animation() . ', description:' . $marker->get_description() . ', image:' . $marker->get_img() );
-			}
-		}
-
-		$polygons = $map->get_polygons();
-
-		if ( $polygons ) {
-			array_push( $map_array, 'Polygons' );
-			foreach ( $polygons as $polygon ) {
-				array_push( $map_array, 'name :' . $polygon->get_name() . ', data :' . $polygon->get_data() . ', line transparency :' . $polygon->get_line_opacity() . ', line color :' . $polygon->get_line_color() . ', fill transparency:' . $polygon->get_fill_opacity() . ', fill color :' . $polygon->get_fill_color() . ', link :' . $polygon->get_url() . ', hover line transparency :' . $polygon->get_hover_line_opacity() . ', hover line color :' . $polygon->get_hover_line_color() . ', hover fill transparency :' . $polygon->get_fill_opacity() . ', hover line color :' . $polygon->get_hover_line_color() . ', line width :' . $polygon->get_line_width() );
-			}
-		}
-
-		$polylines = $map->get_polylines();
-
-		if ( $polylines ) {
-			array_push( $map_array, 'Polylines' );
-			foreach ( $polylines as $polyline ) {
-				array_push( $map_array, 'name :' . $polyline->get_name() . ', data :' . $polyline->get_data() . ', line transparency :' . $polyline->get_line_opacity() . ', line color :' . $polyline->get_line_color() . ', line width :' . $polyline->get_line_width() . ', hover line color :' . $polyline->get_hover_line_color() . ', hover line transparency :' . $polyline->get_name() );
-			}
-		}
-
-		$circles = $map->get_circles();
-
-		if ( $circles ) {
-			array_push( $map_array, 'Circles' );
-			foreach ( $circles as $circle ) {
-				array_push( $map_array, 'name:' . $circle->get_name() . ', center latitude:' . $circle->get_center_lat() . ', center longitude:' . $circle->get_center_lng() . ', radius:' . $circle->get_radius() . ', line width:' . $circle->get_line_width() . ', line transparency:' . $circle->get_line_opacity() . ', line color:' . $circle->get_line_color() . ', fill color:' . $circle->get_fill_color() . ', fill transparency:' . $circle->get_fill_opacity() . ', hover line transparency:"' . $circle->get_hover_line_opacity() . ', hover line color:' . $circle->get_hover_line_color() . ', hover fill color:' . $circle->get_hover_fill_color() . ', hover fill transparency:' . $circle->get_fill_opacity() . ', show marker(0/1=off/on):' . $circle->get_show_marker() );
-			}
-		}
-
-        $locators = $map->get_locator();
-
-        if ( $locators ) {
-            array_push( $map_array, 'Locators' );
-            foreach ( $locators as $locator ) {
-                array_push( $map_array, 'name:' . $locator->get_name() . ', locator latitude: ' . $locator->get_locator_lat() . ', locator longitude: ' . $locator->get_locator_lng() . ', locator address: ' . $locator->get_locator_addr() . ', locator phone: ' . $locator->get_locator_phone() . ', locator days: ' . $locator->get_locator_days());
+	public static function export_to_json() {
+        if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'hugeit_maps_extract_to_json' ) ) {
+            die( 'security check failed' );
+        }
+        global $wpdb;
+        $id = $_POST['map_id'];
+        $map = new Hugeit_Maps_Map( $id );
+        $map_array['id'] = $id;
+        $map_array['name'] = $map->get_name();
+        $map_array['type'] = $map->get_type();
+        $map_array['zoom'] = $map->get_zoom();
+        $map_array['border_radius'] = $map->get_border_radius();
+        $map_array['center_lat'] = $map->get_center_lat();
+        $map_array['center_lng'] = $map->get_center_lng();
+        $map_array['width'] = $map->get_width();
+        $map_array['height'] = $map->get_height();
+        $map_array['align'] = $map->get_align();
+        $map_array['wheel_scroll'] = $map->get_wheel_scroll();
+        $map_array['draggable'] = $map->get_draggable();
+        $map_array['min_zoom'] = $map->get_min_zoom();
+        $map_array['max_zoom'] = $map->get_max_zoom();
+        $map_array['info_type'] = $map->get_info_type();
+        $markers = $map->get_markers();
+        $map_markers = array();
+        if ( $markers ) {
+            foreach ( $markers as $marker ) {
+                $map_markers[] = array(
+                    'title' => $marker->get_name(),
+                    'lat' => $marker->get_lat(),
+                    'lng' => $marker->get_lng(),
+                    'animation' => $marker->get_animation(),
+                    'description' => $marker->get_description(),
+                    'image' => $marker->get_img()
+                );
             }
         }
-
-		$directions = $map->get_directions();
-
-		if ( $directions ) {
-			array_push( $map_array, 'Directions' );
-			foreach ( $directions as $direction ) {
-				array_push( $map_array, 'name:' . $direction->get_name() . ', starting point latitude: ' . $direction->get_start_lat() . ', starting point longitude: ' . $direction->get_start_lng() . ', ending point latitude' . $direction->get_end_lat() . ', ending point longitude: ' . $direction->get_end_lng() . ', line color: ' . $direction->get_line_color() . ', line width: ' . $direction->get_line_width() . ', line opacity: ' . $direction->get_line_opacity() . ', show steps(1/0=on/off): ' . $direction->get_show_steps() . ', travel mode: ' . $direction->get_travel_mode() );
-			}
-		}
-
-		echo json_encode( array( "success" => 1, "string" => $map_array, "map_name" => $map->get_name() ) );
-		die();
+        $map_array['markers'] = $map_markers;
+        $polygons = $map->get_polygons();
+        $map_polygons = array();
+        if ( $polygons ) {
+            foreach ( $polygons as $polygon ) {
+                $map_polygons[] = array(
+                    'name' => $polygon->get_name(),
+                    'data' => $polygon->get_data(),
+                    'line_width' => $polygon->get_line_width(),
+                    'line_transp' => $polygon->get_line_opacity(),
+                    'line_color' => $polygon->get_line_color(),
+                    'fill_transp' => $polygon->get_fill_opacity(),
+                    'fill_color' => $polygon->get_fill_color(),
+                    'hover_line_transp' => $polygon->get_hover_line_opacity(),
+                    'hover_line_color' => $polygon->get_hover_line_color(),
+                    'hover_fill_transp' => $polygon->get_hover_fill_opacity(),
+                    'hover_fill_color' => $polygon->get_hover_fill_color(),
+                    'link' => $polygon->get_url(),
+                );
+            }
+        }
+        $map_array['polygons'] = $map_polygons;
+        $polylines = $map->get_polylines();
+        $map_polylines = array();
+        if ( $polylines ) {
+            foreach ( $polylines as $polyline ) {
+                $map_polylines[] = array(
+                    'name' => $polyline->get_name(),
+                    'data' => $polyline->get_data(),
+                    'line_width' => $polyline->get_line_width(),
+                    'line_transp' => $polyline->get_line_opacity(),
+                    'line_color' => $polyline->get_line_color(),
+                    'hover_line_transp' => $polyline->get_hover_line_opacity(),
+                    'hover_line_color' => $polyline->get_hover_line_color(),
+                );
+            }
+        }
+        $map_array['polylines'] = $map_polylines;
+        $circles = $map->get_circles();
+        $map_circles= array();
+        if ( $circles ) {
+            foreach ( $circles as $circle ) {
+                $map_circles[] = array(
+                    'name' => $circle->get_name(),
+                    'center_lat' => $circle->get_center_lat(),
+                    'center_lng' => $circle->get_center_lng(),
+                    'radius' => $circle->get_radius(),
+                    'line_width' => $circle->get_line_width(),
+                    'line_transp' => $circle->get_line_opacity(),
+                    'line_color' => $circle->get_line_color(),
+                    'fill_color' => $circle->get_fill_color(),
+                    'fill_transp' => $circle->get_fill_opacity(),
+                    'hover_line_transp' => $circle->get_hover_line_opacity(),
+                    'hover_line_color' => $circle->get_hover_line_color(),
+                    'hover_fill_color' => $circle->get_hover_fill_color(),
+                    'hover_fill_transp' => $circle->get_hover_fill_opacity(),
+                    'show_marker' => $circle->get_show_marker(),
+                );
+            }
+        }
+        $map_array['circles'] = $map_circles;
+        $directions = $map->get_directions();
+        $map_directions = array();
+        if ( $directions ) {
+            foreach ( $directions as $direction ) {
+                $map_directions[] = array(
+                    'name' => $direction->get_name(),
+                    'start_lat' => $direction->get_start_lat(),
+                    'start_lng' => $direction->get_start_lng(),
+                    'end_lat' => $direction->get_end_lat(),
+                    'end_lng' => $direction->get_end_lng(),
+                    'line_color' => $direction->get_line_color(),
+                    'line_width' => $direction->get_line_width(),
+                    'line_transp' => $direction->get_line_opacity(),
+                    'show_steps' => $direction->get_show_steps(),
+                    'travel_mode' => $direction->get_travel_mode(),
+                );
+            }
+        }
+        $map_array['directions'] = $map_directions;
+        $locators = $map->get_locator();
+        $map_locators = array();
+        if ( $locators ) {
+            foreach ( $locators as $locator ) {
+                $map_locators[] = array(
+                    'name' => $locator->get_name(),
+                    'lat' => $locator->get_locator_lat(),
+                    'lng' => $locator->get_locator_lng(),
+                    'address' => $locator->get_locator_addr(),
+                    'phone' => $locator->get_locator_phone(),
+                    'days' => $locator->get_locator_days(),
+                );
+            }
+        }
+        $map_array['locators'] = $map_locators;
+        echo json_encode( array( "success" => 1, "string" => $map_array, "map_name" => $map->get_name() ) );
+        die();
 	}
 
 	public static function copy_map() {

@@ -94,7 +94,7 @@ class Hugeit_Maps_Admin_Assets {
 
                 wp_enqueue_script( 'hugeit-maps-admin-scroll-map', Hugeit_Maps()->plugin_url().'/assets/js/admin/scroll-map.js', array( 'jquery' ), false, true );
 
-                wp_enqueue_script( 'hugeit-maps-admin-extract-to-csv', Hugeit_Maps()->plugin_url().'/assets/js/admin/extract-to-csv.js', array( 'jquery' ), false, true );
+                wp_enqueue_script( 'hugeit-maps-admin-extract-to-json', Hugeit_Maps()->plugin_url().'/assets/js/admin/extract-to-json.js', array( 'jquery' ), false, true );
 
                 wp_enqueue_script( 'hugeit-maps-admin-copy-map', Hugeit_Maps()->plugin_url().'/assets/js/admin/copy-map.js', array( 'jquery' ), false, true );
 
@@ -171,8 +171,8 @@ class Hugeit_Maps_Admin_Assets {
         wp_localize_script( 'hugeit-maps-admin-api-key', 'apiKeyL10n', array(
             'nonce'=>wp_create_nonce('hugeit_maps_save_api_key'),
         ) );
-        wp_localize_script( 'hugeit-maps-admin-extract-to-csv', 'extractCSVL10n', array(
-            'nonce'=>wp_create_nonce('hugeit_maps_extract_to_csv'),
+        wp_localize_script( 'hugeit-maps-admin-extract-to-json', 'extractJSONL10n', array(
+            'nonce'=>wp_create_nonce('hugeit_maps_extract_to_json'),
         ) );
         wp_localize_script( 'hugeit-maps-admin-maps', 'mapL10n', array(
             'map'=>$localized_map,

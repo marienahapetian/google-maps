@@ -80,7 +80,7 @@ Do not hesitate to install Google Maps from WordPress to see all the options of 
 * Create a map just in seconds
 * Set the min and max zoom level for your map plugin
 * Add descriptions, links and images to your map markers
-* Export the map to CSV
+* Export the map to JSON
 * Enable Map Traffic Layer
 * Enable Map Bicycling Layer
 * Enable Map Transit layer
@@ -109,9 +109,9 @@ There are different types of road layers that you can use on you map . This comp
 
 We included a huge repository of different styles for Google Map aimed towards web designers and developers, which you can customize yourself.
 
-### CSV Export
+### JSON Export
 
-Huge-IT Google Maps exports CSV file, which makes it easy to export data, create a CSV file of the objects that you submit.
+Huge-IT Google Maps exports JSON file, which makes it easy to export data, create a JSON file of the objects that you submit.
 
 
 > #### Demos 

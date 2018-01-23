@@ -1040,8 +1040,8 @@ msgid "Create Copy Of This Map"
 msgstr "Crea una copia di questa mappa"
 
 #: templates/admin/edit-map.php:79
-msgid "Export This Map To CSV"
-msgstr "Esporta mappa in CSV"
+msgid "Export This Map To JSON"
+msgstr "Esporta mappa in JSON"
 
 #: templates/admin/edit-map.php:83 templates/admin/maps-list.php:20
 #: templates/admin/maps-list.php:48

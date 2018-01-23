@@ -8,9 +8,23 @@ $new_map_link = admin_url( 'admin.php?page=hugeit_maps&task=create_new_map' );
 
 $new_map_link = wp_nonce_url( $new_map_link, 'hugeit_maps_create_new_map' );
 
+$import_map_link = admin_url( 'admin.php?page=hugeit_maps&task=import_map' );
+
 ?>
 <div class="wrap maps_list_container">
-	<h1><?php _e( 'Huge-IT Google maps', 'hg_gmaps' ); ?><a class="page-title-action" href="<?php echo $new_map_link; ?>"><?php _e( 'Add New Map', 'hg_gmaps' ); ?></a></h1>
+	<h1>
+        <?php _e( 'Huge-IT Google maps', 'hg_gmaps' ); ?>
+        <a class="page-title-action" href="<?php echo $new_map_link; ?>">
+            <?php _e( 'Add New Map', 'hg_gmaps' ); ?>
+        </a>
+        <a class="page-title-action import-map" href="">
+            <?php _e( 'Import Map', 'hg_gmaps' ); ?>
+        </a>
+        <form style="display: none" action="<?php echo $import_map_link; ?>" method="post" enctype="multipart/form-data">
+            <input type="file" name="huge-map-import-file">
+            <input type="submit" value="<?php _e('Create The Map','hg_gmaps');?>">
+        </form>
+    </h1>
 
 	<table class="widefat striped fixed maps_table">
 		<thead>

@@ -32,8 +32,8 @@ $license = array(
         "icon" => "-107px -313px"
     ),
     array(
-        "title" => "CSV file export support",
-        "text" => "CSV file exporting makes it easy to export data, creates a CSV file of the objects that you submit",
+        "title" => "JSON file export support",
+        "text" => "JSON file exporting makes it easy to export data, creates a JSON file of the objects that you submit",
         "icon" => "-274px -323px"
     ),
     array(
