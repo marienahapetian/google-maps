@@ -10,13 +10,13 @@
            value="<?php echo $map->get_locator_default_address();?>"
     >
     <select name="locatorRadius" id="locatorRadius_<?php echo $map->get_id(); ?>" class="locatorRadius">
-        <option value="100000">No Limitation</option>
-        <option value="200">200kms</option>
-        <option value="100">100kms</option>
-        <option value="50">50kms</option>
-        <option value="30">30kms</option>
-        <option value="20">20kms</option>
-        <option value="10">10kms</option>
+        <option value="100000"><?php _e('No Limitation','hg_gmaps');?></option>
+        <option value="200"><?php _e('200kms','hg_gmaps');?></option>
+        <option value="100"><?php _e('100kms','hg_gmaps');?></option>
+        <option value="50"><?php _e('50kms','hg_gmaps');?></option>
+        <option value="30"><?php _e('30kms','hg_gmaps');?></option>
+        <option value="20"><?php _e('20kms','hg_gmaps');?></option>
+        <option value="10"><?php _e('10kms','hugeit_contact');?></option>
     </select>
     <input type="submit" value="Search" id="submitLocator_<?php echo $map->get_id(); ?>" class="submitLocator">
 </div>

@@ -90,6 +90,13 @@ jQuery(document).ready(function () {
             }, 500);
         })
 
+        jQuery('a[role=tab]').on('click',function () {
+            setTimeout(function () {
+                hugeitMapsFrontRefresh();
+                front_end_map.setCenter(center_coords);
+            }, 500);
+        })
+
         var front_end_data = {
             action: 'hugeit_maps_get_info',
             map_id: dataMapId
@@ -565,6 +572,7 @@ jQuery(document).ready(function () {
 
         /* locator end */
     }
+
 
     var allMaps = jQuery('.huge_it_google_map');
 
