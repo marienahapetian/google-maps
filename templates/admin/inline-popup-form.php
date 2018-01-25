@@ -7,7 +7,7 @@ $first_map = $maps[0];
 ?>
 
 <form method="post" action="" >
-    <h3>Select The Map</h3>
+    <h3><?php _e('Select The Map','hg_gmaps');?></h3>
 
     <select id="huge_it_map_select" >
     <?php

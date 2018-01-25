@@ -18,5 +18,5 @@
         <option value="20"><?php _e('20kms','hg_gmaps');?></option>
         <option value="10"><?php _e('10kms','hugeit_contact');?></option>
     </select>
-    <input type="submit" value="Search" id="submitLocator_<?php echo $map->get_id(); ?>" class="submitLocator">
+    <input type="submit" value="<?php _e('Search','hg_gmaps');?>" id="submitLocator_<?php echo $map->get_id(); ?>" class="submitLocator">
 </div>

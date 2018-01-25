@@ -229,7 +229,7 @@
 				</ul>
 				<div>
 					<span class="spinner"></span>
-					<input type="submit" class="button-primary" name="marker_edit_submmit" id="marker_edit_submmit" value="Save"/>
+					<input type="submit" class="button-primary" name="marker_edit_submmit" id="marker_edit_submmit" value="<?php _e('Save','hg_gmaps');?>"/>
 					<a href="#" class="cancel" id="cancel_edit_marker">Cancel</a>
 				</div>
 			</div>

@@ -201,7 +201,7 @@
 				</li>
 			</ul>
 			<span class="spinner"></span>
-			<input type="submit" class="button-primary" name="map_submit" id="map_submit" value="Save"/>
+			<input type="submit" class="button-primary" name="map_submit" id="map_submit" value="<?php _e('Save','hg_gmaps');?>"/>
 		</form>
 	</div>
 </li>

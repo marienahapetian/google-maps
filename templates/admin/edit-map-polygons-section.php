@@ -107,7 +107,7 @@
                     </ul>
                     <div>
                         <span class="spinner"></span>
-                        <input type="submit" class="button-primary" name="polygone_submit" id="polygone_submit" value="Save"/>
+                        <input type="submit" class="button-primary" name="polygone_submit" id="polygone_submit" value="<?php _e('Save','hg_gmaps');?>"/>
                         <a href="#" id="cancel_polygone" class="cancel"><?php _e( 'Cancel', 'hg_gmaps' ); ?></a>
                     </div>
                 </div>
