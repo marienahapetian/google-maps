@@ -408,11 +408,11 @@ class Hugeit_Maps_Install {
 
         $marker2
             ->set_map_id( $map )
-            ->set_name( __( 'Delaver', 'hg_gmaps' ) )
+            ->set_name( __( 'Delaware', 'hg_gmaps' ) )
             ->set_lat( 39.189690821096804 )
             ->set_lng( -75.7562255859375 )
             ->set_animation( 'DROP' )
-            ->set_description( __( 'Delaver', 'hg_gmaps' ) );
+            ->set_description( __( 'Delaware', 'hg_gmaps' ) );
 
         $marker2->save();
     }

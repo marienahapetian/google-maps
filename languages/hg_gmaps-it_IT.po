@@ -175,7 +175,7 @@ msgstr "New York City"
 
 #: includes/class-hugeit-maps-install.php:389
 #: includes/class-hugeit-maps-install.php:393
-msgid "Delaver"
+msgid "Delaware"
 msgstr "Delaware"
 
 #: includes/class-hugeit-maps-install.php:409

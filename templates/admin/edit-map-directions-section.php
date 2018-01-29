@@ -16,4 +16,7 @@
         </div>
         <span class="heading_arrow"></span>
     </div>
+    <div class="edit_content pro-feature hide">
+        <img src="<?php echo HUGEIT_MAPS_IMAGES_URL.'/dir_section.png'; ?>"
+    </div>
 </li>

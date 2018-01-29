@@ -895,7 +895,7 @@
 .pro {
     background: url(../images/pro.png) 39% center no-repeat;
 }
-.pro * {
+.pro *,.pro-feature {
     opacity: 0.6;
 }
 
